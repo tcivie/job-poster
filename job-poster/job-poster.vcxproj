@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Check.c" />
     <ClCompile Include="Database.c" />
     <ClCompile Include="job-poster.c" />
   </ItemGroup>
