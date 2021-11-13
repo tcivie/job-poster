@@ -8,7 +8,12 @@
 #define L_Z 90
 #define L_a 97
 #define L_z 122
-
+//elad check
+//elad add check
+int checkcheck()
+{
+	return 0
+}
 int IDcheck(long ID)
 {
 	long temp = ID;
