@@ -51,4 +51,27 @@ int checkUserName(char UserName[MAX_SIZE]);
 /// <returns>0 - If not found | ManagerID - if found</returns>
 int checkManagerUserName(char UserName[MAX_SIZE]);
 
+/// <summary>
+/// Finds the last User ID
+/// </summary>
+/// <returns>UserID - of the user | 0 - If not found</returns>
+int getLastIdUsers();
+
+/// <summary>
+/// Finds the last Manager ID
+/// </summary>
+/// <returns>ManagerID - of the user | 0 - If not found</returns>
+int getLastIdManagers();
+
+/// <summary>
+/// Register a new user
+/// </summary>
+/// <param name="UserName">Username</param>
+/// <param name="FullName">Full name</param>
+/// <param name="ID">User ID (Teudat Zeut)</param>
+/// <param name="age">User Age</param>
+/// <param name="PhoneNumber">User phone number</param>
+/// <returns>UserID - if registration successful | 0 - Otherwise</returns>
+int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE]);
+
 #endif // !DATABASE

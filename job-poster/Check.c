@@ -10,10 +10,6 @@
 #define L_z 122
 //elad check
 //elad add check
-int checkcheck()
-{
-	return 0
-}
 int IDcheck(long ID)
 {
 	long temp = ID;
@@ -184,7 +180,7 @@ int last3DigitsCheck(char* number)//length = 3 and only digits
 }
 
 
-int main()
-{
-	printf("%d",last3DigitsCheck("00!"));
-}
+//int main()
+//{
+//	printf("%d",last3DigitsCheck("00!"));
+//}
