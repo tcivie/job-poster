@@ -11,6 +11,7 @@
 
 #define MANAGERS_FILENAME "Managers.bin"
 #define USERS_FILENAME "Users.bin"
+#define POSTS_FILENAME "Posts.bin"
 
 typedef struct Users {
 	const unsigned int UserID;
@@ -36,6 +37,13 @@ typedef struct Posts {
 	char Name[MAX_SIZE];
 	char Description[MAX_DESCRIPTION];
 } Post;
+
+/// <summary>
+/// Creates the nessecary files if are missing
+///  - you can run it multiple times, nothing will break
+/// </summary>
+/// <returns>1 - On success | exit on failure</returns>
+int initFiles();
 
 /// <summary>
 /// Checks if the username exists in the database

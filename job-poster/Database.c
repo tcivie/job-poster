@@ -86,6 +86,29 @@ int getManagerData(Manager* retValue, const unsigned int managerID) {
 	}
 }
 
+int initFiles() {
+	FILE* usersFile, * managersFile, * postsFile;
+	usersFile = fopen(USERS_FILENAME, "ab");
+	if (usersFile == NULL) {
+		fprintf(stderr, "\nERROR OPENING USERS FILE\n");
+		exit(1);
+	} else
+		fclose(usersFile);
+	managersFile = fopen(MANAGERS_FILENAME, "ab");
+	if (managersFile == NULL) {
+		fprintf(stderr, "\nERROR OPENING MANAGERS FILE\n");
+		exit(1);
+	} else
+		fclose(managersFile);
+	postsFile = fopen(POSTS_FILENAME, "ab");
+	if (postsFile == NULL) {
+		fprintf(stderr, "\nERROR OPENING POSTS FILE\n");
+		exit(1);
+	} else
+		fclose(postsFile);
+	return 1;
+}
+
 int checkUserName(char UserName[MAX_SIZE]) {
 	FILE* infile;
 	User input;
