@@ -42,6 +42,25 @@ int getUserData(User* retValue, const unsigned int userID) {
 	}
 }
 
+int getManagerData(Manager* retValue, const unsigned int managerID) {
+	FILE* infile;
+	infile = fopen(USERS_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		while (fread(retValue, sizeof(Manager), 1, infile)) {	// read trough file
+			if (retValue->ManagerID == managerID) {	// check if equal
+				fclose(infile);
+				return 1;	// return 1
+			}
+		}
+		fclose(infile);
+		retValue = NULL;
+		return 0;
+	}
+}
+
 int checkUserName(char UserName[MAX_SIZE]) {
 	FILE* infile;
 	User input;

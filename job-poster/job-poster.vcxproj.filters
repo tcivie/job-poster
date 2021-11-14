@@ -31,10 +31,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Managers.dat">
+    <None Include="Managers.bin">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Users.dat">
+    <None Include="Users.bin">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

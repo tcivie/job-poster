@@ -147,8 +147,8 @@
     <ClInclude Include="Database.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Managers.dat" />
-    <None Include="Users.dat" />
+    <None Include="Managers.bin" />
+    <None Include="Users.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,8 +9,8 @@
 #define MAX_POSTS 50
 #define MAX_DESCRIPTION 255
 
-#define MANAGERS_FILENAME "Managers.dat"
-#define USERS_FILENAME "Users.dat"
+#define MANAGERS_FILENAME "Managers.bin"
+#define USERS_FILENAME "Users.bin"
 
 typedef struct Users {
 	const unsigned int UserID;
@@ -81,5 +81,13 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 /// <param name="userID">The user ID to look for</param>
 /// <returns>1 - If found | 0 - If not</returns>
 int getUserData(User* retValue,const unsigned int userID);
+
+/// <summary>
+/// Searches for the manager with the given ID and returnes the Manager
+/// </summary>
+/// <param name="retValue">Pointer to the found manager</param>
+/// <param name="managerID">The manager ID to look for</param>
+/// <returns>1 - If found | 0 - If not</returns>
+int getManagerData(Manager* retValue, const unsigned int managerID);
 
 #endif // !DATABASE
