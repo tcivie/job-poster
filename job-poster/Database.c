@@ -25,7 +25,7 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 
 int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]) {
 	FILE* infile;
-	int managerID = getLastIdUsers() + 1;
+	int managerID = getLastIdManagers() + 1;
 	Manager manager = { managerID };	// if got managerID add manager otherwise ID = 1
 	// Append data to the created struct manager
 	strcpy(manager.UserName, UserName);
@@ -40,6 +40,11 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]) {
 		fclose(infile);
 		return managerID;
 	}
+	return 0;
+}
+
+int addPost(int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+	// TODO
 	return 0;
 }
 
@@ -146,10 +151,13 @@ int getLastIdManagers() {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
 	} else {
-		fseek(infile, -(int)sizeof(Manager), SEEK_END);	// go to end of file -1 Manager
-		fread(&input, sizeof(Manager), 1, infile);	// read last manager
-		fclose(infile);
-		return input.ManagerID;
+		fseek(infile, 0, SEEK_END);	// go to end of file
+		if (ftell(infile)) {	// check if not empty
+			fseek(infile, -(int)sizeof(Manager), SEEK_END);
+			fread(&input, sizeof(Manager), 1, infile);	// read last manager
+			fclose(infile);
+			return input.ManagerID;
+		}
 	}
 	return 0;
 }

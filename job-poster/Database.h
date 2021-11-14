@@ -32,7 +32,7 @@ typedef struct Posts {
 	const unsigned int PostID;
 	int location;
 	int Type;
-	int Proffesion;
+	int Profession;
 	char Name[MAX_SIZE];
 	char Description[MAX_DESCRIPTION];
 } Post;
@@ -81,6 +81,17 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 /// <param name="FullName">Business name/ User Full name</param>
 /// <returns>ManagerID - if registration successful | 0 - Otherwise</returns>
 int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]);
+
+/// <summary>
+/// Add new post
+/// </summary>
+/// <param name="location"></param>
+/// <param name="type"></param>
+/// <param name="profession"></param>
+/// <param name="name"></param>
+/// <param name="description"></param>
+/// <returns>PostID - if posting successful | 0 - Otherwise</returns>
+int addPost(int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Searches for the user with the given ID and returns the User
