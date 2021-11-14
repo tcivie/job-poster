@@ -1,6 +1,6 @@
 # Data files
-job-poster/Managers.dat
-job-poster/Users.dat
+*Managers.bin
+*Users.bin
 
 # Created by https://www.toptal.com/developers/gitignore/api/c,visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=c,visualstudio
