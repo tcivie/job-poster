@@ -11,21 +11,41 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	user.age = age;
 	strcpy(user.PhoneNumber, PhoneNumber);
 
-	infile = fopen(USERS_FILENAME, "a");
+	infile = fopen(USERS_FILENAME, "ab");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
 	} else {
 		fwrite(&user, sizeof(User), 1, infile);
+		fclose(infile);
 		return userID;
 	}
 	return 0;
 }
 
+int getUserData(User* retValue, const unsigned int userID) {
+	FILE* infile;
+	infile = fopen(USERS_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		while (fread(retValue, sizeof(User), 1, infile)) {	// read trough file
+			if (retValue->UserID == userID) {	// check if equal
+				fclose(infile);
+				return 1;	// return 1
+			}
+		}
+		fclose(infile);
+		retValue = NULL;
+		return 0;
+	}
+}
+
 int checkUserName(char UserName[MAX_SIZE]) {
 	FILE* infile;
 	User input;
-	infile = fopen(USERS_FILENAME, "r");
+	infile = fopen(USERS_FILENAME, "rb");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -44,7 +64,7 @@ int checkUserName(char UserName[MAX_SIZE]) {
 int checkManagerUserName(char UserName[MAX_SIZE]) {
 	FILE* infile;
 	Manager input;
-	infile = fopen(MANAGERS_FILENAME, "r");
+	infile = fopen(MANAGERS_FILENAME, "rb");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -63,15 +83,18 @@ int checkManagerUserName(char UserName[MAX_SIZE]) {
 int getLastIdUsers() {
 	FILE* infile;
 	User input;
-	infile = fopen(USERS_FILENAME, "r");
+	infile = fopen(USERS_FILENAME, "rb");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
 	} else {
-		fseek(infile, -(int)sizeof(User), SEEK_END);	// go to end of file -1 User
-		fread(&input, sizeof(User), 1, infile);	// read last user
-		fclose(infile);
-		return input.UserID;
+		fseek(infile, 0, SEEK_END);	// go to end of file
+		if (ftell(infile)) {	// check if not empty
+			fseek(infile, -(int)sizeof(User), SEEK_END);
+			fread(&input, sizeof(User), 1, infile);	// read last user
+			fclose(infile);
+			return input.UserID;
+		}
 	}
 	return 0;
 }
@@ -79,7 +102,7 @@ int getLastIdUsers() {
 int getLastIdManagers() {
 	FILE* infile;
 	Manager input;
-	infile = fopen(MANAGERS_FILENAME, "r");
+	infile = fopen(MANAGERS_FILENAME, "rb");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);

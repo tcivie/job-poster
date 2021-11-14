@@ -74,4 +74,12 @@ int getLastIdManagers();
 /// <returns>UserID - if registration successful | 0 - Otherwise</returns>
 int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE]);
 
+/// <summary>
+/// Searches for the user with the given ID and returns the User
+/// </summary>
+/// <param name="retValue">Pointer to the found user</param>
+/// <param name="userID">The user ID to look for</param>
+/// <returns>1 - If found | 0 - If not</returns>
+int getUserData(User* retValue,const unsigned int userID);
+
 #endif // !DATABASE
