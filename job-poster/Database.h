@@ -75,6 +75,14 @@ int getLastIdManagers();
 int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE]);
 
 /// <summary>
+/// Register a new manager
+/// </summary>
+/// <param name="UserName">Username</param>
+/// <param name="FullName">Business name/ User Full name</param>
+/// <returns>ManagerID - if registration successful | 0 - Otherwise</returns>
+int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]);
+
+/// <summary>
 /// Searches for the user with the given ID and returns the User
 /// </summary>
 /// <param name="retValue">Pointer to the found user</param>

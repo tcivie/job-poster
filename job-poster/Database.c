@@ -23,6 +23,26 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	return 0;
 }
 
+int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]) {
+	FILE* infile;
+	int managerID = getLastIdUsers() + 1;
+	Manager manager = { managerID };	// if got managerID add manager otherwise ID = 1
+	// Append data to the created struct manager
+	strcpy(manager.UserName, UserName);
+	strcpy(manager.FullName, FullName);
+
+	infile = fopen(MANAGERS_FILENAME, "ab");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		fwrite(&manager, sizeof(Manager), 1, infile);
+		fclose(infile);
+		return managerID;
+	}
+	return 0;
+}
+
 int getUserData(User* retValue, const unsigned int userID) {
 	FILE* infile;
 	infile = fopen(USERS_FILENAME, "rb");
