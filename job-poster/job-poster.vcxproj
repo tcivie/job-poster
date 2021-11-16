@@ -142,6 +142,7 @@
     <ClCompile Include="Check.c" />
     <ClCompile Include="Database.c" />
     <ClCompile Include="job-poster.c" />
+    <ClCompile Include="Manager.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h" />
