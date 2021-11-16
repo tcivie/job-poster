@@ -111,6 +111,29 @@ int addPost(const unsigned int managerID, int location, int type, int profession
 	return 0;
 }
 
+Post* getAllPosts() {
+	//TODO
+	return 0;
+}
+
+int checkPasswordUser(const unsigned int userID, char password[MAX_PASSWORD]) {
+	User user;
+	if (getUserData(&user, userID)) {
+		if (!strcmp(user.Password, password))
+			return 1;
+	}
+	return 0;
+}
+
+int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWORD]) {
+	Manager manager;
+	if (getManagerData(&manager, managerID)) {
+		if (!strcmp(manager.Password, password))
+			return 1;
+	}
+	return 0;
+}
+
 int initFiles() {
 	FILE* usersFile, * managersFile, * postsFile;
 	usersFile = fopen(USERS_FILENAME, "ab");
