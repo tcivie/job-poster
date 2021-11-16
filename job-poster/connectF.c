@@ -12,7 +12,7 @@ int printPostsByCategory()
 	int choose = -1;
 	int innerChoose = 0;
 	int sizeArray = 0;
-	Post postsArray[POSTSNUM];
+	Post* postsArray[POSTSNUM];
 	sizeArray = getAllPosts(postsArray);
 	while (choose != 0)
 	{
