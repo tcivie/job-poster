@@ -10,7 +10,7 @@ void candidateMenu(char* name)
 	printf("Hello dear %s\n", name);
 	printf("what would you like to do?\n");
 	printf("1-->Job search by parameters  \n2-->Submit a resume  \n3-->view all of submission's history  \n4-->Edit user profile  \n5-->Log out from system\n");
-	scanf("%d", choice);
+	scanf("%d", &choice);
 	switch (choice)
 	{
 	case 1:
@@ -27,6 +27,8 @@ void candidateMenu(char* name)
 		break;
 	case 5:
 		/*function to Log out from system*/
+		printf("goodbye %s!", name);
+		return;
 		break;
 
 	default:
@@ -46,7 +48,7 @@ void employerMenu(char* name)
 	printf("8--> Changing the login password\n");
 	printf("9--> Disconnecting from the system\n");
 
-	scanf("%d", choice);
+	scanf("%d", &choice);
 	switch (choice)
 	{
 	case 1:
@@ -75,6 +77,8 @@ void employerMenu(char* name)
 		break;
 	case 9:
 		/*function to Disconnecting from the system*/
+		printf("goodbye %c!", name);
+		return;
 		break;
 	default:
 		break;
@@ -86,8 +90,9 @@ int main()
 {
 	char username[10], password[10], name[20];
 	int option_menu1, age;
+label1:
 	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n ");
-	scanf("%d", option_menu1);
+	scanf("%d", &option_menu1);
 
 	switch (option_menu1)
 	{
@@ -108,7 +113,7 @@ int main()
 			gets(password);
 		}
 		printf("your login is succsess!\n");
-		/*מעבר לתפריט של מעסיק פונקצייה-*/
+		employerMenu(name);/*מעבר לתפריט של מעסיק פונקצייה-*/
 
 
 		break;
@@ -129,7 +134,7 @@ int main()
 			gets(password);
 		}
 		printf("your connect is succsess!\n");
-		/*transfer to candidate options menu.*/
+		candidateMenu(name);/*transfer to candidate options menu.*/
 		break;
 	case 3:
 		printf("for connect as an employer you need to enter the following details:\n");
@@ -150,7 +155,7 @@ int main()
 			gets(password);
 		}
 		printf("you have successfully registered!\n");
-		/*transfered to employer options menu.*/
+		employerMenu(name);/*transfered to employer options menu.*/
 
 		break;
 	case 4:
@@ -177,9 +182,10 @@ int main()
 			gets(password);
 		}
 		printf("you have successfully registered!\n");
-		/*transfer to candidate options menu.*/
+		candidateMenu(name);/*transfer to candidate options menu.*/
 		break;
 	default:
 		break;
 	}
+	goto label1;
 }
