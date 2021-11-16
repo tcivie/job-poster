@@ -27,6 +27,9 @@
     <ClCompile Include="Manager.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="connectF.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h">
