@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Check.c" />
+    <ClCompile Include="connectF.c" />
     <ClCompile Include="Database.c" />
     <ClCompile Include="job-poster.c" />
     <ClCompile Include="Manager.c" />
