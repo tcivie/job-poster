@@ -66,8 +66,8 @@ The system works with a file-based database and the interface is shown in the co
     <tr>
         <td>Age</td>
         <td>int</td>
-        <td></td>
-        <td></td>
+        <td>Password</td>
+        <td>String</td>
         <td>Name</td>
         <td>String</td>
         <td></td>
@@ -80,6 +80,16 @@ The system works with a file-based database and the interface is shown in the co
         <td></td>
         <td>Description</td>
         <td>String</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td>String</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
     </tr>
