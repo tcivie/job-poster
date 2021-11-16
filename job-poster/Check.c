@@ -20,10 +20,10 @@ int last3DigitsCheck(char* number);
 
 
 
-int main()
-{
-	printf("%d", last3DigitsCheck("00!"));
-}
+//int main()
+//{
+//	printf("%d", last3DigitsCheck("00!"));
+//}
 
 
 

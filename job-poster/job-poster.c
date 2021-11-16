@@ -100,14 +100,14 @@ label1:
 		printf("for login as an employer you need to enter the username and password:\n");
 		printf("username:\n");
 		scanf("%s", username);
-		while (!(/*השם של בדיקה פונקציית*/))
+		while (!(0/*השם של בדיקה פונקציית*/))
 		{
 			printf("this username is not agsist!\nplease enter a right username:\n");
 			scanf("%s", username);
 		}
 		printf("enter a password:\n");
 		gets(password);
-		while (!(/*function to check the password*/))
+		while (!(0/*function to check the password*/))
 		{
 			printf("please try again!\nenter a password:\n");
 			gets(password);
@@ -121,14 +121,14 @@ label1:
 		printf("for connect as an candidate you need to enter the username and password:\n");
 		printf("username:\n");
 		scanf("%s", username);
-		while (!(/*השם של בדיקה פונקציית*/))
+		while (!(0/*השם של בדיקה פונקציית*/))
 		{
 			printf("this username is not agsist!\nplease enter a right username:\n");
 			scanf("%s", username);
 		}
 		printf("enter a password:\n");
 		gets(password);
-		while (!(/*function to check the password*/))
+		while (!(0/*function to check the password*/))
 		{
 			printf("please try again!\nenter a password:\n");
 			gets(password);
@@ -140,7 +140,7 @@ label1:
 		printf("for connect as an employer you need to enter the following details:\n");
 		printf("enter username:\n");
 		scanf("%s", username);
-		while (!(/*check function*/))
+		while (!(0/*check function*/))
 		{
 			printf("this username is failed or allready agsist\nplease enter new username:\n");
 			scanf("%s", username);
@@ -149,7 +149,7 @@ label1:
 		scanf("%s", name);
 		printf("enter password:\n");
 		gets(password);
-		while (!(/*check function*/))
+		while (!(0/*check function*/))
 		{
 			printf("this password is failed! \nplease enter new password:\n");
 			gets(password);
@@ -171,7 +171,7 @@ label1:
 		printf("enter name:\n");
 		scanf("%s", name);
 		printf("enter age:\n");
-		scanf("%d", age);
+		scanf("%d", &age);
 		printf("enter a phone number:\n");
 		printf("enter a password:\n");
 		gets(password);
