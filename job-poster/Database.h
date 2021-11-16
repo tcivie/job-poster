@@ -8,6 +8,7 @@
 #define MAX_SIZE 100
 #define MAX_POSTS 50
 #define MAX_DESCRIPTION 255
+#define MAX_PASSWORD 20
 
 #define MANAGERS_FILENAME "Managers.bin"
 #define USERS_FILENAME "Users.bin"
@@ -20,6 +21,7 @@ typedef struct Users {
 	long ID;
 	int age;
 	char PhoneNumber[MAX_SIZE];
+	char Password[MAX_PASSWORD];
 } User;
 
 typedef struct Managers {
@@ -142,6 +144,12 @@ int getManagerData(Manager* retValue, const unsigned int managerID);
 /// <param name="description">Description of the job tittle</param>
 /// <returns>1 - If post was added | 0 - If not"</returns>
 int addPost(const unsigned int managerID ,int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+
+/// <summary>
+/// Gets all the posts from the database
+/// </summary>
+/// <returns>Pointer to allocated posts object array</returns>
+Post* getAllPosts();
 
 
 #endif // !DATABASE
