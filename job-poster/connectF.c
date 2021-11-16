@@ -11,7 +11,7 @@ int printPostsByCategory()
 	int choose = -1;
 	int innerChoose = 0;
 	int sizeArray = 0;
-	Post postsArray[MAX_POSTS * MAX_MANAGERS];
+	Post* postsArray = (Post*) malloc(MAX_POSTS * MAX_MANAGERS * sizeof(Post));
 	sizeArray = getAllPosts(&postsArray);
 	while (choose != 0)
 	{
@@ -43,6 +43,7 @@ int printPostsByCategory()
 			break;
 		}
 	}
+	free(postsArray);
 	return 0;
 }
 

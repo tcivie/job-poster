@@ -4,6 +4,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_SIZE 100
 #define MAX_POSTS 50
@@ -152,7 +153,7 @@ int addPost(const unsigned int managerID ,int location, int type, int profession
 /// </summary>
 /// <param name="postsArray">The pointer to the posts array</param>
 /// <returns>Number of posts in the array.</returns>
-int getAllPosts(Post* postsArray[MAX_POSTS * MAX_MANAGERS]);
+int getAllPosts(Post* postsArray[]);
 
 /// <summary>
 /// Checks if the userID password matches the one in the database

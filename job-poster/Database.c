@@ -106,7 +106,7 @@ int getManagerData(Manager* retValue, const unsigned int managerID) {
 	return 0;
 }
 
-int getAllPosts(Post* postsArray[MAX_POSTS*MAX_MANAGERS]) {
+int getAllPosts(Post* postsArray[]) {
 	FILE* infile;
 	infile = fopen(POSTS_FILENAME, "rb");
 	if (infile == NULL) {
