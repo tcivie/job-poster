@@ -4,16 +4,16 @@
 Post* add_new_post()
 {
 	Post new_post;
-	new_post.location = new_post.Type = 0;
+	new_post.Location = new_post.Type = 0;
 	do
 	{
 		printf("Select location from list:\n1. North\n2. Center\n 3.South\n");
-		scanf("%d", &new_post.location);
-	} while (new_post.location < 1 || new_post.location > 3);
+		scanf("%d", &new_post.Location);
+	} while (new_post.Location < 1 || new_post.Location > 3);
 	do
 	{
 		printf("Select type of job from list:\n1. Full-time\n2. Part-time\n");
-		scanf("%d", &new_post.location);
+		scanf("%d", &new_post.Location);
 	} while (new_post.Type < 1 || new_post.Type > 2);
 	do
 	{
@@ -26,11 +26,11 @@ void view_post(Post post) // Helper
 	printf("Name: %s\n", post.Name);	// הדפסת שם המודעה
 
 	printf("Location: ");	// הדפסת מיקום העבודה
-	if (post.location == 1)
+	if (post.Location == 1)
 		printf("North\n");
-	if (post.location == 2)
+	if (post.Location == 2)
 		printf("Center\n");
-	if (post.location == 3)
+	if (post.Location == 3)
 		printf("South\n");
 
 	printf("Type of job: ");	// הדפסת סוג העבודה
@@ -74,11 +74,11 @@ void view_posts(Manager manager, Post post) // Requiremrnt 2.4
 			printf("Name: %s\n", post.Name);	// הדפסת שם המודעה
 
 			printf("Location: ");	// הדפסת מיקום העבודה
-			if (post.location == 1)
+			if (post.Location == 1)
 				printf("North\n");
-			if (post.location == 2)
+			if (post.Location == 2)
 				printf("Center\n");
-			if (post.location == 3)
+			if (post.Location == 3)
 				printf("South\n");
 
 			printf("Type of job: ");	// הדפסת סוג העבודה

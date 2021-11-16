@@ -1,16 +1,21 @@
 #include "Database.h"
-
-int printPostsByCategory(Post* postsA)
+#define POSTSNUM 200
+int printPostsByCategory()
 {
 	int choose = -1;
 	int innerChoose = 0;
+	Post* postsArray = (Post*)malloc(sizeof(Post) * 200);
+	if (postsArray == NULL)
+		exit(1);
 	while (choose != 0)
 	{
 		printf("Choose search by category:\n1-->Location\n2-->Type (Full time job/Half time job)\n3-->Profession\n0-->Back");
-		do {
-			scanf("%d", choose);
+		scanf("%d", &choose);
+		while (choose > 3 || choose < 0)
+		{
 			printf("Wrong choose, try again");
-		} while (choose > 3 || choose < 0);
+			scanf("%d", &choose);
+		}
 		switch (choose)
 		{
 		case 1:
@@ -84,9 +89,23 @@ int printPostsByCategory(Post* postsA)
 	
 }
 
-int printByCategories(Post* postsArray, int category, int innerCategory)
+int printByCategories(Post* postsArray, int size, int category, int innerCategory)
 {
-	
+	switch (category)
+	{
+	case 1:
+		for (int i = 0; i < size; i++)
+		{
+			if()
+		}
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
 
 	
