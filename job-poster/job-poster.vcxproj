@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h" />
+    <ClInclude Include="Menager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Managers.bin" />
