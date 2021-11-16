@@ -31,7 +31,7 @@ typedef struct Managers {
 
 typedef struct Posts {
 	const unsigned int PostID;
-	int location;
+	int Location;
 	int Type;
 	int Profession;
 	char Name[MAX_SIZE];

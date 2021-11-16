@@ -43,8 +43,26 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]) {
 	return 0;
 }
 
-int addPost(int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
-	// TODO
+int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+	FILE* infile;
+	int postID = getLastIdPosts() + 1;
+	Post post = { postID };
+	// Append data to the created struct post
+	post.Location = location;
+	post.Type = type;
+	post.Profession = profession;
+	strcpy(post.Name, name);
+	strcpy(post.Description, description);
+
+	infile = fopen(POSTS_FILENAME, "ab");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		fwrite(&post, sizeof(Post), 1, infile);
+		fclose(infile);
+		return postID;
+	}
 	return 0;
 }
 
@@ -84,6 +102,13 @@ int getManagerData(Manager* retValue, const unsigned int managerID) {
 		retValue = NULL;
 		return 0;
 	}
+}
+
+int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+	FILE* infile;
+	infile = fopen(POSTS_FILENAME, "ab");
+
+	return 0;
 }
 
 int initFiles() {
@@ -180,6 +205,25 @@ int getLastIdManagers() {
 			fread(&input, sizeof(Manager), 1, infile);	// read last manager
 			fclose(infile);
 			return input.ManagerID;
+		}
+	}
+	return 0;
+}
+
+int getLastIdPosts() {
+	FILE* infile;
+	Post input;
+	infile = fopen(POSTS_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		fseek(infile, 0, SEEK_END);	// go to end of file
+		if (ftell(infile)) {	// check if not empty
+			fseek(infile, -(int)sizeof(Post), SEEK_END);
+			fread(&input, sizeof(Post), 1, infile);	// read last manager
+			fclose(infile);
+			return input.PostID;
 		}
 	}
 	return 0;
