@@ -116,7 +116,7 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]);
 /// <param name="name"></param>
 /// <param name="description"></param>
 /// <returns>PostID - if posting successful | 0 - Otherwise</returns>
-int addPost(int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Searches for the user with the given ID and returns the User
