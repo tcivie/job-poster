@@ -2,8 +2,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Database.h"
 #include "Manager.h"
-#define MAX_POSTS 50
-#define MAX_MANAGERS 50
 
 int printPostsByCategory();
 int printByCategories(Post* postsArray, int size, int category, int innerCategory);
