@@ -7,6 +7,7 @@
 
 #define MAX_SIZE 100
 #define MAX_POSTS 50
+#define MAX_MANAGERS 50
 #define MAX_DESCRIPTION 255
 #define MAX_PASSWORD 20
 
@@ -116,7 +117,7 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]);
 /// <param name="name"></param>
 /// <param name="description"></param>
 /// <returns>PostID - if posting successful | 0 - Otherwise</returns>
-int addPost(int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Searches for the user with the given ID and returns the User
@@ -147,10 +148,11 @@ int getManagerData(Manager* retValue, const unsigned int managerID);
 int addPost(const unsigned int managerID ,int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
 /// <summary>
-/// Gets all the posts from the database
+/// Get all posts from the database and save in the given pointer
 /// </summary>
-/// <returns>Pointer to allocated posts object array</returns>
-Post* getAllPosts();
+/// <param name="postsArray">The pointer to the posts array</param>
+/// <returns>Number of posts in the array.</returns>
+int getAllPosts(Post* postsArray[MAX_POSTS * MAX_MANAGERS]);
 
 /// <summary>
 /// Checks if the userID password matches the one in the database
