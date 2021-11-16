@@ -36,6 +36,7 @@ typedef struct Posts {
 	int Profession;
 	char Name[MAX_SIZE];
 	char Description[MAX_DESCRIPTION];
+	int Promoted;
 } Post;
 
 /// <summary>
