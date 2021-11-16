@@ -39,6 +39,13 @@ typedef struct Posts {
 	int Promoted;
 } Post;
 
+typedef struct Applied {
+	const unsigned int AppliedId;
+	const unsigned int PostID;
+	const unsigned int UserID;
+	char Description[MAX_DESCRIPTION];
+} Apply;
+
 /// <summary>
 /// Creates the nessecary files if are missing
 ///  - you can run it multiple times, nothing will break
@@ -71,6 +78,12 @@ int getLastIdUsers();
 /// </summary>
 /// <returns>ManagerID - of the user | 0 - If not found</returns>
 int getLastIdManagers();
+
+/// <summary>
+/// Finds the last Post ID
+/// </summary>
+/// <returns>PostID - of the post | 0 - If not found</returns>
+int getLastIdPosts();
 
 /// <summary>
 /// Register a new user
@@ -117,5 +130,18 @@ int getUserData(User* retValue,const unsigned int userID);
 /// <param name="managerID">The manager ID to look for</param>
 /// <returns>1 - If found | 0 - If not</returns>
 int getManagerData(Manager* retValue, const unsigned int managerID);
+
+/// <summary>
+/// Adds new post
+/// </summary>
+/// <param name="managerID">ID of the manager to add the post to</param>
+/// <param name="location">value from 1 to 3 {North, Center, South}</param>
+/// <param name="type">value 1 or 2 {Full time, Part time}</param>
+/// <param name="profession">value from 1 to 8 {Security, Engineering, Medicine, Restaurants, Education, Public transportation, Factories, Economics}</param>
+/// <param name="name">Job tittle</param>
+/// <param name="description">Description of the job tittle</param>
+/// <returns>1 - If post was added | 0 - If not"</returns>
+int addPost(const unsigned int managerID ,int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+
 
 #endif // !DATABASE
