@@ -8,8 +8,26 @@
 #define L_Z 90
 #define L_a 97
 #define L_z 122
-//elad check
-//elad add check
+
+int IDcheck(long ID);
+int FullNameCheck(char* Fname);
+int AgeCheck(int age);
+int PasswordCheck(char* pass);
+int numberOfDaysPayment(int days);
+int creditNumberCheck(char* credit);
+int creditValidityCheck(char* date); //mm / yy
+int last3DigitsCheck(char* number);
+
+
+
+int main()
+{
+	printf("%d", last3DigitsCheck("00!"));
+}
+
+
+
+
 int IDcheck(long ID)
 {
 	long temp = ID;
@@ -180,7 +198,3 @@ int last3DigitsCheck(char* number)//length = 3 and only digits
 }
 
 
-//int main()
-//{
-//	printf("%d",last3DigitsCheck("00!"));
-//}
