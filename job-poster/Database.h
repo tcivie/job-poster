@@ -8,6 +8,7 @@
 #define MAX_SIZE 100
 #define MAX_POSTS 50
 #define MAX_DESCRIPTION 255
+#define MAX_PASSWORD 20
 
 #define MANAGERS_FILENAME "Managers.bin"
 #define USERS_FILENAME "Users.bin"
@@ -20,6 +21,7 @@ typedef struct Users {
 	long ID;
 	int age;
 	char PhoneNumber[MAX_SIZE];
+	char Password[MAX_PASSWORD];
 } User;
 
 typedef struct Managers {
@@ -27,11 +29,12 @@ typedef struct Managers {
 	char UserName[MAX_SIZE];
 	char FullName[MAX_SIZE];
 	int Posts[MAX_POSTS];
+	char Password[MAX_PASSWORD];
 } Manager;
 
 typedef struct Posts {
 	const unsigned int PostID;
-	int location;
+	int Location;
 	int Type;
 	int Profession;
 	char Name[MAX_SIZE];
@@ -142,6 +145,26 @@ int getManagerData(Manager* retValue, const unsigned int managerID);
 /// <param name="description">Description of the job tittle</param>
 /// <returns>1 - If post was added | 0 - If not"</returns>
 int addPost(const unsigned int managerID ,int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+
+/// <summary>
+/// Gets all the posts from the database
+/// </summary>
+/// <returns>Pointer to allocated posts object array</returns>
+Post* getAllPosts();
+
+/// <summary>
+/// Checks if the userID password matches the one in the database
+/// </summary>
+/// <param name="userID">User ID</param>
+/// <returns>1 - If matches | 0 - Otherwise</returns>
+int checkPasswordUser(const unsigned int userID, char password[MAX_PASSWORD]);
+
+/// <summary>
+/// Checks if the manaagerID password matches the one in the database
+/// </summary>
+/// <param name="userID">Manager ID</param>
+/// <returns>1 - If matches | 0 - Otherwise</returns>
+int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWORD]);
 
 
 #endif // !DATABASE
