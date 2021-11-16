@@ -8,7 +8,7 @@ int printPostsByCategory(Post* postsA)
 	{
 		printf("Choose search by category:\n1-->Location\n2-->Type (Full time job/Half time job)\n3-->Profession\n0-->Back");
 		do {
-			scanf("%d", &choose);
+			scanf("%d", choose);
 			printf("Wrong choose, try again");
 		} while (choose > 3 || choose < 0);
 		switch (choose)
@@ -84,6 +84,9 @@ int printPostsByCategory(Post* postsA)
 	
 }
 
-
+int printByCategories(Post* postsArray, int category, int innerCategory)
+{
+	
+}
 
 	
