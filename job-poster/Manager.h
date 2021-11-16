@@ -1,6 +1,10 @@
 #ifndef MANAGER
 #define MANAGER
 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
 /*  Helper function to print a specific job post
     :param post: post
     :return: None (just print)
