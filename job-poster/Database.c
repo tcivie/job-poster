@@ -83,6 +83,7 @@ int getUserData(User* retValue, const unsigned int userID) {
 		retValue = NULL;
 		return 0;
 	}
+	return 0;
 }
 
 int getManagerData(Manager* retValue, const unsigned int managerID) {
@@ -102,17 +103,23 @@ int getManagerData(Manager* retValue, const unsigned int managerID) {
 		retValue = NULL;
 		return 0;
 	}
-}
-
-int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
-	FILE* infile;
-	infile = fopen(POSTS_FILENAME, "ab");
-
 	return 0;
 }
 
-Post* getAllPosts() {
-	//TODO
+int getAllPosts(Post* postsArray[MAX_POSTS*MAX_MANAGERS]) {
+	FILE* infile;
+	infile = fopen(POSTS_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		int size = 0;
+		while (fread(&postsArray[size], sizeof(Post), 1, infile)) {	// read trough file
+			size++;
+		}
+		fclose(infile);
+		return size;
+	}
 	return 0;
 }
 
@@ -174,6 +181,7 @@ int checkUserName(char UserName[MAX_SIZE]) {
 		fclose(infile);
 		return 0;
 	}
+	return 0;
 }
 
 int checkManagerUserName(char UserName[MAX_SIZE]) {
@@ -193,6 +201,7 @@ int checkManagerUserName(char UserName[MAX_SIZE]) {
 		fclose(infile);
 		return 0;
 	}
+	return 0;
 }
 
 int getLastIdUsers() {
