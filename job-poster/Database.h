@@ -29,6 +29,7 @@ typedef struct Managers {
 	char UserName[MAX_SIZE];
 	char FullName[MAX_SIZE];
 	int Posts[MAX_POSTS];
+	char Password[MAX_PASSWORD];
 } Manager;
 
 typedef struct Posts {
@@ -150,6 +151,20 @@ int addPost(const unsigned int managerID ,int location, int type, int profession
 /// </summary>
 /// <returns>Pointer to allocated posts object array</returns>
 Post* getAllPosts();
+
+/// <summary>
+/// Checks if the userID password matches the one in the database
+/// </summary>
+/// <param name="userID">User ID</param>
+/// <returns>1 - If matches | 0 - Otherwise</returns>
+int checkPasswordUser(const unsigned int userID, char password[MAX_PASSWORD]);
+
+/// <summary>
+/// Checks if the manaagerID password matches the one in the database
+/// </summary>
+/// <param name="userID">Manager ID</param>
+/// <returns>1 - If matches | 0 - Otherwise</returns>
+int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWORD]);
 
 
 #endif // !DATABASE
