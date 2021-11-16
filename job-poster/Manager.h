@@ -12,6 +12,13 @@
     :return: None (just print)
 */  void view_posts(Manager manager, Post post);
 
+/*  Requiremrnt 2.2 - Function of adding a new job post
+    :return: Post*
+*/  Post* add_new_post();
+
+
+
+
 
 
 #endif

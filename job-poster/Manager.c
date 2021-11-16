@@ -1,6 +1,25 @@
 #include "Database.h"
-#include "Menager.h"
+#include "Manager.h"
 
+Post* add_new_post()
+{
+	Post new_post;
+	new_post.location = new_post.Type = 0;
+	do
+	{
+		printf("Select location from list:\n1. North\n2. Center\n 3.South\n");
+		scanf("%d", &new_post.location);
+	} while (new_post.location < 1 || new_post.location > 3);
+	do
+	{
+		printf("Select type of job from list:\n1. Full-time\n2. Part-time\n");
+		scanf("%d", &new_post.location);
+	} while (new_post.Type < 1 || new_post.Type > 2);
+	do
+	{
+		printf("Select relevant profession from list:\n1. Security\n2. Engineering\n3. Medicine\n4. Restaurants\n5. Education\n6. Public transportation\n7. Factories\n8. Economics\n0. Not relevant\n");
+	} while (new_post.Profession < 0 || new_post.Profession > 8);
+}
 
 void view_post(Post post) // Helper
 {
