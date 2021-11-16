@@ -2,7 +2,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Database.h"
 #include "Manager.h"
-#define POSTSNUM 200
+#define MAX_POSTS 50
+#define MAX_MANAGERS 50
 
 int printPostsByCategory();
 int printByCategories(Post* postsArray, int size, int category, int innerCategory);
@@ -12,8 +13,8 @@ int printPostsByCategory()
 	int choose = -1;
 	int innerChoose = 0;
 	int sizeArray = 0;
-	Post* postsArray[POSTSNUM];
-	sizeArray = getAllPosts(postsArray);
+	Post postsArray[MAX_POSTS * MAX_MANAGERS];
+	sizeArray = getAllPosts(&postsArray);
 	while (choose != 0)
 	{
 		printf("Choose search by category:\n1-->Location\n2-->Type (Full time job/Half time job)\n3-->Profession\n0-->Back");
@@ -44,7 +45,7 @@ int printPostsByCategory()
 			break;
 		}
 	}
-	
+	return 0;
 }
 
 int printByCategories(Post* postsArray, int size, int category, int innerCategory)
