@@ -74,6 +74,14 @@ int checkUserName(char UserName[MAX_SIZE]);
 int checkManagerUserName(char UserName[MAX_SIZE]);
 
 /// <summary>
+/// Checks if the user has aleardy appied for the application
+/// </summary>
+/// <param name="PostID">ID of the post the user wants to apply to</param>
+/// <param name="UserID">ID of the user</param>
+/// <returns>ApplicationID - if found | 0 - Otherwise</returns>
+int checkUserApplication(const unsigned int PostID, const unsigned int userID);
+
+/// <summary>
 /// Finds the last User ID
 /// </summary>
 /// <returns>UserID - of the user | 0 - If not found</returns>
@@ -92,6 +100,12 @@ int getLastIdManagers();
 int getLastIdPosts();
 
 /// <summary>
+/// Finds the last Applied ID
+/// </summary>
+/// <returns>AppliedID - of the post | 0 - If not found</returns>
+int getLastIdApplied();
+
+/// <summary>
 /// Register a new user
 /// </summary>
 /// <param name="UserName">Username</param>
@@ -101,6 +115,19 @@ int getLastIdPosts();
 /// <param name="PhoneNumber">User phone number</param>
 /// <returns>UserID - if registration successful | 0 - Otherwise</returns>
 int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE]);
+
+/// <summary>
+/// Update user data
+/// </summary>
+/// <param name="userID">Id of the updated user</param>
+/// <param name="UserName"></param>
+/// <param name="FullName"></param>
+/// <param name="ID">Teudat Zeut (ID)</param>
+/// <param name="age"></param>
+/// <param name="PhoneNumber"></param>
+/// <param name="Password"></param>
+/// <returns>UserID on success | 0 - Otherwise</returns>
+int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]);
 
 /// <summary>
 /// Register a new manager
@@ -120,6 +147,15 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]);
 /// <param name="description"></param>
 /// <returns>PostID - if posting successful | 0 - Otherwise</returns>
 int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+
+/// <summary>
+/// Register application for user to a post
+/// </summary>
+/// <param name="PostID">ID of the post the user wants to apply to</param>
+/// <param name="UserID">ID of the user</param>
+/// <param name="Description">The application contents</param>
+/// <returns>ApplicationID if succeeded | 0 otherwise</returns>
+int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Searches for the user with the given ID and returns the User
