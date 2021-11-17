@@ -142,7 +142,7 @@ int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWOR
 }
 
 int initFiles() {
-	FILE* usersFile, * managersFile, * postsFile;
+	FILE* usersFile, * managersFile, * postsFile, * appliedFile;
 	usersFile = fopen(USERS_FILENAME, "ab");
 	if (usersFile == NULL) {
 		fprintf(stderr, "\nERROR OPENING USERS FILE\n");
@@ -161,6 +161,12 @@ int initFiles() {
 		exit(1);
 	} else
 		fclose(postsFile);
+	appliedFile = fopen(APPLIED_FILENAME, "ab");
+	if (appliedFile == NULL) {
+		fprintf(stderr, "\nERROR OPENING POSTS FILE\n");
+		exit(1);
+	} else
+		fclose(appliedFile);
 	return 1;
 }
 

@@ -15,6 +15,7 @@
 #define MANAGERS_FILENAME "Managers.bin"
 #define USERS_FILENAME "Users.bin"
 #define POSTS_FILENAME "Posts.bin"
+#define APPLIED_FILENAME "Applied.bin"
 
 typedef struct Users {
 	const unsigned int UserID;
