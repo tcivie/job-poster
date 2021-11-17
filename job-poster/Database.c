@@ -165,7 +165,7 @@ int initFiles() {
 		fclose(postsFile);
 	appliedFile = fopen(APPLIED_FILENAME, "ab");
 	if (appliedFile == NULL) {
-		fprintf(stderr, "\nERROR OPENING POSTS FILE\n");
+		fprintf(stderr, "\nERROR OPENING APPLIED FILE\n");
 		exit(1);
 	} else
 		fclose(appliedFile);

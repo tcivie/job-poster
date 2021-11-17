@@ -94,12 +94,12 @@ label1:
 	switch (option_menu1)
 	{
 	case 1:
-		printf("for login as an employer you need to enter the username and password:\n");
+		printf("to login as an employer you have to enter the username and a password:\n");
 		printf("username:\n");
 		scanf("%s", username);
 		while (!(0/*השם של בדיקה פונקציית*/))
 		{
-			printf("this username is not agsist!\nplease enter a right username:\n");
+			printf("this username does not exist!\nplease try again:\n");
 			scanf("%s", username);
 		}
 		printf("enter a password:\n");
@@ -115,12 +115,12 @@ label1:
 
 		break;
 	case 2:
-		printf("for connect as an candidate you need to enter the username and password:\n");
+		printf("to login as a candidate you need to enter username and password:\n");
 		printf("username:\n");
 		scanf("%s", username);
 		while (!(0/*השם של בדיקה פונקציית*/))
 		{
-			printf("this username is not agsist!\nplease enter a right username:\n");
+			printf("this username does not exist!\nplease try again:\n");
 			scanf("%s", username);
 		}
 		printf("enter a password:\n");
@@ -130,16 +130,16 @@ label1:
 			printf("please try again!\nenter a password:\n");
 			gets(password);
 		}
-		printf("your connect is succsess!\n");
+		printf("successful login!\n");
 		candidateMenu(name);/*transfer to candidate options menu.*/
 		break;
 	case 3:
-		printf("for connect as an employer you need to enter the following details:\n");
+		printf("to login as an employer you need to enter the following details:\n");
 		printf("enter username:\n");
 		scanf("%s", username);
 		while (!(0/*check function*/))
 		{
-			printf("this username is failed or allready agsist\nplease enter new username:\n");
+			printf("this username is incorrect or already exists\nplease enter new username:\n");
 			scanf("%s", username);
 		}
 		printf("enter name or business name:\n");
@@ -148,7 +148,7 @@ label1:
 		gets(password);
 		while (!(0/*check function*/))
 		{
-			printf("this password is failed! \nplease enter new password:\n");
+			printf("password failed! \nplease enter new password:\n");
 			gets(password);
 		}
 		printf("you have successfully registered!\n");
@@ -156,13 +156,13 @@ label1:
 
 		break;
 	case 4:
-		printf("for connect as an candidate you need to enter the following details:\n");
+		printf("to connect as a candidate you need to enter the following details:\n");
 		printf("enter username:\n");
 		scanf("%s", username);
 		/*chack the username.*/
 		while (!username)
 		{
-			printf("this username is failed or allready agsist\nplease enter new username:\n");
+			printf("this username is incorrect or alreadt exists\nplease enter new username:\n");
 			scanf("%s", username);
 		}
 		printf("enter name:\n");
@@ -175,7 +175,7 @@ label1:
 		/*check the password and enter her again.*/
 		while (!password)
 		{
-			printf("this password is failed! \nplease enter new password:\n");
+			printf("this password is incorrect! \nplease enter new password:\n");
 			gets(password);
 		}
 		printf("you have successfully registered!\n");
