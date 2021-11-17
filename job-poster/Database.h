@@ -114,7 +114,7 @@ int getLastIdApplied();
 /// <param name="age">User Age</param>
 /// <param name="PhoneNumber">User phone number</param>
 /// <returns>UserID - if registration successful | 0 - Otherwise</returns>
-int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE]);
+int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]);
 
 /// <summary>
 /// Update user data
@@ -135,7 +135,7 @@ int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char Full
 /// <param name="UserName">Username</param>
 /// <param name="FullName">Business name/ User Full name</param>
 /// <returns>ManagerID - if registration successful | 0 - Otherwise</returns>
-int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]);
+int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
 
 /// <summary>
 /// Add new post

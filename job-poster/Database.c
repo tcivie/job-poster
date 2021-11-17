@@ -1,6 +1,6 @@
 #include "Database.h"
 
-int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE]) {
+int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	FILE* infile;
 	int userID = getLastIdUsers() + 1;
 	User user = { userID };	// if got userID add user otherwise ID = 1
@@ -10,6 +10,7 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	user.ID = ID;
 	user.age = age;
 	strcpy(user.PhoneNumber, PhoneNumber);
+	strcpy(user.Password, Password);
 
 	infile = fopen(USERS_FILENAME, "ab");
 	if (infile == NULL) {
@@ -23,13 +24,14 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	return 0;
 }
 
-int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE]) {
+int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	FILE* infile;
 	int managerID = getLastIdManagers() + 1;
 	Manager manager = { managerID };	// if got managerID add manager otherwise ID = 1
 	// Append data to the created struct manager
 	strcpy(manager.UserName, UserName);
 	strcpy(manager.FullName, FullName);
+	strcpy(manager.Password, Password);
 
 	infile = fopen(MANAGERS_FILENAME, "ab");
 	if (infile == NULL) {
