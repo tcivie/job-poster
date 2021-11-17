@@ -138,15 +138,26 @@ int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char Full
 int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
 
 /// <summary>
-/// Add new post
+/// Update manager data
 /// </summary>
+/// <param name="managerID"></param>
+/// <param name="UserName"></param>
+/// <param name="FullName"></param>
+/// <param name="Password"></param>
+/// <returns>ManagerID - if succeeded | 0 - Otherwise</returns>
+int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
+
+/// <summary>
+/// Update post data
+/// </summary>
+/// <param name="postID"></param>
 /// <param name="location"></param>
 /// <param name="type"></param>
 /// <param name="profession"></param>
 /// <param name="name"></param>
 /// <param name="description"></param>
-/// <returns>PostID - if posting successful | 0 - Otherwise</returns>
-int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+/// <returns>PostID if succeeded | 0 - Otherwise</returns>
+int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Register application for user to a post
