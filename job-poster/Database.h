@@ -122,8 +122,8 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 /// <param name="userID">Id of the updated user (Must)</param>
 /// <param name="UserName">Optional (pass NULL if not updated)</param>
 /// <param name="FullName">Optional (pass NULL if not updated)</param>
-/// <param name="ID">Teudat Zeut (ID) Optional (pass NULL if not updated)</param>
-/// <param name="age">Optional (pass NULL if not updated)</param>
+/// <param name="ID">Teudat Zeut (ID) Optional (pass 0 if not updated)</param>
+/// <param name="age">Optional (pass 0 if not updated)</param>
 /// <param name="PhoneNumber">Optional (pass NULL if not updated)</param>
 /// <param name="Password">Optional (pass NULL if not updated)</param>
 /// <returns>UserID on success | 0 - Otherwise</returns>

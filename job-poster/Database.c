@@ -32,9 +32,9 @@ int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char Full
 			strcpy(user.UserName, UserName);
 		if (FullName != NULL)
 			strcpy(user.FullName, FullName);
-		if (ID != NULL)
+		if (ID != 0)
 			user.ID = ID;
-		if (age != NULL)
+		if (age != 0)
 			user.age = age;
 		if (PhoneNumber != NULL)
 			strcpy(user.PhoneNumber, PhoneNumber);
@@ -84,7 +84,7 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Passw
 int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	Manager manager, iterator;
 	FILE* infile;
-	if (getUserData(&manager, managerID)) {	// if manager exists
+	if (getManagerData(&manager, managerID)) {	// if manager exists
 		if (UserName != NULL)
 			strcpy(manager.UserName, UserName);
 		if (FullName != NULL)
