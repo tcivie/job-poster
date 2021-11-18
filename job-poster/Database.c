@@ -24,6 +24,42 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	return 0;
 }
 
+int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]) {
+	User user, iterator;
+	FILE* infile;
+	if (getUserData(&user, userID)) {	// if user exists
+		if (UserName != NULL)
+			strcpy(user.UserName, UserName);
+		if (FullName != NULL)
+			strcpy(user.FullName, FullName);
+		if (ID != NULL)
+			user.ID = ID;
+		if (age != NULL)
+			user.age = age;
+		if (PhoneNumber != NULL)
+			strcpy(user.PhoneNumber, PhoneNumber);
+		if (Password != NULL)
+			strcpy(user.Password, Password);
+
+		// Start reding the file to find the user and modify it
+		infile = fopen(USERS_FILENAME, "wb");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			while (fread(&iterator, sizeof(User), 1, infile)) {	// read trough file
+				if (iterator.UserID == userID)
+					break;	// found the user and read it
+			}
+			fseek(infile, -(int)sizeof(User), SEEK_CUR);	// jump back one user
+			fwrite(&user, sizeof(User), 1, infile);	// write the changes
+			fclose(infile);
+			return userID;
+		}
+	} else
+		return 0;
+}
+
 int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	FILE* infile;
 	int managerID = getLastIdManagers() + 1;
