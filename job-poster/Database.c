@@ -24,6 +24,42 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	return 0;
 }
 
+int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]) {
+	User user, iterator;
+	FILE* infile;
+	if (getUserData(&user, userID)) {	// if user exists
+		if (UserName != NULL)
+			strcpy(user.UserName, UserName);
+		if (FullName != NULL)
+			strcpy(user.FullName, FullName);
+		if (ID != 0)
+			user.ID = ID;
+		if (age != 0)
+			user.age = age;
+		if (PhoneNumber != NULL)
+			strcpy(user.PhoneNumber, PhoneNumber);
+		if (Password != NULL)
+			strcpy(user.Password, Password);
+
+		// Start reding the file to find the user and modify it
+		infile = fopen(USERS_FILENAME, "wb");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			while (fread(&iterator, sizeof(User), 1, infile)) {	// read trough file
+				if (iterator.UserID == userID)
+					break;	// found the user and read it
+			}
+			fseek(infile, -(int)sizeof(User), SEEK_CUR);	// jump back one user
+			fwrite(&user, sizeof(User), 1, infile);	// write the changes
+			fclose(infile);
+			return userID;
+		}
+	} else
+		return 0;
+}
+
 int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	FILE* infile;
 	int managerID = getLastIdManagers() + 1;
@@ -43,6 +79,36 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Passw
 		return managerID;
 	}
 	return 0;
+}
+
+int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
+	Manager manager, iterator;
+	FILE* infile;
+	if (getManagerData(&manager, managerID)) {	// if manager exists
+		if (UserName != NULL)
+			strcpy(manager.UserName, UserName);
+		if (FullName != NULL)
+			strcpy(manager.FullName, FullName);
+		if (Password != NULL)
+			strcpy(manager.Password, Password);
+
+		// Start reding the file to find the manager and modify it
+		infile = fopen(MANAGERS_FILENAME, "wb");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			while (fread(&iterator, sizeof(Manager), 1, infile)) {	// read trough file
+				if (iterator.ManagerID == managerID)
+					break;	// found the manager and read it
+			}
+			fseek(infile, -(int)sizeof(Manager), SEEK_CUR);	// jump back one manager
+			fwrite(&manager, sizeof(Manager), 1, infile);	// write the changes
+			fclose(infile);
+			return managerID;
+		}
+	} else
+		return 0;
 }
 
 int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
