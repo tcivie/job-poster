@@ -119,13 +119,13 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 /// <summary>
 /// Update user data
 /// </summary>
-/// <param name="userID">Id of the updated user</param>
-/// <param name="UserName"></param>
-/// <param name="FullName"></param>
-/// <param name="ID">Teudat Zeut (ID)</param>
-/// <param name="age"></param>
-/// <param name="PhoneNumber"></param>
-/// <param name="Password"></param>
+/// <param name="userID">Id of the updated user (Must)</param>
+/// <param name="UserName">Optional (pass NULL if not updated)</param>
+/// <param name="FullName">Optional (pass NULL if not updated)</param>
+/// <param name="ID">Teudat Zeut (ID) Optional (pass NULL if not updated)</param>
+/// <param name="age">Optional (pass NULL if not updated)</param>
+/// <param name="PhoneNumber">Optional (pass NULL if not updated)</param>
+/// <param name="Password">Optional (pass NULL if not updated)</param>
 /// <returns>UserID on success | 0 - Otherwise</returns>
 int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]);
 
@@ -140,10 +140,10 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Passw
 /// <summary>
 /// Update manager data
 /// </summary>
-/// <param name="managerID"></param>
-/// <param name="UserName"></param>
-/// <param name="FullName"></param>
-/// <param name="Password"></param>
+/// <param name="managerID">Optional (pass NULL if not updated)</param>
+/// <param name="UserName">Optional (pass NULL if not updated)</param>
+/// <param name="FullName">Optional (pass NULL if not updated)</param>
+/// <param name="Password">Optional (pass NULL if not updated)</param>
 /// <returns>ManagerID - if succeeded | 0 - Otherwise</returns>
 int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
 

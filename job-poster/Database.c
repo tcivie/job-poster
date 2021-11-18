@@ -81,6 +81,36 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Passw
 	return 0;
 }
 
+int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
+	Manager manager, iterator;
+	FILE* infile;
+	if (getUserData(&manager, managerID)) {	// if manager exists
+		if (UserName != NULL)
+			strcpy(manager.UserName, UserName);
+		if (FullName != NULL)
+			strcpy(manager.FullName, FullName);
+		if (Password != NULL)
+			strcpy(manager.Password, Password);
+
+		// Start reding the file to find the manager and modify it
+		infile = fopen(MANAGERS_FILENAME, "wb");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			while (fread(&iterator, sizeof(Manager), 1, infile)) {	// read trough file
+				if (iterator.ManagerID == managerID)
+					break;	// found the manager and read it
+			}
+			fseek(infile, -(int)sizeof(Manager), SEEK_CUR);	// jump back one manager
+			fwrite(&manager, sizeof(Manager), 1, infile);	// write the changes
+			fclose(infile);
+			return managerID;
+		}
+	} else
+		return 0;
+}
+
 int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
 	FILE* infile;
 	int postID = getLastIdPosts() + 1;
