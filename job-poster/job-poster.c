@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Database.h"
+#include "check.c"
 
 void candidateMenu(char* name)
 {
@@ -21,10 +22,13 @@ void candidateMenu(char* name)
 		break;
 	case 4:
 		/*function to Edit user profile*/
+		/*ask gleb what we can change
+		
+		*/
 		break;
 	case 5:
 		/*function to Log out from system*/
-		printf("goodbye %s!", name);
+		printf("goodbye %s!\n", name);
 		return;
 		break;
 
@@ -34,6 +38,7 @@ void candidateMenu(char* name)
 }
 void employerMenu(char* name)
 {
+	char password[20], newpassword[20];
 	int choice;
 	printf("Hello dear %s\nwhat would you like to do?\n1-->Post a new ad on the board\n", name);
 	printf("2--> Delete an existing ad from the board\n");
@@ -44,6 +49,7 @@ void employerMenu(char* name)
 	printf("7--> Promotion of a job by means of payment\n");
 	printf("8--> Changing the login password\n");
 	printf("9--> Disconnecting from the system\n");
+	printf("10-->chat with a candidate\n");
 
 	scanf("%d", &choice);
 	switch (choice)
@@ -70,13 +76,34 @@ void employerMenu(char* name)
 		/*function to Promotion of a job by means of payment*/
 		break;
 	case 8:
+		
 		/*function to Changing the login password*/
+		printf("enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
+		gets(password);
+		while (PasswordCheck(password))
+		{
+			printf("please try again!\nenter a password:\n");
+			gets(password);
+		}
+		printf("to verify the password\nenter the password again\n");
+		gets(newpassword);
+		while (!strcmp(password, newpassword))
+		{
+			printf("to verify the password\nenter the password again\n");
+			gets(newpassword);
+		}
+		/*the password transfered to the  employer file and swich the old pass*/
+
+
 		break;
 	case 9:
 		/*function to Disconnecting from the system*/
-		printf("goodbye %c!", name);
+		printf("goodbye %c!\n", name);
 		return;
 		break;
+	case 10:
+		printf("who you want to speak?");
+		
 	default:
 		break;
 	}
@@ -85,10 +112,10 @@ void employerMenu(char* name)
 
 int main()
 {
-	char username[10], password[10], name[20];
+	char username[10], password[20], name[20], newpassword[20];
 	int option_menu1, age;
 label1:
-	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n ");
+	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n");
 	scanf("%d", &option_menu1);
 
 	switch (option_menu1)
@@ -97,39 +124,39 @@ label1:
 		printf("to login as an employer you have to enter the username and a password:\n");
 		printf("username:\n");
 		scanf("%s", username);
-		while (!(0/*השם של בדיקה פונקציית*/))
+		while (!(FullNameCheck(username)))
 		{
 			printf("this username does not exist!\nplease try again:\n");
 			scanf("%s", username);
 		}
 		printf("enter a password:\n");
 		gets(password);
-		while (!(0/*function to check the password*/))
+		while (PasswordCheck(password))
 		{
 			printf("please try again!\nenter a password:\n");
 			gets(password);
 		}
+		/*check the ditails from the file--gleb*/
 		printf("your login is succsess!\n");
-		employerMenu(name);/*מעבר לתפריט של מעסיק פונקצייה-*/
-
-
+		employerMenu(name);/*moved to employer menu*/
 		break;
 	case 2:
 		printf("to login as a candidate you need to enter username and password:\n");
 		printf("username:\n");
 		scanf("%s", username);
-		while (!(0/*השם של בדיקה פונקציית*/))
+		while (!(FullNameCheck(username)))
 		{
 			printf("this username does not exist!\nplease try again:\n");
 			scanf("%s", username);
 		}
 		printf("enter a password:\n");
 		gets(password);
-		while (!(0/*function to check the password*/))
+		while (PasswordCheck(password))
 		{
 			printf("please try again!\nenter a password:\n");
 			gets(password);
 		}
+		/*check the ditails from the file--gleb*/
 		printf("successful login!\n");
 		candidateMenu(name);/*transfer to candidate options menu.*/
 		break;
@@ -137,21 +164,29 @@ label1:
 		printf("to login as an employer you need to enter the following details:\n");
 		printf("enter username:\n");
 		scanf("%s", username);
-		while (!(0/*check function*/))
+		while (!(FullNameCheck(username)))
 		{
 			printf("this username is incorrect or already exists\nplease enter new username:\n");
 			scanf("%s", username);
 		}
 		printf("enter name or business name:\n");
 		scanf("%s", name);
-		printf("enter password:\n");
+		printf("enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
 		gets(password);
-		while (!(0/*check function*/))
+		while (PasswordCheck(password))
 		{
 			printf("password failed! \nplease enter new password:\n");
 			gets(password);
 		}
+		printf("to verify the password\nenter the password again\n");
+		gets(newpassword);
+		while (!strcmp(password, newpassword))
+		{
+			printf("the verify failed\nenter the password again\n");
+			gets(newpassword);
+		}
 		printf("you have successfully registered!\n");
+		/*send the ditails to the file--gleb*/
 		employerMenu(name);/*transfered to employer options menu.*/
 
 		break;
@@ -159,8 +194,7 @@ label1:
 		printf("to connect as a candidate you need to enter the following details:\n");
 		printf("enter username:\n");
 		scanf("%s", username);
-		/*chack the username.*/
-		while (!username)
+		while (!(FullNameCheck(username)))/*chack the username.*/
 		{
 			printf("this username is incorrect or alreadt exists\nplease enter new username:\n");
 			scanf("%s", username);
@@ -169,20 +203,35 @@ label1:
 		scanf("%s", name);
 		printf("enter age:\n");
 		scanf("%d", &age);
-		printf("enter a phone number:\n");
-		printf("enter a password:\n");
-		gets(password);
-		/*check the password and enter her again.*/
-		while (!password)
+		while (!AgeCheck(age))
 		{
-			printf("this password is incorrect! \nplease enter new password:\n");
+			printf("wrong age!\nplease try again");
+			scanf("%d", &age);
+		}
+		printf("enter a phone number:\n");///question????????????????
+
+
+		printf("enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
+		gets(password);
+		while (PasswordCheck(password))/*check the password and enter her again.*/
+		{
+			printf("this password is incorrect! \nplease enter new password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
 			gets(password);
 		}
+		printf("to verify the password\nenter the password again\n");
+		gets(newpassword);
+		while (!strcmp(password, newpassword))
+		{
+			printf("the verify failed\nenter the password again\n");
+			gets(newpassword);
+		}
 		printf("you have successfully registered!\n");
+		/*send the ditails to the file--gleb*/
 		candidateMenu(name);/*transfer to candidate options menu.*/
 		break;
 	default:
 		break;
 	}
 	goto label1;
+	
 }
