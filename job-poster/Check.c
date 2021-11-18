@@ -109,7 +109,7 @@ int AgeCheck(int age)
 
 int PasswordCheck(char* pass)
 {
-	int size, bigLflag=0, smallLflag=0, numberflag=0;
+	int size=0, bigLflag=0, smallLflag=0, numberflag=0;
 	if (pass == NULL)
 		return 1;//string is NULL
 	size = strlen(pass);
@@ -196,4 +196,12 @@ int last3DigitsCheck(char* number)//length = 3 and only digits
 	return 0;
 }
 
+int phoneNumberCheck(char* number)
+{
+	if (strlen(number) != 10)
+		return 1;//length is not good
+	if (number[0] != '0' || number[1] != '5')
+		return 2;//personal phone number starts with 05...
+	return 0;
+}
 
