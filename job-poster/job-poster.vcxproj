@@ -146,6 +146,7 @@
     <ClCompile Include="Manager.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Check.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="Manager.h" />
   </ItemGroup>

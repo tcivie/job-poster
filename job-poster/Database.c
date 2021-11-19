@@ -169,7 +169,7 @@ int updatePost(const unsigned int postID, int location, int type, int profession
 }
 
 int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]) {
-	if (PostID != NULL && UserID != NULL) {
+	if (PostID != 0 && UserID != 0) {
 		FILE* infile;
 		int applicationID = getLastIdApplications() + 1;
 		Apply applied = { applicationID, PostID, UserID };	// if got managerID add manager otherwise ID = 1

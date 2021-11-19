@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Database.h"
-#include "check.c"
+#include "Check.h"
 
 void candidateMenu(char* name)
 {
