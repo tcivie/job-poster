@@ -103,7 +103,7 @@ int getLastIdPosts();
 /// Finds the last Applied ID
 /// </summary>
 /// <returns>AppliedID - of the post | 0 - If not found</returns>
-int getLastIdApplied();
+int getLastIdApplications();
 
 /// <summary>
 /// Register a new user

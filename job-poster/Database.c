@@ -134,6 +134,27 @@ int addPost(const unsigned int managerID, int location, int type, int profession
 	return 0;
 }
 
+int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]) {
+	if (PostID != NULL && UserID != NULL) {
+		FILE* infile;
+		int applicationID = getLastIdApplications() + 1;
+		Apply applied = { applicationID, PostID, UserID };	// if got managerID add manager otherwise ID = 1
+		// Append data to the created struct manager
+		strcpy(applied.Description, Description);
+
+		infile = fopen(APPLIED_FILENAME, "ab");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			fwrite(&applied, sizeof(Apply), 1, infile);
+			fclose(infile);
+			return applicationID;
+		}
+	}
+	return 0;
+}
+
 int getUserData(User* retValue, const unsigned int userID) {
 	FILE* infile;
 	infile = fopen(USERS_FILENAME, "rb");
