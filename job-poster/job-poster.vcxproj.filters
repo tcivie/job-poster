@@ -41,6 +41,9 @@
     <ClInclude Include="Check.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="connectF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Managers.bin">
