@@ -229,6 +229,26 @@ int getManagerData(Manager* retValue, const unsigned int managerID) {
 	return 0;
 }
 
+int getPostData(Post* retValue, const unsigned int postID) {
+	FILE* infile;
+	infile = fopen(POSTS_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		while (fread(retValue, sizeof(Post), 1, infile)) {	// read trough file
+			if (retValue->PostID == postID) {	// check if equal
+				fclose(infile);
+				return 1;	// return 1
+			}
+		}
+		fclose(infile);
+		retValue = NULL;
+		return 0;
+	}
+	return 0;
+}
+
 int getAllPosts(Post* postsArray[]) {
 	FILE* infile;
 	infile = fopen(POSTS_FILENAME, "rb");

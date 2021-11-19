@@ -190,7 +190,7 @@ int getManagerData(Manager* retValue, const unsigned int managerID);
 /// </summary>
 /// <param name="retValue">Pointer to the found post</param>
 /// <param name="postID">The post ID to look for</param>
-/// <returns>postID - If found | 0 - If not</returns>
+/// <returns>1 - If found | 0 - If not</returns>
 int getPostData(Post* retValue, const unsigned int postID);
 
 /// <summary>
