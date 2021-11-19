@@ -151,12 +151,12 @@ int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], cha
 /// <summary>
 /// Update post data
 /// </summary>
-/// <param name="postID"></param>
-/// <param name="location"></param>
-/// <param name="type"></param>
-/// <param name="profession"></param>
-/// <param name="name"></param>
-/// <param name="description"></param>
+/// <param name="postID">ID of the updated post</param>
+/// <param name="location">Optional (pass 0 if not updated)</param>
+/// <param name="type">Optional (pass 0 if not updated)</param>
+/// <param name="profession">Optional (pass 0 if not updated)</param>
+/// <param name="name">Optional (pass NULL if not updated)</param>
+/// <param name="description">Optional (pass NULL if not updated)</param>
 /// <returns>PostID if succeeded | 0 - Otherwise</returns>
 int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
@@ -184,6 +184,14 @@ int getUserData(User* retValue,const unsigned int userID);
 /// <param name="managerID">The manager ID to look for</param>
 /// <returns>1 - If found | 0 - If not</returns>
 int getManagerData(Manager* retValue, const unsigned int managerID);
+
+/// <summary>
+/// Searches for a post with a given ID and returns it
+/// </summary>
+/// <param name="retValue">Pointer to the found post</param>
+/// <param name="postID">The post ID to look for</param>
+/// <returns>postID - If found | 0 - If not</returns>
+int getPostData(Post* retValue, const unsigned int postID);
 
 /// <summary>
 /// Adds new post

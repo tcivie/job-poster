@@ -134,6 +134,40 @@ int addPost(const unsigned int managerID, int location, int type, int profession
 	return 0;
 }
 
+int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+	Post post, iterator;
+	FILE* infile;
+	if (getPostData(&post, postID)) {	// if post exists
+		if (location != 0)
+			post.Location = location;
+		if (type != 0)
+			post.Type = type;
+		if (profession != 0)
+			post.Profession = profession;
+		if (name != NULL)
+			strcpy(post.Name, name);
+		if (description != NULL)
+			strcpy(post.Description, description);
+
+		// Start reding the file to find the post and modify it
+		infile = fopen(POSTS_FILENAME, "wb");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			while (fread(&iterator, sizeof(Post), 1, infile)) {	// read trough file
+				if (iterator.PostID == postID)
+					break;	// found the post and read it
+			}
+			fseek(infile, -(int)sizeof(Post), SEEK_CUR);	// jump back one post
+			fwrite(&post, sizeof(Post), 1, infile);	// write the changes
+			fclose(infile);
+			return postID;
+		}
+	} else
+		return 0;
+}
+
 int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]) {
 	if (PostID != NULL && UserID != NULL) {
 		FILE* infile;
