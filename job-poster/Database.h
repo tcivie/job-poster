@@ -27,6 +27,7 @@ typedef struct Users {
 	char Password[MAX_PASSWORD];
 } User;
 
+
 typedef struct Managers {
 	const unsigned int ManagerID;
 	char UserName[MAX_SIZE];

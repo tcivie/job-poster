@@ -299,6 +299,28 @@ int checkManagerUserName(char UserName[MAX_SIZE]) {
 	return 0;
 }
 
+int checkUserApplication(const unsigned int PostID, const unsigned int userID) {
+	FILE* infile;
+	Apply input;
+	infile = fopen(APPLIED_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		while (fread(&input, sizeof(Apply), 1, infile)) {	// read trough file
+			if (input.PostID == PostID) {	// check if its the post
+				if (input.UserID == userID) {
+					fclose(infile);
+					return input.AppliedID;	// return Application ID
+				}
+			}	// found application but not the user
+		}
+		fclose(infile);
+		return 0;
+	}
+	return 0;
+}
+
 int getLastIdUsers() {
 	FILE* infile;
 	User input;
@@ -369,7 +391,7 @@ int getLastIdApplications() {
 			fseek(infile, -(int)sizeof(Apply), SEEK_END);
 			fread(&input, sizeof(Apply), 1, infile);	// read last manager
 			fclose(infile);
-			return input.AppliedId;
+			return input.AppliedID;
 		}
 	}
 	return 0;
