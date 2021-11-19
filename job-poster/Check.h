@@ -20,5 +20,6 @@ int numberOfDaysPayment(int days);
 int creditNumberCheck(char* credit);
 int creditValidityCheck(char* date); //mm / yy
 int last3DigitsCheck(char* number);
+int phoneNumberCheck(char* number);
 
 #endif // !CHECK

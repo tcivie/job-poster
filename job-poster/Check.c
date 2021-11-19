@@ -71,7 +71,7 @@ int FullNameCheck(char* Fname)
 {
 	int size = strlen(Fname);
 	if (size == 0||Fname==NULL)
-		return 0;
+		return 1;//too short - not good
 	for (int i = 0; i <size; i++)
 	{
 		if (!((Fname[i] >= L_A && Fname[i] <= L_Z)|| (Fname[i] >= L_a && Fname[i] <= L_z)|| (Fname[i] == 32)))
