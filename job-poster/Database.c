@@ -355,3 +355,22 @@ int getLastIdPosts() {
 	}
 	return 0;
 }
+
+int getLastIdApplications() {
+	FILE* infile;
+	Apply input;
+	infile = fopen(APPLIED_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		fseek(infile, 0, SEEK_END);	// go to end of file
+		if (ftell(infile)) {	// check if not empty
+			fseek(infile, -(int)sizeof(Apply), SEEK_END);
+			fread(&input, sizeof(Apply), 1, infile);	// read last manager
+			fclose(infile);
+			return input.AppliedId;
+		}
+	}
+	return 0;
+}

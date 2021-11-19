@@ -46,7 +46,7 @@ typedef struct Posts {
 } Post;
 
 typedef struct Applied {
-	const unsigned int AppliedId;
+	const unsigned int AppliedID;
 	const unsigned int PostID;
 	const unsigned int UserID;
 	char Description[MAX_DESCRIPTION];
