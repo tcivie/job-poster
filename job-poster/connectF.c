@@ -238,5 +238,6 @@ int editManagerData(const unsigned int userID)
 			break;
 		}
 	} while (choose != 0);
+	return 0;
 }
 	
