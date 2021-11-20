@@ -241,7 +241,7 @@ int editManagerData(const unsigned int userID)
 	return 0;
 }
 	
-int promotionAD(const unsigned int userID)
+int promotionAD(const unsigned int managerID)
 {
 	int selection = -1;
 	printf("Those are all your posts:\n\n");
