@@ -241,3 +241,12 @@ int editManagerData(const unsigned int userID)
 	return 0;
 }
 	
+int promotionAD(const unsigned int userID)
+{
+	int selection = -1;
+	printf("Those are all your posts:\n\n");
+	//call function that print all specific user's posts
+	printf("Enter the id of the post you would like to promote:\n");
+	scanf("%d", &selection);
+	//////////////////////
+}
