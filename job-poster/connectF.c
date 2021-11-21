@@ -244,9 +244,45 @@ int editManagerData(const unsigned int userID)
 int promotionAD(const unsigned int managerID)
 {
 	int selection = -1;
+	Post posts[MAX_POSTS];
+	int numberOfdays1=-1;
+	int flag = 0;
+	Manager manager;
+	int size = getAllPosts(&posts);
+	if(!(getManagerData(&manager,managerID)))
+		exit(1);
 	printf("Those are all your posts:\n\n");
-	//call function that print all specific user's posts
-	printf("Enter the id of the post you would like to promote:\n");
-	scanf("%d", &selection);
-	//////////////////////
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < (sizeof(manager.Posts) / sizeof(int)); j++)
+		{
+			if (posts[i].PostID == manager.Posts[j])
+				view_post(posts[i]);
+		}
+	}
+	do {
+		printf("Enter the id of the post you would like to promote:\n");
+		scanf("%d", &selection);
+		flag = 0;
+		for (int j = 0; j < (sizeof(manager.Posts) / sizeof(int)); j++)
+		{
+			if (manager.Posts[j] == selection)
+			{
+				flag = 1;
+				break;
+			}
+		}
+	} while (flag == 0);
+	flag = 0;
+	do{
+		printf("Enter number of days of promotion:(between 1-365)\n");
+		scanf("%d", &numberOfdays1);
+		if (numberOfDaysPayment(numberOfdays1) == 0)
+			flag = 1;
+	}while (flag == 0);
+	printf("The total payment will be: %d\$\n", numberOfdays1 * 3);
+	flag = 0;
+	do {
+		printf("");
+	} while (0);
 }
