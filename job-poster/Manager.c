@@ -194,7 +194,7 @@ void view_post(Post post) // Helper
 	printf("Description:\n%s", post.Description);	// Print description
 }
 
-void view_posts(Manager manager) // Requiremrnt 2.4
+void view_candidates_profiles(Manager manager) // Requiremrnt 2.4
 {
 
 	if (sizeof(manager.Posts) / sizeof(int) > 0)
@@ -251,4 +251,56 @@ void view_posts(Manager manager) // Requiremrnt 2.4
 		}
 	}
 	else printf("No ads exist!\n");
+}
+
+int view_profiles(Manager manager)
+{
+	User* users = NULL;
+	Manager temp_manager;
+	int post = (-1), flag = (-1), qty;
+
+	view_posts(manager); // display posts
+	
+	do
+	{
+		printf("Which post would you like to check for candidates?\n");
+		scanf("%d", &post); // selection
+		for (int i = 0; i < sizeof(temp_manager.Posts) / sizeof(int); i++)
+		{
+			if (temp_manager.Posts[i] == post)
+			{
+				flag = 1;
+				break;
+			}
+			else if (i == sizeof(manager.Posts) / sizeof(int))
+				flag = 2;
+		}
+	} while (flag == 0);
+	if (!getAppliedByPost(&users, post))
+	{
+		exit(1);
+	}
+	if (flag == 1)
+	{
+		if (getAppliedByPost(&users, post) == 0)
+		{
+			printf("No candidated applied for this post\n");
+			return 0;
+		}
+		qty = getAppliedByPost(&users, post);
+		// case: print all the users profiles that applied for this post
+		for (int i = 0; i < qty; i++)
+		{
+			printf("Name: %s\n", users[i].FullName);
+			printf("ID: %s\n", users[i].ID);
+			printf("Age: %d\n", users[i].age);
+			printf("Phone number: %s\n", users[i].PhoneNumber);
+			printf("Resume: %s\n\n", users[i].Resume);
+		}
+	}
+	if (flag == 2)
+	{
+		printf("Invalid post ID\n");
+		return 1;
+	}
 }
