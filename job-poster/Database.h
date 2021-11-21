@@ -66,14 +66,14 @@ int initFiles();
 /// </summary>
 /// <param name="UserName">User's username</param>
 /// <returns>0 - If not found | UserID - if found</returns>
-int checkUserName(char UserName[MAX_SIZE]);
+unsigned int checkUserName(char UserName[MAX_SIZE]);
 
 /// <summary>
 /// Checks if the username of the manager exists in the database
 /// </summary>
 /// <param name="UserName">Manager's username</param>
 /// <returns>0 - If not found | ManagerID - if found</returns>
-int checkManagerUserName(char UserName[MAX_SIZE]);
+unsigned int checkManagerUserName(char UserName[MAX_SIZE]);
 
 /// <summary>
 /// Checks if the user has aleardy appied for the application
@@ -81,31 +81,31 @@ int checkManagerUserName(char UserName[MAX_SIZE]);
 /// <param name="PostID">ID of the post the user wants to apply to</param>
 /// <param name="UserID">ID of the user</param>
 /// <returns>ApplicationID - if found | 0 - Otherwise</returns>
-int checkUserApplication(const unsigned int PostID, const unsigned int userID);
+unsigned int checkUserApplication(const unsigned int PostID, const unsigned int userID);
 
 /// <summary>
 /// Finds the last User ID
 /// </summary>
 /// <returns>UserID - of the user | 0 - If not found</returns>
-int getLastIdUsers();
+unsigned int getLastIdUsers();
 
 /// <summary>
 /// Finds the last Manager ID
 /// </summary>
 /// <returns>ManagerID - of the user | 0 - If not found</returns>
-int getLastIdManagers();
+unsigned int getLastIdManagers();
 
 /// <summary>
 /// Finds the last Post ID
 /// </summary>
 /// <returns>PostID - of the post | 0 - If not found</returns>
-int getLastIdPosts();
+unsigned int getLastIdPosts();
 
 /// <summary>
 /// Finds the last Applied ID
 /// </summary>
 /// <returns>AppliedID - of the post | 0 - If not found</returns>
-int getLastIdApplications();
+unsigned int getLastIdApplications();
 
 /// <summary>
 /// Register a new user
@@ -117,7 +117,7 @@ int getLastIdApplications();
 /// <param name="PhoneNumber">User phone number</param>
 /// <param name="Resume">Path to user resume</param>
 /// <returns>UserID - if registration successful | 0 - Otherwise</returns>
-int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]);
+unsigned int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Update user data
@@ -131,7 +131,7 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 /// <param name="Password">Optional (pass NULL if not updated)</param>
 /// <param name="Resume">Optional (pass NULL if not updated)</param>
 /// <returns>UserID on success | 0 - Otherwise</returns>
-int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]);
+unsigned int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Register a new manager
@@ -139,7 +139,7 @@ int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char Full
 /// <param name="UserName">Username</param>
 /// <param name="FullName">Business name/ User Full name</param>
 /// <returns>ManagerID - if registration successful | 0 - Otherwise</returns>
-int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
+unsigned int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
 
 /// <summary>
 /// Update manager data
@@ -149,7 +149,7 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Passw
 /// <param name="FullName">Optional (pass NULL if not updated)</param>
 /// <param name="Password">Optional (pass NULL if not updated)</param>
 /// <returns>ManagerID - if succeeded | 0 - Otherwise</returns>
-int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
+unsigned int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]);
 
 /// <summary>
 /// Update post data
@@ -161,7 +161,7 @@ int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], cha
 /// <param name="name">Optional (pass NULL if not updated)</param>
 /// <param name="description">Optional (pass NULL if not updated)</param>
 /// <returns>PostID if succeeded | 0 - Otherwise</returns>
-int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+unsigned int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Register application for user to a post
@@ -170,7 +170,7 @@ int updatePost(const unsigned int postID, int location, int type, int profession
 /// <param name="UserID">ID of the user</param>
 /// <param name="Description">The application contents</param>
 /// <returns>ApplicationID if succeeded | 0 otherwise</returns>
-int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]);
+unsigned int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Searches for the user with the given ID and returns the User
