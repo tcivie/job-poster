@@ -1,5 +1,6 @@
 #include "Database.h"
 #include "Manager.h"
+#include "Check.h"
 
 Post* add_new_post(Manager manager) // TODO: Update posts array and return it
 {
@@ -69,69 +70,80 @@ int delete_post(Manager manager)
 	}
 }
 
-int update_post(Manager manager, Post post)
+int update_post(int managerID)
 {
-	int up_val = (-1), choose = 0, flag = 0, location_temp = 0, type_temp = 0;
-	view_posts(manager);
-	while (up_val > manager.Posts || up_val < 0)
+	Manager temp_manager;
+	int up_val = (-1), choose = 1, flag = 0, temp = 0, type_temp = 0,flag2 = 0;
+	char temp_name[MAX_DESCRIPTION] = "";
+	Post posts[MAX_POSTS];
+	int size = getAllPosts(&posts);
+	if (!(getManagerData(&temp_manager, managerID)))
+		exit(1);
+	do
 	{
 		printf("Which post would you like to update?\n");
 		scanf("%d", &up_val); // update value
-	}
-	while (choose < 0 || choose > 6)
+		for (int i = 0; i < sizeof(temp_manager.Posts) / sizeof(int); i++)
+		{
+			if (temp_manager.Posts[i] == up_val)
+			{
+				flag2 = 1;
+				break;
+			}
+		}
+	} while (flag2 == 0);
+	while (choose > 0 || choose < 6)
 	{
 		printf("What property would you like to change?\n 1. Location\n2. Type of job\n3. Profession\n4. Name of post\n5. Description\n6. None\n");
 		scanf("%d", &choose);
 		switch (choose)
 		{
 		case 1:
+			temp = 0;
 			do
 			{
 				printf("Select location from list:\n1. North\n2. Center\n 3.South\n");
-				scanf("%d", &location_temp);
-			} while (location_temp < 1 || location_temp > 3);
-			updatePost()
+				scanf("%d", &temp);
+			} while (temp < 1 || temp > 3);
+			updatePost(up_val, temp, 0, 0, NULL, NULL, 0);
 			break;
 		case 2:
+			temp = 0;
 			do
 			{
 				printf("Select type of job from list:\n1. Full-time\n2. Part-time\n");
-				scanf("%d", &up_post.Location);
-			} while (up_post.Type < 1 || up_post.Type > 2);
+				scanf("%d", &temp);
+			} while (temp < 1 || temp > 2);
+			updatePost(up_val, 0, temp, 0, NULL, NULL, 0);
 			break;
 		case 3:
+			temp = 0;
 			do
 			{
 				printf("Select relevant profession from list:\n1. Security\n2. Engineering\n3. Medicine\n4. Restaurants\n5. Education\n6. Public transportation\n7. Factories\n8. Economics\n0. Not relevant\n");
-				scanf("%d", &up_post.Profession);
-			} while (up_post.Profession < 0 || up_post.Profession > 8);
+				scanf("%d", &temp);
+			} while (temp < 0 || temp > 8);
+			updatePost(up_val, 0, 0, temp, NULL, NULL, 0);
 			break;
 		case 4:
+			strcpy(temp_name, "");
 			do
 			{
-				if (strlen(up_post.Name) > MAX_SIZE)
-					printf("Title should be 100 characters or lower\n");
 				printf("Please enter post title (Maximun: 100 characters)\n");
-				gets(up_post.Name);
-			} while (strlen(up_post.Name) > MAX_SIZE);
+				scanf("%s", temp_name);
+			} while (FullNameCheck(temp_name) != 0);
+			updatePost(up_val, 0, 0, 0, temp_name, NULL, 0);
 			break;
 		case 5:
-			do
-			{
-				if (strlen(up_post.Description) > MAX_DESCRIPTION)
-					printf("Description should be 255 characters or lower\n");
-				printf("Please enter post description (Maximun: 255 characters)\n");
-				gets(up_post.Description);
-			} while (strlen(up_post.Description) > MAX_DESCRIPTION);
-			break;
-		case 6:
+			strcpy(temp_name, "");
+			printf("Please enter post description (Maximun: 255 characters)\n");
+			scanf("%s", temp_name);
+			updatePost(up_val, 0, 0, 0, NULL, temp_name, 0);
 			break;
 		default:
 			break;
 		}
 	}
-	
-
 }
 
 void view_post(Post post) // Helper
