@@ -118,14 +118,14 @@ int editUserProfile(const unsigned int userID)
 			printf("Enter the new user name please:\n");
 			strcpy(temp, "");
 			scanf("%s",temp);
-			updateUserData(userID, temp, NULL, 0, 0, NULL, NULL);
+			updateUserData(userID, temp, NULL, 0, 0, NULL, NULL,NULL);
 			break;
 		case 2:
 			printf("Enter the new full name please:\n");
 			strcpy(temp, "");
 			scanf("%s", temp);
 			if (FullNameCheck(temp) == 0)
-				updateUserData(userID, NULL, temp, 0, 0, NULL, NULL);
+				updateUserData(userID, NULL, temp, 0, 0, NULL, NULL,NULL);
 			else
 				printf("Wrong full name\n");
 			break;
@@ -133,7 +133,7 @@ int editUserProfile(const unsigned int userID)
 			printf("Enter the new ID please:\n");
 			scanf("%ld",&tempID);
 			if (IDcheck(tempID) == 1)
-				updateUserData(userID, NULL, NULL, tempID, 0, NULL, NULL);
+				updateUserData(userID, NULL, NULL, tempID, 0, NULL, NULL,NULL);
 			else
 				printf("Wrong ID number\n");
 			break;
@@ -141,7 +141,7 @@ int editUserProfile(const unsigned int userID)
 			printf("Enter new age please:\n");
 			scanf("%d", &tempAge);
 			if (AgeCheck(tempAge) == 0)
-				updateUserData(userID, NULL, NULL, 0, tempAge, NULL, NULL);
+				updateUserData(userID, NULL, NULL, 0, tempAge, NULL, NULL,NULL);
 			else
 				printf("Wrong age");
 			break;
@@ -150,7 +150,7 @@ int editUserProfile(const unsigned int userID)
 			strcpy(temp, "");
 			scanf("%s", temp);
 			if(phoneNumberCheck(temp)==0)
-				updateUserData(userID, NULL, NULL, 0, 0, temp, NULL);
+				updateUserData(userID, NULL, NULL, 0, 0, temp, NULL,NULL);
 			else {
 				if (phoneNumberCheck(temp) == 1)
 					printf("Length of phone number is not correct");
@@ -169,7 +169,7 @@ int editUserProfile(const unsigned int userID)
 			{
 				passwordTemp = PasswordCheck(temp);
 				if (passwordTemp == 0)
-					updateUserData(userID, NULL, NULL, 0, 0, NULL, temp);
+					updateUserData(userID, NULL, NULL, 0, 0, NULL, temp,NULL);
 				if (passwordTemp == 1 || passwordTemp == 2)
 					printf("Wrong password, the new password is not long enough");
 				if (passwordTemp == 3)
