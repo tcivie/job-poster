@@ -275,6 +275,29 @@ int getAppliedByUser(Apply* retValue[], const unsigned int userID)
 	return 0;
 }
 
+int getAppliedByPost(User* retValue[], const unsigned int postID)
+{
+	FILE* infile;
+	Apply buffer;
+	infile = fopen(APPLIED_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+	else {
+		int size = 0;
+		while (fread(&buffer, sizeof(Apply), 1, infile)) {	// read trough file
+			if (buffer.PostID == postID) {
+				if (!getUserData(&retValue[size++], buffer.UserID))	// get the user
+					return 0;	// ERROR
+			}
+		}
+		fclose(infile);
+		return size;
+	}
+	return 0;
+}
+
 
 int getAllPosts(Post* postsArray[]) {
 	FILE* infile;
