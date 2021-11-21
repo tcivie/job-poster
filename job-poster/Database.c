@@ -137,7 +137,7 @@ unsigned int addPost(const unsigned int managerID, int location, int type, int p
 	return 0;
 }
 
-unsigned int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+unsigned int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION], int Promoted) {
 	Post post, iterator;
 	FILE* infile;
 	if (getPostData(&post, postID)) {	// if post exists
@@ -151,6 +151,8 @@ unsigned int updatePost(const unsigned int postID, int location, int type, int p
 			strcpy(post.Name, name);
 		if (description != NULL)
 			strcpy(post.Description, description);
+		if (Promoted == 1)
+			post.Promoted = Promoted;
 
 		// Start reding the file to find the post and modify it
 		infile = fopen(POSTS_FILENAME, "wb");

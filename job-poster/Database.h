@@ -160,8 +160,9 @@ unsigned int updateManagerData(const unsigned int managerID, char UserName[MAX_S
 /// <param name="profession">Optional (pass 0 if not updated)</param>
 /// <param name="name">Optional (pass NULL if not updated)</param>
 /// <param name="description">Optional (pass NULL if not updated)</param>
+/// <param name="Promoted">Optional (pass 0 if not updated)</param>
 /// <returns>PostID if succeeded | 0 - Otherwise</returns>
-unsigned int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]);
+unsigned int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION], int Promoted);
 
 /// <summary>
 /// Register application for user to a post
