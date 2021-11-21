@@ -2,7 +2,7 @@
 #include "Manager.h"
 #include "Check.h"
 
-Post* add_new_post(Manager manager) // TODO: Update posts array and return it
+int add_new_post(Manager manager)
 {
 	Post new_post;
 	new_post.Location = new_post.Type = 0;
@@ -37,7 +37,11 @@ Post* add_new_post(Manager manager) // TODO: Update posts array and return it
 		gets(new_post.Description);
 	} while (strlen(new_post.Description) > MAX_DESCRIPTION);
 	if (!addPost(manager.ManagerID, new_post.Location, new_post.Type, new_post.Profession, new_post.Name, new_post.Description))
+	{
+		return 1;
 		printf("Error! can't add post\n");
+	}
+	return 0;
 }
 
 int delete_post(int managerID)
@@ -76,7 +80,7 @@ int delete_post(int managerID)
 int update_post(int managerID)
 {
 	Manager temp_manager;
-	int up_val = (-1), choose = 1, flag = 0, temp = 0, type_temp = 0,flag2 = 0;
+	int up_val = (-1), choose = 1, flag = 0, temp = 0, type_temp = 0;
 	char temp_name[MAX_DESCRIPTION] = "";
 	Post posts[MAX_POSTS];
 	int size = getAllPosts(&posts);
@@ -90,11 +94,11 @@ int update_post(int managerID)
 		{
 			if (temp_manager.Posts[i] == up_val)
 			{
-				flag2 = 1;
+				flag = 1;
 				break;
 			}
 		}
-	} while (flag2 == 0);
+	} while (flag == 0);
 	while (choose > 0 || choose < 6)
 	{
 		printf("What property would you like to change?\n 1. Location\n2. Type of job\n3. Profession\n4. Name of post\n5. Description\n6. None\n");
