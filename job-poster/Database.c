@@ -1,6 +1,6 @@
 #include "Database.h"
 
-int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]) {
+int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]) {
 	FILE* infile;
 	int userID = getLastIdUsers() + 1;
 	User user = { userID };	// if got userID add user otherwise ID = 1
@@ -11,6 +11,7 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	user.age = age;
 	strcpy(user.PhoneNumber, PhoneNumber);
 	strcpy(user.Password, Password);
+	strcpy(user.Resume, Resume);
 
 	infile = fopen(USERS_FILENAME, "ab");
 	if (infile == NULL) {
@@ -24,7 +25,7 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	return 0;
 }
 
-int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]) {
+int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]) {
 	User user, iterator;
 	FILE* infile;
 	if (getUserData(&user, userID)) {	// if user exists
@@ -40,6 +41,8 @@ int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char Full
 			strcpy(user.PhoneNumber, PhoneNumber);
 		if (Password != NULL)
 			strcpy(user.Password, Password);
+		if (Resume != NULL)
+			strcpy(user.Resume, Resume);
 
 		// Start reding the file to find the user and modify it
 		infile = fopen(USERS_FILENAME, "wb");
