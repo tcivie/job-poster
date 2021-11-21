@@ -15,7 +15,6 @@ void view_post(Post post);
 /// Requiremrnt 2.4 - Function of printing all the job posts
 /// </summary>
 /// <param name="manager">logged in manager</param>
-/// <param name="post"></param>
 void view_posts(Manager manager, Post post);
 
 /// <summary>

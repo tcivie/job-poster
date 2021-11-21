@@ -39,36 +39,40 @@ Post* add_new_post(Manager manager) // TODO: Update posts array and return it
 		printf("Error! can't add post\n");
 }
 
-Post* delete_post(Manager manager, Post post)
+int delete_post(Manager manager)
 {
 	int del_val = (-1);
 	int count = 0;
-	view_posts(manager, post); // display posts
-	while (del_val > manager.Posts || del_val < 0)
+	int flag = 0;
+	view_posts(manager); // display posts
+	do
 	{
 		printf("Which post would you like to remove?\n");
 		scanf("%d", &del_val); // delete value
-	}
-	del_val = del_val - 1;
-	for (int i = 0; i < manager.Posts; i++)
+		for (int i = 0; i <= sizeof(manager.Posts) / sizeof(int); i++)
+		{
+			if (manager.Posts[i] == del_val)
+				flag = 1;
+			else if (i == sizeof(manager.Posts) / sizeof(int))
+				flag = 2;
+		}
+	} while (flag == 0);
+	if (flag == 1)
 	{
-		if (del_val = i)
-		{
-			count--;
-		}
-		else 
-		{
-			manager.Posts[count] = count + 1;
-		}
-		count++;
+		///gleb///
+		return 0;
+	}
+	if (flag == 2)
+	{
+		proitf("Invalid post ID\n");
+		return 1;
 	}
 }
 
-Post* update_post(Manager manager, Post post)
+int update_post(Manager manager, Post post)
 {
-	Post up_post;
-	int up_val = (-1), choose = 0, flag = 0;
-	view_posts(manager, post);
+	int up_val = (-1), choose = 0, flag = 0, location_temp = 0, type_temp = 0;
+	view_posts(manager);
 	while (up_val > manager.Posts || up_val < 0)
 	{
 		printf("Which post would you like to update?\n");
@@ -84,8 +88,9 @@ Post* update_post(Manager manager, Post post)
 			do
 			{
 				printf("Select location from list:\n1. North\n2. Center\n 3.South\n");
-				scanf("%d", &up_post.Location);
-			} while (up_post.Location < 1 || up_post.Location > 3);
+				scanf("%d", &location_temp);
+			} while (location_temp < 1 || location_temp > 3);
+			updatePost()
 			break;
 		case 2:
 			do
@@ -170,7 +175,6 @@ void view_post(Post post) // Helper
 	printf("Description:\n%s", post.Description);	// Print description
 }
 
-
 void view_posts(Manager manager) // Requiremrnt 2.4
 {
 
@@ -184,7 +188,7 @@ void view_posts(Manager manager) // Requiremrnt 2.4
 			{
 				if (posts[i].PostID == manager.Posts)
 				{
-					printf("%d. ", i + 1);	// Print post id
+					printf("%d. ", posts[i].PostID);	// Print post id
 
 					printf("Name: %s\n", posts[i].Name);	// Print name
 
