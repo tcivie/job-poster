@@ -1,7 +1,7 @@
 #include "Database.h"
 #include "Manager.h"
 
-Post* add_new_post() // TODO: Update posts array and return it
+Post* add_new_post(Manager manager) // TODO: Update posts array and return it
 {
 	Post new_post;
 	new_post.Location = new_post.Type = 0;
@@ -35,6 +35,8 @@ Post* add_new_post() // TODO: Update posts array and return it
 		printf("Please enter post description (Maximun: 255 characters)\n");
 		gets(new_post.Description);
 	} while (strlen(new_post.Description) > MAX_DESCRIPTION);
+	if (!addPost(manager.ManagerID, new_post.Location, new_post.Type, new_post.Profession, new_post.Name, new_post.Description))
+		printf("Error! can't add post\n");
 }
 
 Post* delete_post(Manager manager, Post post)
