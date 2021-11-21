@@ -200,10 +200,18 @@ int getPostData(Post* retValue, const unsigned int postID);
 /// <summary>
 /// Gets all the applications for the given user
 /// </summary>
-/// <param name="retValue">Pointer to array of applications to store in the applications</param>
+/// <param name="retValue">Pointer to array of applications</param>
 /// <param name="userID">Id of the user</param>
 /// <returns>Number of applications - If succeeded | 0 - If failed</returns>
 int getAppliedByUser(Apply* retValue[], const unsigned int userID);
+
+/// <summary>
+/// Gets all the user profiles who applied for the job
+/// </summary>
+/// <param name="retValue">Pointer to array of users</param>
+/// <param name="postID">Id of the post</param>
+/// <returns>Number of applications - If succeeded | 0 - If failed</returns>
+int getAppliedByPost(User* retValue[], const unsigned int postID);
 
 /// <summary>
 /// Adds new post
