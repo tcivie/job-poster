@@ -40,33 +40,36 @@ Post* add_new_post(Manager manager) // TODO: Update posts array and return it
 		printf("Error! can't add post\n");
 }
 
-int delete_post(Manager manager)
+int delete_post(int managerID)
 {
 	int del_val = (-1);
 	int count = 0;
 	int flag = 0;
-	view_posts(manager); // display posts
-	do
-	{
-		printf("Which post would you like to remove?\n");
-		scanf("%d", &del_val); // delete value
-		for (int i = 0; i <= sizeof(manager.Posts) / sizeof(int); i++)
+	Manager manager;
+	if (getManagerData(&manager, managerID)) {
+		view_posts(manager); // display posts
+		do
 		{
-			if (manager.Posts[i] == del_val)
-				flag = 1;
-			else if (i == sizeof(manager.Posts) / sizeof(int))
-				flag = 2;
+			printf("Which post would you like to remove?\n");
+			scanf("%d", &del_val); // delete value
+			for (int i = 0; i <= sizeof(manager.Posts) / sizeof(int); i++)
+			{
+				if (manager.Posts[i] == del_val)
+					flag = 1;
+				else if (i == sizeof(manager.Posts) / sizeof(int))
+					flag = 2;
+			}
+		} while (flag == 0);
+		if (flag == 1)
+		{
+			///gleb///
+			return 0;
 		}
-	} while (flag == 0);
-	if (flag == 1)
-	{
-		///gleb///
-		return 0;
-	}
-	if (flag == 2)
-	{
-		proitf("Invalid post ID\n");
-		return 1;
+		if (flag == 2)
+		{
+			printf("Invalid post ID\n");
+			return 1;
+		}
 	}
 }
 

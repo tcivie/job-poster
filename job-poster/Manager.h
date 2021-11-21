@@ -15,7 +15,7 @@ void view_post(Post post);
 /// Requiremrnt 2.4 - Function of printing all the job posts
 /// </summary>
 /// <param name="manager">logged in manager</param>
-void view_posts(Manager manager, Post post);
+void view_posts(Manager manager);
 
 /// <summary>
 /// Requiremrnt 2.2 - Function of adding a new job post
@@ -27,7 +27,9 @@ Post* add_new_post();
 /// Requirement 2.3 - Delete an existing ad from the board 
 /// </summary>
 /// <returns></returns>
-Post* delete_post(Manager manager, Post post);
+int delete_post(int managerID);
+
+int update_post(int managerID);
 
 
 
