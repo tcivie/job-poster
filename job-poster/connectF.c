@@ -245,7 +245,11 @@ int promotionAD(const unsigned int managerID)
 {
 	int selection = -1;
 	Post posts[MAX_POSTS];
-	int numberOfdays1=-1;
+	char name[MAX_DESCRIPTION]="";
+	char Cnum[MAX_DESCRIPTION]="";
+	char validity[MAX_DESCRIPTION]="";
+	char threedigit[MAX_DESCRIPTION]="";
+	int numberOfdays1=-1, endChoose = 0;
 	int flag = 0;
 	Manager manager;
 	int size = getAllPosts(&posts);
@@ -281,8 +285,51 @@ int promotionAD(const unsigned int managerID)
 			flag = 1;
 	}while (flag == 0);
 	printf("The total payment will be: %d\$\n", numberOfdays1 * 3);
-	flag = 0;
-	do {
-		printf("");
-	} while (0);
+	printf("Are you sure you want to continue?(0-yes , else-no");
+	scanf("%d", &endChoose);
+	if (endChoose == 0)
+	{
+		flag = 0;
+		do {
+			printf("Enter the name of the credit card holder:\n");
+			scanf("%s", name);
+			if (FullNameCheck(name) == 0)
+			{
+				printf("Enter the credit number:\n");
+				scanf("%s", Cnum);
+				if (creditNumberCheck(Cnum) == 0)
+				{
+					printf("Enter the card validity:(mm/yy)\n");
+					scanf("%s", validity);
+					if (creditValidityCheck(validity) == 0)
+					{
+						printf("Enter last 3 digits on the back of the credit card:\n");
+						scanf("%s", threedigit);
+						if (last3DigitsCheck(threedigit) == 0)
+							flag = 0;
+						else
+							printf("3 digits failed - try again");
+					}
+					else
+					{
+						if (creditValidityCheck(validity) == 2)
+							printf("No slash in the middle of the date-try again");
+						else {
+							if (creditValidityCheck(validity) == 4)
+								printf("The card expired");
+							else
+								printf("Year/month are not correct, try again");
+						}
+						
+					}
+				}
+				else
+					printf("credit card number error - try again");
+			}
+			else
+				printf("Full name error - try again");
+		} while (flag==0);
+		updatePost(selection, 0, 0, 0, NULL, NULL, 1);
+		return 0;
+	}
 }

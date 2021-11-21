@@ -1,8 +1,8 @@
 #include "Database.h"
 
-int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]) {
+unsigned int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]) {
 	FILE* infile;
-	int userID = getLastIdUsers() + 1;
+	unsigned int userID = getLastIdUsers() + 1;
 	User user = { userID };	// if got userID add user otherwise ID = 1
 	// Append data to the created struct user
 	strcpy(user.UserName, UserName);
@@ -25,7 +25,7 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 	return 0;
 }
 
-int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]) {
+unsigned int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]) {
 	User user, iterator;
 	FILE* infile;
 	if (getUserData(&user, userID)) {	// if user exists
@@ -63,9 +63,9 @@ int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char Full
 		return 0;
 }
 
-int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
+unsigned int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	FILE* infile;
-	int managerID = getLastIdManagers() + 1;
+	unsigned int managerID = getLastIdManagers() + 1;
 	Manager manager = { managerID };	// if got managerID add manager otherwise ID = 1
 	// Append data to the created struct manager
 	strcpy(manager.UserName, UserName);
@@ -84,7 +84,7 @@ int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Passw
 	return 0;
 }
 
-int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
+unsigned int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], char Password[MAX_PASSWORD]) {
 	Manager manager, iterator;
 	FILE* infile;
 	if (getManagerData(&manager, managerID)) {	// if manager exists
@@ -114,9 +114,9 @@ int updateManagerData(const unsigned int managerID, char UserName[MAX_SIZE], cha
 		return 0;
 }
 
-int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+unsigned int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
 	FILE* infile;
-	int postID = getLastIdPosts() + 1;
+	unsigned int postID = getLastIdPosts() + 1;
 	Post post = { postID };
 	// Append data to the created struct post
 	post.Location = location;
@@ -137,7 +137,7 @@ int addPost(const unsigned int managerID, int location, int type, int profession
 	return 0;
 }
 
-int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
+unsigned int updatePost(const unsigned int postID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION], int Promoted) {
 	Post post, iterator;
 	FILE* infile;
 	if (getPostData(&post, postID)) {	// if post exists
@@ -151,6 +151,8 @@ int updatePost(const unsigned int postID, int location, int type, int profession
 			strcpy(post.Name, name);
 		if (description != NULL)
 			strcpy(post.Description, description);
+		if (Promoted == 1)
+			post.Promoted = Promoted;
 
 		// Start reding the file to find the post and modify it
 		infile = fopen(POSTS_FILENAME, "wb");
@@ -171,10 +173,10 @@ int updatePost(const unsigned int postID, int location, int type, int profession
 		return 0;
 }
 
-int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]) {
+unsigned int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]) {
 	if (PostID != 0 && UserID != 0) {
 		FILE* infile;
-		int applicationID = getLastIdApplications() + 1;
+		unsigned int applicationID = getLastIdApplications() + 1;
 		Apply applied = { applicationID, PostID, UserID };	// if got managerID add manager otherwise ID = 1
 		// Append data to the created struct manager
 		strcpy(applied.Description, Description);
@@ -379,7 +381,7 @@ int checkUserApplication(const unsigned int PostID, const unsigned int userID) {
 	return 0;
 }
 
-int getLastIdUsers() {
+unsigned int getLastIdUsers() {
 	FILE* infile;
 	User input;
 	infile = fopen(USERS_FILENAME, "rb");
@@ -398,7 +400,7 @@ int getLastIdUsers() {
 	return 0;
 }
 
-int getLastIdManagers() {
+unsigned int getLastIdManagers() {
 	FILE* infile;
 	Manager input;
 	infile = fopen(MANAGERS_FILENAME, "rb");
@@ -417,7 +419,7 @@ int getLastIdManagers() {
 	return 0;
 }
 
-int getLastIdPosts() {
+unsigned int getLastIdPosts() {
 	FILE* infile;
 	Post input;
 	infile = fopen(POSTS_FILENAME, "rb");
@@ -436,7 +438,7 @@ int getLastIdPosts() {
 	return 0;
 }
 
-int getLastIdApplications() {
+unsigned int getLastIdApplications() {
 	FILE* infile;
 	Apply input;
 	infile = fopen(APPLIED_FILENAME, "rb");
