@@ -254,8 +254,7 @@ int getPostData(Post* retValue, const unsigned int postID) {
 	return 0;
 }
 
-int getAppliedByUser(Apply* retValue[], const unsigned int userID)
-{
+int getAppliedByUser(Apply* retValue[], const unsigned int userID) {
 	FILE* infile;
 	Apply buffer;
 	infile = fopen(APPLIED_FILENAME, "rb");
@@ -275,8 +274,7 @@ int getAppliedByUser(Apply* retValue[], const unsigned int userID)
 	return 0;
 }
 
-int getAppliedByPost(User* retValue[], const unsigned int postID)
-{
+int getAppliedByPost(User* retValue[], const unsigned int postID) {
 	FILE* infile;
 	Apply buffer;
 	infile = fopen(APPLIED_FILENAME, "rb");
@@ -330,6 +328,31 @@ int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWOR
 	if (getManagerData(&manager, managerID)) {
 		if (!strcmp(manager.Password, password))
 			return 1;
+	}
+	return 0;
+}
+
+unsigned int deletePost(const unsigned int postID) {
+	FILE* infile, *outfile;
+	Post toCopy;
+	infile = fopen(POSTS_FILENAME, "rb");
+	outfile = fopen(TEMP_FILENAME, "ab");
+	if (infile == NULL || outfile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+	else {
+		while (fread(&toCopy, sizeof(Post), 1, infile)) {	// read trough file
+			if (toCopy.PostID == postID)	// if found the post
+				continue;
+			fwrite(&toCopy, sizeof(Post), 1, infile);	// write to temp
+		}
+		fclose(infile);
+		fclose(outfile);
+		remove(POSTS_FILENAME);
+		if (rename(TEMP_FILENAME, POSTS_FILENAME))
+			return 0;
+		return postID;
 	}
 	return 0;
 }

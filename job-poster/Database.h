@@ -16,6 +16,7 @@
 #define USERS_FILENAME "Users.bin"
 #define POSTS_FILENAME "Posts.bin"
 #define APPLIED_FILENAME "Applied.bin"
+#define TEMP_FILENAME "Temp.bin"
 
 typedef struct Users {
 	const unsigned int UserID;
@@ -246,5 +247,11 @@ int checkPasswordUser(const unsigned int userID, char password[MAX_PASSWORD]);
 /// <returns>1 - If matches | 0 - Otherwise</returns>
 int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWORD]);
 
+/// <summary>
+/// Delete Post
+/// </summary>
+/// <param name="postID">Id of the post</param>
+/// <returns>ID of the deleted post | NULL - Otherwise</returns>
+unsigned int deletePost(const unsigned int postID);
 
 #endif // !DATABASE
