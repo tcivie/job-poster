@@ -197,6 +197,14 @@ int getManagerData(Manager* retValue, const unsigned int managerID);
 int getPostData(Post* retValue, const unsigned int postID);
 
 /// <summary>
+/// Gets all the applications for the given user
+/// </summary>
+/// <param name="retValue">Pointer to array of applications to store in the applications</param>
+/// <param name="userID">Id of the user</param>
+/// <returns>Number of applications - If succeeded | 0 - If failed</returns>
+int getAppliedByUser(Apply* retValue[], const unsigned int userID);
+
+/// <summary>
 /// Adds new post
 /// </summary>
 /// <param name="managerID">ID of the manager to add the post to</param>

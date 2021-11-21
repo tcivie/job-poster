@@ -252,6 +252,7 @@ int getPostData(Post* retValue, const unsigned int postID) {
 	return 0;
 }
 
+
 int getAllPosts(Post* postsArray[]) {
 	FILE* infile;
 	infile = fopen(POSTS_FILENAME, "rb");
