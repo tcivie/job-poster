@@ -93,4 +93,14 @@ The system works with a file-based database and the interface is shown in the co
         <td></td>
         <td></td>
     </tr>
+    <tr>
+        <td>Resume</td>
+        <td>String</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>

@@ -25,6 +25,7 @@ typedef struct Users {
 	int age;
 	char PhoneNumber[MAX_SIZE];
 	char Password[MAX_PASSWORD];
+	char Resume[MAX_DESCRIPTION];
 } User;
 
 
@@ -114,8 +115,9 @@ int getLastIdApplications();
 /// <param name="ID">User ID (Teudat Zeut)</param>
 /// <param name="age">User Age</param>
 /// <param name="PhoneNumber">User phone number</param>
+/// <param name="Resume">Path to user resume</param>
 /// <returns>UserID - if registration successful | 0 - Otherwise</returns>
-int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]);
+int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Update user data
@@ -127,8 +129,9 @@ int registerUser(char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int 
 /// <param name="age">Optional (pass 0 if not updated)</param>
 /// <param name="PhoneNumber">Optional (pass NULL if not updated)</param>
 /// <param name="Password">Optional (pass NULL if not updated)</param>
+/// <param name="Resume">Optional (pass NULL if not updated)</param>
 /// <returns>UserID on success | 0 - Otherwise</returns>
-int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD]);
+int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], char FullName[MAX_SIZE], long ID, int age, char PhoneNumber[MAX_SIZE], char Password[MAX_PASSWORD], char Resume[MAX_DESCRIPTION]);
 
 /// <summary>
 /// Register a new manager
@@ -192,6 +195,14 @@ int getManagerData(Manager* retValue, const unsigned int managerID);
 /// <param name="postID">The post ID to look for</param>
 /// <returns>1 - If found | 0 - If not</returns>
 int getPostData(Post* retValue, const unsigned int postID);
+
+/// <summary>
+/// Gets all the applications for the given user
+/// </summary>
+/// <param name="retValue">Pointer to array of applications to store in the applications</param>
+/// <param name="userID">Id of the user</param>
+/// <returns>Number of applications - If succeeded | 0 - If failed</returns>
+int getAppliedByUser(Apply* retValue[], const unsigned int userID);
 
 /// <summary>
 /// Adds new post
