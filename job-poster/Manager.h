@@ -24,6 +24,12 @@ void view_posts(Manager manager, Post post);
 /// <returns></returns>
 Post* add_new_post();
 
+/// <summary>
+/// Requirement 2.3 - Delete an existing ad from the board 
+/// </summary>
+/// <returns></returns>
+Post* delete_post(Manager manager, Post post);
+
 
 
 
