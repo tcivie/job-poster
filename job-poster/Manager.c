@@ -196,6 +196,15 @@ void view_post(Post post) // Helper
 	printf("Description:\n%s", post.Description);	// Print description
 }
 
+void view_posts(Manager manager) {
+	Post postsArray[MAX_POSTS];
+	int size;
+	size = getPostsByManagerID(&postsArray, manager.ManagerID);
+	for (int i = 0; i < size; i++) {
+		view_post(postsArray[i]);
+	}
+}
+
 void view_candidates_profiles(unsigned int managerID) // Requiremrnt 2.4
 {
 	Manager manager;
