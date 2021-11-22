@@ -206,7 +206,7 @@ label1:
 		printf("enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
 		getchar();	// clean buffer
 		gets(password);
-		while (PasswordCheck(password))	// ERROR: SKIPPING FIRST PASSWORD CHECK
+		while (PasswordCheck(password))
 		{
 			printf("password failed! \nplease enter new password or 1 to exit:\n");
 			gets(password);
