@@ -125,6 +125,7 @@ int main()
 	int option_menu1, age;
 	unsigned int userID;
 	long ID;
+	initFiles();	// create missing files
 label1:
 	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n5-->to close the program");
 	scanf("%d", &option_menu1);
