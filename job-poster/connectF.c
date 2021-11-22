@@ -333,12 +333,3 @@ int promotionAD(const unsigned int managerID)
 		return 0;
 	}
 }
-
-
-int viewCanditatesByPost(unsigned managerID)
-{
-	Post posts[MAX_POSTS];
-	int size;
-	///////
-
-}
