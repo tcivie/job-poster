@@ -7,7 +7,9 @@
 void candidateMenu(unsigned int *ID,char *name,long id,int age,char *phoneNumber,char *password)
 {
 	char CV[MAX_DESCRIPTION]="";
-	int choice;
+	int choice,size;
+	Apply retValue[MAX_MANAGERS*MAX_POSTS];
+	Post post;
 	printf("Hello dear %s\n", name);
 	printf("what would you like to do?\n");
 	printf("1-->Job search by parameters  \n2-->Submit a resume  \n3-->view all of submission's history  \n4-->Edit user profile  \n5-->Log out from system\n");
@@ -26,7 +28,12 @@ void candidateMenu(unsigned int *ID,char *name,long id,int age,char *phoneNumber
 		break;
 	case 3:
 		/*function to view all of submission's history*/
-
+		size=getAppliedByUser(&retValue, ID);
+		for (int i = 0; i < size; i++)
+		{
+			getPostData(&post, retValue[i].PostID);
+			view_post(post);
+		}
 		break;
 	case 4:
 		/*function to Edit user profile*/
@@ -45,9 +52,9 @@ void candidateMenu(unsigned int *ID,char *name,long id,int age,char *phoneNumber
 }
 void employerMenu(unsigned int employerID,char *name)
 {
-
+	Post postsArray[MAX_POSTS];
 	char password[20], newpassword[20];
-	int choice;
+	int choice,size;
 	printf("Hello dear %s\nwhat would you like to do?\n1-->Post a new ad on the board\n", name);
 	printf("2--> Delete an existing ad from the board\n");
 	printf("3--> Update an existing ad on the board\n");
@@ -63,7 +70,7 @@ void employerMenu(unsigned int employerID,char *name)
 	{
 	case 1:
 		/*function to Post a new ad on the board*/
-		/*add_new_post(name);*/
+		add_new_post(employerID);
 		break;
 	case 2:
 		/*function to Delete an existing ad from the board*/
@@ -75,11 +82,15 @@ void employerMenu(unsigned int employerID,char *name)
 		break;
 	case 4:
 		/*function to View ads posted by the employer connected to the system*/
-		
-
+		size =getPostsByManagerID(&postsArray, employerID);
+		for (int i = 0; i < size; i++)
+		{
+			view_post(postsArray[i]);
+		}
 		break;
 	case 5:
 		/*function to View profiles of candidates who have submitted resumes for the appropriate position*/
+		view_profiles(employerID);
 		break;
 	case 6:
 		printPostsByCategory();

@@ -2,10 +2,12 @@
 #include "Manager.h"
 #include "Check.h"
 
-int add_new_post(Manager manager)
+int add_new_post(unsigned int managerID)
 {
+	Manager manager;
 	Post new_post;
 	new_post.Location = new_post.Type = 0;
+	getManagerData(&manager, managerID);
 	strcpy(new_post.Name, "0"); strcpy(new_post.Description, "0");
 	do
 	{
@@ -38,8 +40,8 @@ int add_new_post(Manager manager)
 	} while (strlen(new_post.Description) > MAX_DESCRIPTION);
 	if (!addPost(manager.ManagerID, new_post.Location, new_post.Type, new_post.Profession, new_post.Name, new_post.Description))
 	{
-		return 1;
 		printf("Error! can't add post\n");
+		return 1;
 	}
 	return 0;
 }
@@ -254,12 +256,12 @@ void view_candidates_profiles(unsigned int managerID) // Requiremrnt 2.4
 	else printf("No ads exist!\n");
 }
 
-int view_profiles(Manager manager)
+int view_profiles(unsigned int managerID)
 {
 	User* users = NULL;
-	Manager temp_manager;
+	Manager temp_manager,manager;
 	int post = (-1), flag = (-1), qty;
-
+	getManagerData(&manager,managerID);
 	view_posts(manager); // display posts
 	
 	do

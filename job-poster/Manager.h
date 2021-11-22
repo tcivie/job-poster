@@ -21,7 +21,7 @@ void view_posts(Manager manager);
 /// Requiremrnt 2.2 - Function of adding a new job post
 /// </summary>
 /// <returns></returns>
-int add_new_post(Manager manager);
+int add_new_post(unsigned int managerID);
 
 /// <summary>
 /// Requirement 2.3 - Delete an existing ad from the board 
@@ -41,6 +41,7 @@ int update_post(int managerID);
 /// </summary>
 /// <param name="manager">logged in manager</param>
 /// <returns></returns>
-void view_candidates_profiles(Manager manager);
+void view_candidates_profiles(unsigned int managerID);
+int view_profiles(unsigned int managerID);
 
 #endif
