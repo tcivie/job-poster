@@ -238,7 +238,7 @@ int getAllPosts(Post* postsArray[]);
 /// </summary>
 /// <param name="postsArray">Pointer to empty posts array</param>
 /// <param name="ManagerID">Manager ID</param>
-/// <returns>1 - If suceeded | 0 - otherwise</returns>
+/// <returns>number of posts - If suceeded | 0 - otherwise</returns>
 int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID);
 
 /// <summary>

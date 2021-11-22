@@ -328,7 +328,7 @@ int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID) {
 				postsArray[i]->Profession = post.Type;
 			}
 		}
-		return 1;
+		return sizeof(manager.Posts) / sizeof(int);
 	}
 	return 0;
 }
