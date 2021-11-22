@@ -152,7 +152,9 @@
     <ClInclude Include="Manager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Applied.bin" />
     <None Include="Managers.bin" />
+    <None Include="Posts.bin" />
     <None Include="Users.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

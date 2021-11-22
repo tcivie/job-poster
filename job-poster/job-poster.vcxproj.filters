@@ -52,5 +52,11 @@
     <None Include="Users.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Applied.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Posts.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

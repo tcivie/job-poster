@@ -1,6 +1,10 @@
 # Data files
 *Managers.bin
 *Users.bin
+*Applied.bin
+*Users.bin
+*Temp.bin
+*Posts.bin
 
 # Created by https://www.toptal.com/developers/gitignore/api/c,visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=c,visualstudio
