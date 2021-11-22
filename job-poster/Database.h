@@ -7,8 +7,8 @@
 #include <stdlib.h>
 
 #define MAX_SIZE 100
-#define MAX_POSTS 50
-#define MAX_MANAGERS 50
+#define MAX_POSTS 30
+#define MAX_MANAGERS 30
 #define MAX_DESCRIPTION 255
 #define MAX_PASSWORD 20
 

@@ -2,9 +2,11 @@
 #include "Database.h"
 #include "Check.h"
 #include"connectF.h"
+#include"Manager.h"
 
-void candidateMenu(unsigned int *ID,char *name)
+void candidateMenu(unsigned int *ID,char *name,long id,int age,char *phoneNumber,char *password)
 {
+	char CV[MAX_DESCRIPTION]="";
 	int choice;
 	printf("Hello dear %s\n", name);
 	printf("what would you like to do?\n");
@@ -14,18 +16,22 @@ void candidateMenu(unsigned int *ID,char *name)
 	{
 	case 1:
 		/*function to Job search by parameters*/
+		printPostsByCategory();
 		break;
 	case 2:
 		/*function to Submit a resume*/
+		strcpy(CV, "");
+		enterCV(CV);
+		updateUserData(ID, NULL, NULL, 0, 0, NULL, NULL, CV);
 		break;
 	case 3:
 		/*function to view all of submission's history*/
+
 		break;
 	case 4:
 		/*function to Edit user profile*/
-		/*ask gleb what we can change
+		editUserProfile(ID);
 		
-		*/
 		break;
 	case 5:
 		/*function to Log out from system*/
@@ -37,8 +43,9 @@ void candidateMenu(unsigned int *ID,char *name)
 		break;
 	}
 }
-void employerMenu(unsigned int *ID,char *name)
+void employerMenu(unsigned int employerID,char *name)
 {
+
 	char password[20], newpassword[20];
 	int choice;
 	printf("Hello dear %s\nwhat would you like to do?\n1-->Post a new ad on the board\n", name);
@@ -56,15 +63,20 @@ void employerMenu(unsigned int *ID,char *name)
 	{
 	case 1:
 		/*function to Post a new ad on the board*/
+		/*add_new_post(name);*/
 		break;
 	case 2:
 		/*function to Delete an existing ad from the board*/
+		delete_post(employerID);
 		break;
 	case 3:
 		/*function to Update an existing ad on the board*/
+		update_post(employerID);
 		break;
 	case 4:
 		/*function to View ads posted by the employer connected to the system*/
+		
+
 		break;
 	case 5:
 		/*function to View profiles of candidates who have submitted resumes for the appropriate position*/
@@ -74,15 +86,13 @@ void employerMenu(unsigned int *ID,char *name)
 		/*function to Job search by custom characteristics*/
 		break;
 	case 7:
+		promotionAD(employerID);
 		/*function to Promotion of a job by means of payment*/
 		break;
 	case 8:
-		
 		/*function to Changing the login password*/
-		editUserProfile(ID);
+		editManagerData(employerID);
 		/*the password transfered to the  employer file and swich the old pass*/
-
-
 		break;
 	case 9:
 		/*function to Disconnecting from the system*/
@@ -90,8 +100,8 @@ void employerMenu(unsigned int *ID,char *name)
 		return;
 		break;
 	case 10:
-		printf("who you want to speak?");
-		
+		printf("who you want to speak with?");
+		//not functional
 	default:
 		break;
 	}
@@ -102,7 +112,7 @@ int main()
 {
 	char username[10], password[20], name[20], newpassword[20], phoneNumber[20];
 	int option_menu1, age;
-	unsigned int localID;
+	unsigned int userID;
 	long ID;
 label1:
 	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n5-->to close the program");
@@ -123,10 +133,10 @@ label1:
 		}
 		if (strcmp(username, '1') == 0)
 			goto label1;
-		localID = checkUserName(username);
+		userID = checkUserName(username);
 		printf("enter a password:\n");
 		gets(password);
-		while (!(checkPasswordManager(localID, password)))
+		while (!(checkPasswordManager(userID, password)))
 		{
 			printf("prees 1 to exit or try again!\nenter a password:\n");
 			gets(password);
@@ -136,7 +146,7 @@ label1:
 		if (strcmp(password, '1') == 0)
 			goto label1;
 		printf("your login is succsess!\n");
-		employerMenu(localID, username);/*moved to employer menu*/
+		employerMenu(userID, username);/*moved to employer menu*/
 		break;
 	case 2:
 		printf("to login as a candidate you need to enter username and password:\n");
@@ -151,10 +161,10 @@ label1:
 		}
 		if (strcmp(username, '1') == 0)
 			goto label1;
-		localID = checkUserName(username);
+		userID = checkUserName(username);
 		printf("enter a password:\n");
 		gets(password);
-		while (!(checkPasswordUser(localID, password)))
+		while (!(checkPasswordUser(userID, password)))
 		{
 			printf("press 1 to exit or try again!\nenter a password:\n");
 			gets(password);
@@ -164,7 +174,7 @@ label1:
 		if (strcmp(password, '1') == 0)
 			goto label1;
 		printf("successful login!\n");
-		candidateMenu(localID, username);/*transfer to candidate options menu.*/
+		candidateMenu(userID, username,ID,age,phoneNumber,password);/*transfer to candidate options menu.*/
 		break;
 	case 3:
 		printf("to login as an employer you need to enter the following details:\n");
@@ -203,14 +213,14 @@ label1:
 		}
 		if (strcmp(newpassword, '1') == 0)
 			goto label1;
-		localID = registerManager(username, name, password);
-		if (localID == 0)
+		userID = registerManager(username, name, password);
+		if (userID == 0)
 		{
 			printf("register failed!\nproblem with the file!");
 			goto label1;
 		}
 		printf("you have successfully registered!\n");
-		employerMenu(localID,name);/*transfered to employer options menu.*/
+		employerMenu(userID,name);/*transfered to employer options menu.*/
 		break;
 	case 4:
 		printf("to connect as a candidate you need to enter the following details:\n");
@@ -279,14 +289,14 @@ label1:
 		if (strcmp(newpassword, '1') == 0)
 			goto label1;
 		/*send the ditails to the file--gleb*/
-		localID=registerUser(username,name,ID,age,phoneNumber,password);
-		if (localID == 0)
+		userID=registerUser(username,name,ID,age,phoneNumber,password,NULL);
+		if (userID == 0)
 		{
 			printf("register failed!\nproblem with the file!");
 			goto label1;
 		}
 		printf("you have successfully registered!\n");
-		candidateMenu(localID,name);/*transfer to candidate options menu.*/
+		candidateMenu(userID,name,ID,age,phoneNumber,password);/*transfer to candidate options menu.*/
 		break;
 	case 5:
 		printf("thank you!\ngoodbye");
