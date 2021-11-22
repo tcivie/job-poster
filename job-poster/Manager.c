@@ -2,7 +2,7 @@
 #include "Manager.h"
 #include "Check.h"
 
-Post* add_new_post(Manager manager) // TODO: Update posts array and return it
+int add_new_post(Manager manager)
 {
 	Post new_post;
 	new_post.Location = new_post.Type = 0;
@@ -37,7 +37,11 @@ Post* add_new_post(Manager manager) // TODO: Update posts array and return it
 		gets(new_post.Description);
 	} while (strlen(new_post.Description) > MAX_DESCRIPTION);
 	if (!addPost(manager.ManagerID, new_post.Location, new_post.Type, new_post.Profession, new_post.Name, new_post.Description))
+	{
+		return 1;
 		printf("Error! can't add post\n");
+	}
+	return 0;
 }
 
 int delete_post(int managerID)
@@ -76,7 +80,7 @@ int delete_post(int managerID)
 int update_post(int managerID)
 {
 	Manager temp_manager;
-	int up_val = (-1), choose = 1, flag = 0, temp = 0, type_temp = 0,flag2 = 0;
+	int up_val = (-1), choose = 1, flag = 0, temp = 0, type_temp = 0;
 	char temp_name[MAX_DESCRIPTION] = "";
 	Post posts[MAX_POSTS];
 	int size = getAllPosts(&posts);
@@ -90,11 +94,11 @@ int update_post(int managerID)
 		{
 			if (temp_manager.Posts[i] == up_val)
 			{
-				flag2 = 1;
+				flag = 1;
 				break;
 			}
 		}
-	} while (flag2 == 0);
+	} while (flag == 0);
 	while (choose > 0 || choose < 6)
 	{
 		printf("What property would you like to change?\n 1. Location\n2. Type of job\n3. Profession\n4. Name of post\n5. Description\n6. None\n");
@@ -190,7 +194,7 @@ void view_post(Post post) // Helper
 	printf("Description:\n%s", post.Description);	// Print description
 }
 
-void view_posts(Manager manager) // Requiremrnt 2.4
+void view_candidates_profiles(Manager manager) // Requiremrnt 2.4
 {
 
 	if (sizeof(manager.Posts) / sizeof(int) > 0)
@@ -247,4 +251,56 @@ void view_posts(Manager manager) // Requiremrnt 2.4
 		}
 	}
 	else printf("No ads exist!\n");
+}
+
+int view_profiles(Manager manager)
+{
+	User* users = NULL;
+	Manager temp_manager;
+	int post = (-1), flag = (-1), qty;
+
+	view_posts(manager); // display posts
+	
+	do
+	{
+		printf("Which post would you like to check for candidates?\n");
+		scanf("%d", &post); // selection
+		for (int i = 0; i < sizeof(temp_manager.Posts) / sizeof(int); i++)
+		{
+			if (temp_manager.Posts[i] == post)
+			{
+				flag = 1;
+				break;
+			}
+			else if (i == sizeof(manager.Posts) / sizeof(int))
+				flag = 2;
+		}
+	} while (flag == 0);
+	if (!getAppliedByPost(&users, post))
+	{
+		exit(1);
+	}
+	if (flag == 1)
+	{
+		if (getAppliedByPost(&users, post) == 0)
+		{
+			printf("No candidated applied for this post\n");
+			return 0;
+		}
+		qty = getAppliedByPost(&users, post);
+		// case: print all the users profiles that applied for this post
+		for (int i = 0; i < qty; i++)
+		{
+			printf("Name: %s\n", users[i].FullName);
+			printf("ID: %s\n", users[i].ID);
+			printf("Age: %d\n", users[i].age);
+			printf("Phone number: %s\n", users[i].PhoneNumber);
+			printf("Resume: %s\n\n", users[i].Resume);
+		}
+	}
+	if (flag == 2)
+	{
+		printf("Invalid post ID\n");
+		return 1;
+	}
 }

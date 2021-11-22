@@ -12,7 +12,7 @@
 void view_post(Post post);
 
 /// <summary>
-/// Requiremrnt 2.4 - Function of printing all the job posts
+/// Requiremrnt 2.5 - Function of printing all the job posts
 /// </summary>
 /// <param name="manager">logged in manager</param>
 void view_posts(Manager manager);
@@ -21,7 +21,7 @@ void view_posts(Manager manager);
 /// Requiremrnt 2.2 - Function of adding a new job post
 /// </summary>
 /// <returns></returns>
-Post* add_new_post();
+int add_new_post(Manager manager);
 
 /// <summary>
 /// Requirement 2.3 - Delete an existing ad from the board 
@@ -29,12 +29,18 @@ Post* add_new_post();
 /// <returns></returns>
 int delete_post(int managerID);
 
+/// <summary>
+/// Requirement 2.4 - Update an existing ad on the board
+/// </summary>
+/// <param name="managerID">
+/// <returns></returns>
 int update_post(int managerID);
 
-
-
-
-
+/// <summary>
+/// Requirement 2.6 - View profiles of candidates who have submitted resumes for the appropriate position.
+/// </summary>
+/// <param name="manager">logged in manager</param>
+/// <returns></returns>
+int view_candidates_profiles(Manager manager);
 
 #endif
-

@@ -52,7 +52,7 @@ typedef struct Applied {
 	const unsigned int AppliedID;
 	const unsigned int PostID;
 	const unsigned int UserID;
-	char Description[MAX_DESCRIPTION];
+	char Description[MAX_DESCRIPTION]; // Resume
 } Apply;
 
 /// <summary>
