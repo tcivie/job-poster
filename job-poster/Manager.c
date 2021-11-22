@@ -66,7 +66,7 @@ int delete_post(int managerID)
 		} while (flag == 0);
 		if (flag == 1)
 		{
-			///gleb///
+			deletePost(del_val);
 			return 0;
 		}
 		if (flag == 2)

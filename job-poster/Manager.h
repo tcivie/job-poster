@@ -41,6 +41,6 @@ int update_post(int managerID);
 /// </summary>
 /// <param name="manager">logged in manager</param>
 /// <returns></returns>
-int view_candidates_profiles(Manager manager);
+void view_candidates_profiles(Manager manager);
 
 #endif
