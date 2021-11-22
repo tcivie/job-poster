@@ -39,7 +39,7 @@ typedef struct Managers {
 } Manager;
 
 typedef struct Posts {
-	const unsigned int PostID;
+	unsigned int PostID;
 	int Location;
 	int Type;
 	int Profession;
@@ -232,6 +232,14 @@ int addPost(const unsigned int managerID ,int location, int type, int profession
 /// <param name="postsArray">The pointer to the posts array</param>
 /// <returns>Number of posts in the array.</returns>
 int getAllPosts(Post* postsArray[]);
+
+/// <summary>
+/// Returns all the posts by the manager ID
+/// </summary>
+/// <param name="postsArray">Pointer to empty posts array</param>
+/// <param name="ManagerID">Manager ID</param>
+/// <returns>1 - If suceeded | 0 - otherwise</returns>
+int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID);
 
 /// <summary>
 /// Checks if the userID password matches the one in the database

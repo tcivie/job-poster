@@ -314,6 +314,25 @@ int getAllPosts(Post* postsArray[]) {
 	return 0;
 }
 
+int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID) {
+	Manager manager;
+	Post post;
+	if (getManagerData(&manager, ManagerID)) {	// get manager data
+		for (int i = 0; i < sizeof(manager.Posts)/sizeof(int); i++) {	// run on all posts
+			if (getPostData(&post,manager.Posts[i])) {	// get post by ID
+				postsArray[i]->PostID = post.PostID;
+				strcpy(postsArray[i]->Description, post.Description);
+				strcpy(postsArray[i]->Name, post.Name);
+				postsArray[i]->Location = post.Location;
+				postsArray[i]->Type = post.Type;
+				postsArray[i]->Profession = post.Type;
+			}
+		}
+		return 1;
+	}
+	return 0;
+}
+
 int checkPasswordUser(const unsigned int userID, char password[MAX_PASSWORD]) {
 	User user;
 	if (getUserData(&user, userID)) {
