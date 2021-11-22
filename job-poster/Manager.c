@@ -194,12 +194,13 @@ void view_post(Post post) // Helper
 	printf("Description:\n%s", post.Description);	// Print description
 }
 
-void view_candidates_profiles(Manager manager) // Requiremrnt 2.4
+void view_candidates_profiles(unsigned int managerID) // Requiremrnt 2.4
 {
-
+	Manager manager;
+	getManagerData(&manager, managerID);
 	if (sizeof(manager.Posts) / sizeof(int) > 0)
 	{
-		Post posts[MAX_POSTS * MAX_MANAGERS];
+		Post posts[MAX_POSTS];
 		int size = getAllPosts(&posts);
 		for (int i = 0; i < size; i++)
 		{
