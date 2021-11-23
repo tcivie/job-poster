@@ -2,6 +2,7 @@
 #include "Database.h"
 #include "Manager.h"
 #include "Check.h"
+#include "string.h"
 
 int printPostsByCategory();
 int printByCategories(Post* postsArray, int size, int category, int innerCategory);
@@ -15,7 +16,9 @@ int printPostsByCategory()
 	sizeArray = getAllPosts(&postsArray);
 	while (1)
 	{
+		printf("------------------------------------------------------\n");
 		printf("Choose search by category:\n1-->Location\n2-->Type (Full time job/Half time job)\n3-->Profession\n0-->Back\n");
+		printf("------------------------------------------------------\n");
 		scanf_s("%d", &choose);
 		switch (choose)
 		{
@@ -79,23 +82,11 @@ int printByCategories(Post* postsArray, int size, int category, int innerCategor
 
 int enterCV(char* CV)//gets char* to enter the data that the user entered
 {
-	int choose = -1;
-	do {
-		printf("1-->Enter CV\n 0-->Back\n");
-		scanf("%d", &choose);
-		switch (choose)
-		{
-		case 0:
-			return 0;
-		case 1:
-			scanf("%s",CV);
-
-		default:
-			printf("Wrong number, please try again\n");
-			break;
-		}
-	} while (choose != 0);
-
+	printf("Enter your CV:\n");
+	getchar();
+	gets(CV);
+	printf("succesful");
+	return 0;
 }
 
 int editUserProfile(const unsigned int userID)
@@ -107,7 +98,9 @@ int editUserProfile(const unsigned int userID)
 	char temp2[MAX_SIZE] = "";
 	int passwordTemp = 0;
 	do {
-		printf("Choose category to edit:\n1-->User namer\n2-->Full name\n3-->ID\n4-->Age\n5-->Phone number\n6-->Password\n0-->Back");
+		printf("------------------------------------------------------\n");
+		printf("Choose category to edit:\n1-->User name\n2-->Full name\n3-->ID\n4-->Age\n5-->Phone number\n6-->Password\n0-->Back\n");
+		printf("------------------------------------------------------\n");
 		scanf_s("%d", &choose);
 		switch (choose)
 		{
@@ -150,16 +143,16 @@ int editUserProfile(const unsigned int userID)
 				updateUserData(userID, NULL, NULL, 0, 0, temp, NULL,NULL);
 			else {
 				if (phoneNumberCheck(temp) == 1)
-					printf("Length of phone number is not correct");
+					printf("Length of phone number is not correct\n");
 				if (phoneNumberCheck(temp) == 2)
-					printf("Wrong number entered, phone number starts with 05");
+					printf("Wrong number entered, phone number starts with 05\n");
 			}
 			break;
 		case 6:
-			printf("Enter new password please:");
+			printf("Enter new password please:\n");
 			strcpy(temp, "");
 			scanf("%s", temp);
-			printf("Enter new password again please (check)");
+			printf("Enter new password again please (check)\n");
 			strcpy(temp2, "");
 			scanf("%s", temp2);
 			if (strcmp(temp, temp2) == 0)
@@ -168,12 +161,12 @@ int editUserProfile(const unsigned int userID)
 				if (passwordTemp == 0)
 					updateUserData(userID, NULL, NULL, 0, 0, NULL, temp,NULL);
 				if (passwordTemp == 1 || passwordTemp == 2)
-					printf("Wrong password, the new password is not long enough");
+					printf("Wrong password, the new password is not long enough\n");
 				if (passwordTemp == 3)
-					printf("Wrong password, the new password needs to contain at least big and small letter and number");
+					printf("Wrong password, the new password needs to contain at least big and small letter and number\n");
 			}
 			else
-				printf("Two passwords are not the same");
+				printf("Two passwords are not the same\n");
 			break;
 		default:
 			break;
@@ -192,7 +185,9 @@ int editManagerData(const unsigned int userID)
 	char temp2[MAX_SIZE] = "";
 	int passwordTemp = 0;
 	do {
-		printf("Choose category to edit:\n1-->User namer\n2-->Full name\n3-->Password\n0-->Back");
+		printf("------------------------------------------------------\n");
+		printf("Choose category to edit:\n1-->User name\n2-->Full name\n3-->Password\n0-->Back\n");
+		printf("------------------------------------------------------\n");
 		scanf_s("%d", &choose);
 		switch (choose)
 		{
@@ -212,10 +207,10 @@ int editManagerData(const unsigned int userID)
 				printf("Wrong full name\n");
 			break;
 		case 3:
-			printf("Enter new password please:");
+			printf("Enter new password please:\n");
 			strcpy(temp, "");
 			scanf("%s", temp);
-			printf("Enter new password again please (check)");
+			printf("Enter new password again please (check)\n");
 			strcpy(temp2, "");
 			scanf("%s", temp2);
 			if (strcmp(temp, temp2) == 0)
@@ -224,12 +219,12 @@ int editManagerData(const unsigned int userID)
 				if (passwordTemp == 0)
 					updateManagerData(userID, NULL, NULL, temp);
 				if (passwordTemp == 1 || passwordTemp == 2)
-					printf("Wrong password, the new password is not long enough");
+					printf("Wrong password, the new password is not long enough\n");
 				if (passwordTemp == 3)
-					printf("Wrong password, the new password needs to contain at least big and small letter and number");
+					printf("Wrong password, the new password needs to contain at least big and small letter and number\n");
 			}
 			else
-				printf("Two passwords are not the same");
+				printf("Two passwords are not the same\n");
 			break;
 		default:
 			break;

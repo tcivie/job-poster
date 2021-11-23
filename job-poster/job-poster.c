@@ -43,6 +43,8 @@ void candidateMenu(unsigned int *ID,char *name)
 			editUserProfile(ID);
 			break;
 		case 5:
+			//function to apply to job
+		case 6:
 			/*function to Log out from system*/
 			printf("goodbye %s!\n", name);
 			return;
