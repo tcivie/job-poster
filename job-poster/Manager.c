@@ -159,8 +159,9 @@ int update_post(int managerID)
 
 void view_post(Post post) // Helper
 {
+
 	printf("----------------------\n");
-	printf("Name: %s\n", post.Name);	// Print name
+	printf("ID: %ld\nName: %s\n", post.PostID,post.Name);	// Print name
 
 	printf("Location: ");	// Print location
 	if (post.Location == 1)
@@ -271,52 +272,37 @@ void view_candidates_profiles(unsigned int managerID) // Requiremrnt 2.4
 
 int view_profiles(unsigned int managerID)
 {
-	User* users = NULL;
+	User users[MAX_MANAGERS];
 	Manager temp_manager,manager;
-	int post = (-1), flag = (-1), qty;
-	getManagerData(&manager,managerID);
-	view_posts(manager); // display posts
-	
-	do
+	int post = (-1), qty,i=0;
+	getManagerData(&temp_manager,managerID);
+	view_posts(temp_manager); // display posts	
+	i = 0;
+	printf("Which post would you like to check for candidates?\n");
+	scanf("%d", &post); // selection
+	while(temp_manager.Posts[i])
 	{
-		printf("Which post would you like to check for candidates?\n");
-		scanf("%d", &post); // selection
-		for (int i = 0; i < sizeof(temp_manager.Posts) / sizeof(int); i++)
+		if (temp_manager.Posts[i] == post)
 		{
-			if (temp_manager.Posts[i] == post)
+			qty = getAppliedByPost(&users, post);
+			if (qty== 0)
 			{
-				flag = 1;
-				break;
+				printf("No candidated applied for this post\n");
+				return 0;
 			}
-			else if (i == sizeof(manager.Posts) / sizeof(int))
-				flag = 2;
+			// case: print all the users profiles that applied for this post
+			for (int i = 0; i < qty; i++)
+			{
+				printf("Name: %s\n", users[i].FullName);
+				printf("ID: %ld\n", users[i].ID);
+				printf("Age: %d\n", users[i].age);
+				printf("Phone number: %s\n", users[i].PhoneNumber);
+				printf("Resume: %s\n\n", users[i].Resume);
+			}
+			return 1;
 		}
-	} while (flag == 0);
-	if (!getAppliedByPost(&users, post))
-	{
-		exit(1);
+		i++;
 	}
-	if (flag == 1)
-	{
-		if (getAppliedByPost(&users, post) == 0)
-		{
-			printf("No candidated applied for this post\n");
-			return 0;
-		}
-		qty = getAppliedByPost(&users, post);
-		// case: print all the users profiles that applied for this post
-		for (int i = 0; i < qty; i++)
-		{
-			printf("Name: %s\n", users[i].FullName);
-			printf("ID: %s\n", users[i].ID);
-			printf("Age: %d\n", users[i].age);
-			printf("Phone number: %s\n", users[i].PhoneNumber);
-			printf("Resume: %s\n\n", users[i].Resume);
-		}
-	}
-	if (flag == 2)
-	{
-		printf("Invalid post ID\n");
-		return 1;
-	}
+	printf("Invalid post ID\n");
+	return 1;
 }

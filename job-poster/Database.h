@@ -220,7 +220,7 @@ int getAppliedByUser(Apply* retValue[], const unsigned int userID);
 /// <param name="retValue">Pointer to array of users</param>
 /// <param name="postID">Id of the post</param>
 /// <returns>Number of applications - If succeeded | 0 - If failed</returns>
-int getAppliedByPost(User* retValue, const unsigned int postID);
+int getAppliedByPost(User retValue[MAX_MANAGERS], const unsigned int postID);
 
 /// <summary>
 /// Adds new post

@@ -7,7 +7,7 @@
 void candidateMenu(unsigned int *ID,char *name)
 {
 	char CV[MAX_DESCRIPTION]="";
-	int choice,size;
+	int choice=-1,size=-1,tempID=-1;
 	Apply retValue[MAX_MANAGERS*MAX_POSTS];
 	Post post;
 	printf("\n------------------------------------------------------\n");
@@ -43,7 +43,10 @@ void candidateMenu(unsigned int *ID,char *name)
 			editUserProfile(ID);
 			break;
 		case 5:
-			//function to apply to job
+			printf("Enter the job application ID you would like to apply to\n");
+			scanf("%d", &tempID);
+			ApplyJob(ID, tempID);
+			break;
 		case 6:
 			/*function to Log out from system*/
 			printf("goodbye %s!\n", name);

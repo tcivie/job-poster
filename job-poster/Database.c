@@ -322,7 +322,7 @@ int getAppliedByUser(Apply* retValue[], const unsigned int userID) {
 	return 0;
 }
 
-int getAppliedByPost(User* retValue, const unsigned int postID) {
+int getAppliedByPost(User retValue[MAX_MANAGERS], const unsigned int postID) {
 	FILE* infile;
 	Apply buffer;
 	infile = fopen(APPLIED_FILENAME, "rb");
