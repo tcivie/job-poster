@@ -153,10 +153,11 @@ int update_post(int managerID)
 
 void view_post(Post post) // Helper
 {
-
+	if (post.Promoted == 1)
+		system("Color 6");
 	printf("----------------------\n");
 	printf("ID: %ld\nName: %s\n", post.PostID,post.Name);	// Print name
-
+	
 	printf("Location: ");	// Print location
 	if (post.Location == 1)
 		printf("North\n");
@@ -193,6 +194,7 @@ void view_post(Post post) // Helper
 
 	printf("Description:\n%s\n", post.Description);	// Print description
 	printf("----------------------\n");
+	system("Color 7");
 }
 
 void view_posts(Manager manager) {

@@ -244,13 +244,13 @@ int promotionAD(const unsigned int managerID)
 	int numberOfdays1=-1, endChoose = 0;
 	int flag = 0;
 	Manager manager;
-	int size = getAllPosts(&posts);
+	int size = getPostsByManagerID(posts,managerID);
 	if(!(getManagerData(&manager,managerID)))
 		exit(1);
 	printf("Those are all your posts:\n\n");
 	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < (sizeof(manager.Posts) / sizeof(int)); j++)
+		for (int j = 0; j < size; j++)
 		{
 			if (posts[i].PostID == manager.Posts[j])
 				view_post(posts[i]);
@@ -260,7 +260,7 @@ int promotionAD(const unsigned int managerID)
 		printf("Enter the id of the post you would like to promote:\n");
 		scanf("%d", &selection);
 		flag = 0;
-		for (int j = 0; j < (sizeof(manager.Posts) / sizeof(int)); j++)
+		for (int j = 0; j <size; j++)
 		{
 			if (manager.Posts[j] == selection)
 			{

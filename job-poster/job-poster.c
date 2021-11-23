@@ -80,7 +80,7 @@ void employerMenu(unsigned int employerID,char *name)
 		printf(" 5--> View profiles of candidates who have submitted resumes for the appropriate position\n");
 		printf(" 6--> Job search by custom characteristics\n");
 		printf(" 7--> Promotion of a job by means of payment\n");
-		printf(" 8--> Changing the login password\n");
+		printf(" 8--> Updating user profile\n");
 		printf(" 9--> Disconnecting from the system\n");
 		printf("10--> chat with a candidate\n");
 		printf("------------------------------------------------------\n");
@@ -180,8 +180,6 @@ label1:
 		gets(password);
 		while (!(checkPasswordManager(userID, password)))
 		{
-			strcpy(password, "");
-			while (getchar() != '\n');
 			printf("prees 1 to exit or try again!\nenter a password:\n");
 			gets(password);
 			if (strcmp(password, "1") == 0)

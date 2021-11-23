@@ -345,7 +345,7 @@ int getAppliedByPost(User retValue[MAX_MANAGERS], const unsigned int postID) {
 }
 
 
-int getAllPosts(Post* postsArray[]) {
+int getAllPosts(Post postsArray[MAX_POSTS]) {
 	FILE* infile;
 	infile = fopen(POSTS_FILENAME, "rb");
 	if (infile == NULL) {

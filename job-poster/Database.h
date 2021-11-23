@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <conio.h>
 
 #define MAX_SIZE 100
 #define MAX_POSTS 30
@@ -239,7 +240,7 @@ int addPost(const unsigned int managerID ,int location, int type, int profession
 /// </summary>
 /// <param name="postsArray">The pointer to the posts array</param>
 /// <returns>Number of posts in the array.</returns>
-int getAllPosts(Post* postsArray[]);
+int getAllPosts(Post postsArray[MAX_POSTS]);
 
 /// <summary>
 /// Returns all the posts by the manager ID
