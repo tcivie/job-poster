@@ -239,7 +239,7 @@ int getAllPosts(Post* postsArray[]);
 /// <param name="postsArray">Pointer to empty posts array</param>
 /// <param name="ManagerID">Manager ID</param>
 /// <returns>number of posts - If suceeded | 0 - otherwise</returns>
-int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID);
+int getPostsByManagerID(Post* postsArray,const unsigned int ManagerID);
 
 /// <summary>
 /// Checks if the userID password matches the one in the database

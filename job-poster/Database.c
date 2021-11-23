@@ -71,7 +71,10 @@ unsigned int registerManager(char UserName[MAX_SIZE], char FullName[MAX_SIZE], c
 	strcpy(manager.UserName, UserName);
 	strcpy(manager.FullName, FullName);
 	strcpy(manager.Password, Password);
-
+	for (int i = 0; i < MAX_POSTS; i++)
+	{
+		manager.Posts[i] = 0;
+	}
 	infile = fopen(MANAGERS_FILENAME, "ab");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
@@ -115,24 +118,44 @@ unsigned int updateManagerData(const unsigned int managerID, char UserName[MAX_S
 }
 
 unsigned int addPost(const unsigned int managerID, int location, int type, int profession, char name[MAX_SIZE], char description[MAX_DESCRIPTION]) {
-	FILE* infile;
+	FILE* infile, *managerfile;
 	unsigned int postID = getLastIdPosts() + 1;
 	Post post = { postID };
+	Manager bufferManager;
+	int i;
 	// Append data to the created struct post
 	post.Location = location;
 	post.Type = type;
 	post.Profession = profession;
 	strcpy(post.Name, name);
 	strcpy(post.Description, description);
-
-	infile = fopen(POSTS_FILENAME, "ab");
-	if (infile == NULL) {
+	managerfile = fopen(MANAGERS_FILENAME, "r+b");
+	if (managerfile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
-	} else {
-		fwrite(&post, sizeof(Post), 1, infile);
-		fclose(infile);
-		return postID;
+	}
+	else {	// Opened managers file
+		while (fread(&bufferManager, sizeof(Manager), 1, managerfile)) {	// read trough file
+			if (bufferManager.ManagerID == managerID) {	// check if equal
+				i = 0;
+				while (bufferManager.Posts[i]) i++;	// run till end of posts
+				bufferManager.Posts[i] = postID;
+				fseek(managerfile, -(int)sizeof(Manager), SEEK_CUR);	// jump back one manager
+				fwrite(&bufferManager, sizeof(Manager), 1, managerfile);	// write the changes
+				fclose(managerfile);
+				
+				infile = fopen(POSTS_FILENAME, "ab");
+				if (infile == NULL) {
+					fprintf(stderr, "\nERROR OPENING FILE\n");
+					exit(1);
+				} else {
+					fwrite(&post, sizeof(Post), 1, infile);
+					fclose(infile);
+					return postID;
+				}
+			}
+		}
+		fclose(managerfile);
 	}
 	return 0;
 }
@@ -216,7 +239,7 @@ int getUserData(User* retValue, const unsigned int userID) {
 
 int getManagerData(Manager* retValue, const unsigned int managerID) {
 	FILE* infile;
-	infile = fopen(USERS_FILENAME, "rb");
+	infile = fopen(MANAGERS_FILENAME, "rb");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -314,21 +337,23 @@ int getAllPosts(Post* postsArray[]) {
 	return 0;
 }
 
-int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID) {
+int getPostsByManagerID(Post* postsArray,const unsigned int ManagerID) {
 	Manager manager;
 	Post post;
+	int i = 0;
 	if (getManagerData(&manager, ManagerID)) {	// get manager data
-		for (int i = 0; i < sizeof(manager.Posts)/sizeof(int); i++) {	// run on all posts
+		while (manager.Posts[i]!=0) {	// run on all posts
 			if (getPostData(&post,manager.Posts[i])) {	// get post by ID
-				postsArray[i]->PostID = post.PostID;
-				strcpy(postsArray[i]->Description, post.Description);
-				strcpy(postsArray[i]->Name, post.Name);
-				postsArray[i]->Location = post.Location;
-				postsArray[i]->Type = post.Type;
-				postsArray[i]->Profession = post.Type;
+				postsArray[i].PostID = post.PostID;
+				strcpy(postsArray[i].Description, post.Description);
+				strcpy(postsArray[i].Name, post.Name);
+				postsArray[i].Location = post.Location;
+				postsArray[i].Type = post.Type;
+				postsArray[i].Profession = post.Type;
+				i++;
 			}
 		}
-		return sizeof(manager.Posts) / sizeof(int);
+		return i;
 	}
 	return 0;
 }

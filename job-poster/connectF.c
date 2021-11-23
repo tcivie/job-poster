@@ -11,17 +11,12 @@ int printPostsByCategory()
 	int choose = -1;
 	int innerChoose = 0;
 	int sizeArray = 0;
-	Post* postsArray = (Post*) malloc(MAX_POSTS * MAX_MANAGERS * sizeof(Post));
+	Post postsArray[MAX_POSTS];
 	sizeArray = getAllPosts(&postsArray);
-	while (choose != 0)
+	while (1)
 	{
 		printf("Choose search by category:\n1-->Location\n2-->Type (Full time job/Half time job)\n3-->Profession\n0-->Back\n");
 		scanf_s("%d", &choose);
-		while (choose > 3 || choose < 0)
-		{
-			printf("Wrong choose,please try again\n");
-			scanf_s("%d", &choose);
-		}
 		switch (choose)
 		{
 		case 1:
@@ -39,11 +34,13 @@ int printPostsByCategory()
 			scanf_s("%d", &innerChoose);
 			printByCategories(postsArray, sizeArray, choose, innerChoose);
 			break;
+		case 0:
+			return 0;
 		default:
+			printf("Wrong choose,please try again\n");
 			break;
 		}
 	}
-	free(postsArray);
 	return 0;
 }
 
