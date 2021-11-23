@@ -202,9 +202,10 @@ label1:
 		/*if (strcmp(username, '1') == 0)
 			goto label1;*/	// ERROR: EXCEPTION - READ LOCATION VIOLATION
 		printf("enter name or business name:\n");
-		scanf("%s", name);
+		getchar();
+		gets(name);	// read whole line (Including spaces)
 		printf("enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
-		getchar();	// clean buffer
+		//getchar();
 		gets(password);
 		while (PasswordCheck(password))	// ERROR: SKIPPING FIRST PASSWORD CHECK
 		{
@@ -213,7 +214,7 @@ label1:
 			if (strcmp(password, "1") == 0)
 				break;
 		}
-		if (strcmp(password, '1') == 0)
+		if (strcmp(password, "1") == 0)
 			goto label1;
 		printf("to verify the password\nenter the password again\n");
 		gets(newpassword);
@@ -221,10 +222,10 @@ label1:
 		{
 			printf("the verify failed\nenter the password again\n");
 			gets(newpassword);
-			if (strcmp(newpassword, '1') == 0)
+			if (strcmp(newpassword, "1") == 0)
 				break;
 		}
-		if (strcmp(newpassword, '1') == 0)
+		if (strcmp(newpassword, "1") == 0)
 			goto label1;
 		userID = registerManager(username, name, password);
 		if (userID == 0)
