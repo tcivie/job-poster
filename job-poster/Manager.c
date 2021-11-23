@@ -50,34 +50,28 @@ int add_new_post(unsigned int managerID)
 
 int delete_post(int managerID)
 {
-	int del_val = (-1);
+	int del_val = -1;
 	int count = 0;
-	int flag = 0;
+	int flag = 0,i=0;
 	Manager manager;
 	if (getManagerData(&manager, managerID)) {
 		view_posts(manager); // display posts
-		do
+
+		printf("Which post would you like to remove?\n");
+		scanf("%d", &del_val); // delete value
+		while(manager.Posts[i])
 		{
-			printf("Which post would you like to remove?\n");
-			scanf("%d", &del_val); // delete value
-			for (int i = 0; i <= sizeof(manager.Posts) / sizeof(int); i++)
+			if (manager.Posts[i] == del_val)
 			{
-				if (manager.Posts[i] == del_val)
-					flag = 1;
-				else if (i == sizeof(manager.Posts) / sizeof(int))
-					flag = 2;
+				deletePost(del_val);
+				flag = 1;
+				printf("Post has been deleted.\n");
+				return 0;
 			}
-		} while (flag == 0);
-		if (flag == 1)
-		{
-			deletePost(del_val);
-			return 0;
+			i++;
 		}
-		if (flag == 2)
-		{
-			printf("Invalid post ID\n");
-			return 1;
-		}
+		printf("Invalid post ID\n");
+		return 1;
 	}
 }
 

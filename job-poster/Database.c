@@ -367,16 +367,17 @@ int getPostsByManagerID(Post* postsArray,const unsigned int ManagerID) {
 	Post post;
 	int i = 0;
 	if (getManagerData(&manager, ManagerID)) {	// get manager data
-		while (manager.Posts[i]!=0) {	// run on all posts
+		while (manager.Posts[i]!=0) 
+		{	// run on all posts
 			if (getPostData(&post,manager.Posts[i])) {	// get post by ID
 				postsArray[i].PostID = post.PostID;
 				strcpy(postsArray[i].Description, post.Description);
 				strcpy(postsArray[i].Name, post.Name);
 				postsArray[i].Location = post.Location;
 				postsArray[i].Type = post.Type;
-				postsArray[i].Profession = post.Type;
-				i++;
+				postsArray[i].Profession = post.Type;		
 			}
+			i++;
 		}
 		return i;
 	}
@@ -414,7 +415,7 @@ unsigned int deletePost(const unsigned int postID) {
 		while (fread(&toCopy, sizeof(Post), 1, infile)) {	// read trough file
 			if (toCopy.PostID == postID)	// if found the post
 				continue;
-			fwrite(&toCopy, sizeof(Post), 1, infile);	// write to temp
+			fwrite(&toCopy, sizeof(Post), 1, outfile);	// write to temp
 		}
 		fclose(infile);
 		fclose(outfile);
