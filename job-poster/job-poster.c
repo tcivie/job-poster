@@ -55,6 +55,12 @@ void candidateMenu(unsigned int *ID,char *name)
 void employerMenu(unsigned int employerID,char *name)
 {
 	Post postsArray[MAX_POSTS];
+	Post post = { 0 };
+	for (int i = 0; i < MAX_POSTS; i++)
+	{
+		postsArray[i] = post;
+	}
+	
 	char password[20], newpassword[20];
 	int choice,size;
 	do

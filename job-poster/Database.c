@@ -129,7 +129,7 @@ unsigned int addPost(const unsigned int managerID, int location, int type, int p
 	post.Profession = profession;
 	strcpy(post.Name, name);
 	strcpy(post.Description, description);
-	managerfile = fopen(MANAGERS_FILENAME, "wb");
+	managerfile = fopen(MANAGERS_FILENAME, "r+b");
 	if (managerfile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -140,6 +140,8 @@ unsigned int addPost(const unsigned int managerID, int location, int type, int p
 				i = 0;
 				while (bufferManager.Posts[i]) i++;	// run till end of posts
 				bufferManager.Posts[i] = postID;
+				fseek(managerfile, -(int)sizeof(Manager), SEEK_CUR);	// jump back one manager
+				fwrite(&bufferManager, sizeof(Manager), 1, managerfile);	// write the changes
 				fclose(managerfile);
 				
 				infile = fopen(POSTS_FILENAME, "ab");
@@ -335,19 +337,19 @@ int getAllPosts(Post* postsArray[]) {
 	return 0;
 }
 
-int getPostsByManagerID(Post* postsArray[],const unsigned int ManagerID) {
+int getPostsByManagerID(Post* postsArray,const unsigned int ManagerID) {
 	Manager manager;
 	Post post;
 	int i = 0;
 	if (getManagerData(&manager, ManagerID)) {	// get manager data
 		while (manager.Posts[i]!=0) {	// run on all posts
 			if (getPostData(&post,manager.Posts[i])) {	// get post by ID
-				postsArray[i]->PostID = post.PostID;
-				strcpy(postsArray[i]->Description, post.Description);
-				strcpy(postsArray[i]->Name, post.Name);
-				postsArray[i]->Location = post.Location;
-				postsArray[i]->Type = post.Type;
-				postsArray[i]->Profession = post.Type;
+				postsArray[i].PostID = post.PostID;
+				strcpy(postsArray[i].Description, post.Description);
+				strcpy(postsArray[i].Name, post.Name);
+				postsArray[i].Location = post.Location;
+				postsArray[i].Type = post.Type;
+				postsArray[i].Profession = post.Type;
 				i++;
 			}
 		}
