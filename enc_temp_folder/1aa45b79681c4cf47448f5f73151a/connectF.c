@@ -320,7 +320,7 @@ int promotionAD(const unsigned int managerID)
 			}
 			else
 				printf("Full name error - try again\n");
-		} while (flag);
+		} while (flag==0);
 		updatePost(selection, 0, 0, 0, NULL, NULL, 1);
 		return 0;
 	}

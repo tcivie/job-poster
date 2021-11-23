@@ -300,17 +300,17 @@ int promotionAD(const unsigned int managerID)
 						if (last3DigitsCheck(threedigit) == 0)
 							flag = 0;
 						else
-							printf("3 digits failed - try again\n");
+							printf("3 digits failed - try again");
 					}
 					else
 					{
 						if (creditValidityCheck(validity) == 2)
-							printf("No slash in the middle of the date-try again\n");
+							printf("No slash in the middle of the date-try again");
 						else {
 							if (creditValidityCheck(validity) == 4)
-								printf("The card expired\n");
+								printf("The card expired");
 							else
-								printf("Year/month are not correct, try again\n");
+								printf("Year/month are not correct, try again");
 						}
 						
 					}
@@ -320,7 +320,7 @@ int promotionAD(const unsigned int managerID)
 			}
 			else
 				printf("Full name error - try again\n");
-		} while (flag);
+		} while (flag==0);
 		updatePost(selection, 0, 0, 0, NULL, NULL, 1);
 		return 0;
 	}

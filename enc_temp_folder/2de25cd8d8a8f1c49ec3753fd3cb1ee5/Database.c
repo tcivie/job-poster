@@ -45,7 +45,7 @@ unsigned int updateUserData(const unsigned int userID, char UserName[MAX_SIZE], 
 			strcpy(user.Resume, Resume);
 
 		// Start reding the file to find the user and modify it
-		infile = fopen(USERS_FILENAME, "r+b");
+		infile = fopen(USERS_FILENAME, "wb");
 		if (infile == NULL) {
 			fprintf(stderr, "\nERROR OPENING FILE\n");
 			exit(1);
@@ -99,7 +99,7 @@ unsigned int updateManagerData(const unsigned int managerID, char UserName[MAX_S
 			strcpy(manager.Password, Password);
 
 		// Start reding the file to find the manager and modify it
-		infile = fopen(MANAGERS_FILENAME, "r+b");
+		infile = fopen(MANAGERS_FILENAME, "wb");
 		if (infile == NULL) {
 			fprintf(stderr, "\nERROR OPENING FILE\n");
 			exit(1);
@@ -178,7 +178,7 @@ unsigned int updatePost(const unsigned int postID, int location, int type, int p
 			post.Promoted = Promoted;
 
 		// Start reding the file to find the post and modify it
-		infile = fopen(POSTS_FILENAME, "r+b");
+		infile = fopen(POSTS_FILENAME, "wb");
 		if (infile == NULL) {
 			fprintf(stderr, "\nERROR OPENING FILE\n");
 			exit(1);
