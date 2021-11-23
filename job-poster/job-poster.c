@@ -127,7 +127,7 @@ int main()
 	long ID;
 	initFiles();	// create missing files
 label1:
-	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n5-->to close the program");
+	printf("Hello! \n Enter what you want to do\n 1->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n5-->to close the program\n");
 	scanf("%d", &option_menu1);
 
 	switch (option_menu1)
