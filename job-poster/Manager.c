@@ -159,7 +159,7 @@ int update_post(int managerID)
 
 void view_post(Post post) // Helper
 {
-	printf("----------------------");
+	printf("----------------------\n");
 	printf("Name: %s\n", post.Name);	// Print name
 
 	printf("Location: ");	// Print location
@@ -196,8 +196,8 @@ void view_post(Post post) // Helper
 	if (post.Profession == 0)
 		printf("Not relevant\n");
 
-	printf("Description:\n%s", post.Description);	// Print description
-	printf("----------------------");
+	printf("Description:\n%s\n", post.Description);	// Print description
+	printf("----------------------\n");
 }
 
 void view_posts(Manager manager) {

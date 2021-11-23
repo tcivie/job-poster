@@ -12,45 +12,46 @@ void candidateMenu(unsigned int *ID,char *name)
 	Post post;
 	printf("\n------------------------------------------------------\n");
 	printf("Hello dear %s\n", name);
-	printf("what would you like to do?\n");
-	printf("1-->Job search by parameters  \n2-->Submit a resume  \n3-->view all of submission's history  \n4-->Edit user profile  \n5-->Log out from system\n");
-	printf("\n------------------------------------------------------\n");
-	scanf("%d", &choice);
-	switch (choice)
-	{
-	case 1:
-		/*function to Job search by parameters*/
-		printPostsByCategory();
-		break;
-	case 2:
-		/*function to Submit a resume*/
-		strcpy(CV, "");
-		enterCV(CV);
-		updateUserData(ID, NULL, NULL, 0, 0, NULL, NULL, CV);
-		break;
-	case 3:
-		/*function to view all of submission's history*/
-		size=getAppliedByUser(&retValue, ID);
-		for (int i = 0; i < size; i++)
+	do {
+		printf("what would you like to do?\n");
+		printf("1-->Job search by parameters  \n2-->Submit a resume  \n3-->View all of submission's history  \n4-->Edit user profile  \n5-->Apply for job  \n6-->Log out from system\n");
+		printf("------------------------------------------------------\n");
+		scanf("%d", &choice);
+		switch (choice)
 		{
-			getPostData(&post, retValue[i].PostID);
-			view_post(post);
-		}
-		break;
-	case 4:
-		/*function to Edit user profile*/
-		editUserProfile(ID);
-		
-		break;
-	case 5:
-		/*function to Log out from system*/
-		printf("goodbye %s!\n", name);
-		return;
-		break;
+		case 1:
+			/*function to Job search by parameters*/
+			printPostsByCategory();
+			break;
+		case 2:
+			/*function to Submit a resume*/
+			strcpy(CV, "");
+			enterCV(CV);
+			updateUserData(ID, NULL, NULL, 0, 0, NULL, NULL, CV);
+			break;
+		case 3:
+			/*function to view all of submission's history*/
+			size = getAppliedByUser(&retValue, ID);
+			for (int i = 0; i < size; i++)
+			{
+				getPostData(&post, retValue[i].PostID);
+				view_post(post);
+			}
+			break;
+		case 4:
+			/*function to Edit user profile*/
+			editUserProfile(ID);
+			break;
+		case 5:
+			/*function to Log out from system*/
+			printf("goodbye %s!\n", name);
+			return;
+			break;
 
-	default:
-		break;
-	}
+		default:
+			break;
+		}
+	} while (1);
 }
 void employerMenu(unsigned int employerID,char *name)
 {
@@ -66,7 +67,7 @@ void employerMenu(unsigned int employerID,char *name)
 	do
 	{
 
-		printf("------------------------------------------------------\n");
+		printf("\n------------------------------------------------------\n");
 		printf("Hello dear %s\nwhat would you like to do?\n 1--> Post a new ad on the board\n", name);
 		printf(" 2--> Delete an existing ad from the board\n");
 		printf(" 3--> Update an existing ad on the board\n");
@@ -120,7 +121,7 @@ void employerMenu(unsigned int employerID,char *name)
 			break;
 		case 9:
 			/*function to Disconnecting from the system*/
-			printf("goodbye %c!\n", name);
+			printf("goodbye %s!\n", name);
 			return;
 			break;
 		case 10:
