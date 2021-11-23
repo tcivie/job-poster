@@ -402,9 +402,10 @@ int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWOR
 	return 0;
 }
 
-unsigned int deletePost(const unsigned int postID) {
-	FILE* infile, *outfile;
+unsigned int deletePost(const unsigned int postID, const unsigned int managerID) {
+	FILE* infile, *outfile, *managerFile;
 	Post toCopy;
+	Manager manager,tempManager;
 	infile = fopen(POSTS_FILENAME, "rb");
 	outfile = fopen(TEMP_FILENAME, "ab");
 	if (infile == NULL || outfile == NULL) {
@@ -422,7 +423,32 @@ unsigned int deletePost(const unsigned int postID) {
 		remove(POSTS_FILENAME);
 		if (rename(TEMP_FILENAME, POSTS_FILENAME))
 			return 0;
-		return postID;
+
+		if (getManagerData(&manager, managerID)) {
+			managerFile = fopen(MANAGERS_FILENAME, "r+b");
+			if (managerFile == NULL) {
+				fprintf(stderr, "\nERROR OPENING FILE\n");
+				exit(1);
+			} else {
+				while (fread(&tempManager,sizeof(Manager),1,managerFile)) {
+					if (tempManager.ManagerID == managerID) {
+						int i = 0;
+						while (manager.Posts[i] != postID) {	// FIRST SECTION
+							tempManager.Posts[i] = manager.Posts[i];
+							i++;
+						}
+						i++;
+						while (manager.Posts[i]) {	// SECOND SECTION
+							tempManager.Posts[i - 1] = manager.Posts[i];
+							i++;
+						}
+						tempManager.Posts[MAX_POSTS - 1] = 0;	// CLEAR LAST ONE
+					}
+				}
+				fclose(managerFile);
+				return postID;
+			}
+		}
 	}
 	return 0;
 }

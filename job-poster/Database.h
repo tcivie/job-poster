@@ -266,8 +266,9 @@ int checkPasswordManager(const unsigned int managerID, char password[MAX_PASSWOR
 /// <summary>
 /// Delete Post
 /// </summary>
-/// <param name="postID">Id of the post</param>
+/// <param name="postID">ID of the post</param>
+/// <param name="managerID">ID of the manager</param>
 /// <returns>ID of the deleted post | NULL - Otherwise</returns>
-unsigned int deletePost(const unsigned int postID);
+unsigned int deletePost(const unsigned int postID, const unsigned int managerID);
 
 #endif // !DATABASE

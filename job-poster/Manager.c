@@ -63,7 +63,7 @@ int delete_post(int managerID)
 		{
 			if (manager.Posts[i] == del_val)
 			{
-				deletePost(del_val);
+				deletePost(del_val,managerID);
 				flag = 1;
 				printf("Post has been deleted.\n");
 				return 0;
