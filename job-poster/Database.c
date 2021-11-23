@@ -419,10 +419,21 @@ unsigned int deletePost(const unsigned int postID, const unsigned int managerID)
 			fwrite(&toCopy, sizeof(Post), 1, outfile);	// write to temp
 		}
 		fclose(infile);
-		fclose(outfile);
 		remove(POSTS_FILENAME);
-		if (rename(TEMP_FILENAME, POSTS_FILENAME))
-			return 0;
+		infile = fopen(POSTS_FILENAME, "ab");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			while (fread(&toCopy, sizeof(Post), 1, outfile)) {	// read trough file
+				fwrite(&toCopy, sizeof(Post), 1, infile);	// write to temp
+			}
+		}
+		fclose(outfile);
+		fclose(infile);
+
+		//if (rename(TEMP_FILENAME, POSTS_FILENAME))
+			//return 0;
 
 		if (getManagerData(&manager, managerID)) {
 			managerFile = fopen(MANAGERS_FILENAME, "r+b");
