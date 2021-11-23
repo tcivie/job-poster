@@ -217,6 +217,31 @@ unsigned int registerApplication(const unsigned int PostID, const unsigned int U
 	return 0;
 }
 
+unsigned int ApplyJob(const unsigned int UserID, const unsigned int PostID) {
+	int applicationID;
+	FILE* infile;
+	User user;
+	infile = fopen(APPLIED_FILENAME, "ab");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		if (applicationID = checkUserApplication(PostID, UserID)) {	// Checks if the user already applied
+			fclose(infile);
+			return applicationID;
+		}
+		if (getUserData(&user, UserID)) {
+			applicationID = getLastIdApplications() + 1;
+			Apply application = {applicationID,PostID,UserID};
+			strcpy(application.Description, user.Resume);	// copy the application
+			fwrite(&application, sizeof(Apply), 1, infile);
+			fclose(infile);
+			return applicationID;
+		}
+	}
+	return 0;
+}
+
 int getUserData(User* retValue, const unsigned int userID) {
 	FILE* infile;
 	infile = fopen(USERS_FILENAME, "rb");

@@ -175,6 +175,14 @@ unsigned int updatePost(const unsigned int postID, int location, int type, int p
 unsigned int registerApplication(const unsigned int PostID, const unsigned int UserID, char Description[MAX_DESCRIPTION]);
 
 /// <summary>
+/// Apply for a job - save in file apply the application
+/// </summary>
+/// <param name="UserID">ID of the user to appy</param>
+/// <param name="PostID">ID of the post</param>
+/// <returns>ApplicationID - If succeeded | 0 - Otherwise</returns>
+unsigned int ApplyJob(const unsigned int UserID, const unsigned int PostID);
+
+/// <summary>
 /// Searches for the user with the given ID and returns the User
 /// </summary>
 /// <param name="retValue">Pointer to the found user</param>
