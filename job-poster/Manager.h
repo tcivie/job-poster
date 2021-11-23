@@ -4,6 +4,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include "Colors.h"
 
 /// <summary>
 /// Helper function to print a specific job post

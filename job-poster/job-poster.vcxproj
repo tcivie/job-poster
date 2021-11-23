@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Check.c" />
+    <ClCompile Include="Colors.c" />
     <ClCompile Include="connectF.c" />
     <ClCompile Include="Database.c" />
     <ClCompile Include="job-poster.c" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Check.h" />
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="connectF.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="Manager.h" />

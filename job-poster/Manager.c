@@ -154,7 +154,7 @@ int update_post(int managerID)
 void view_post(Post post) // Helper
 {
 	if (post.Promoted == 1)
-		system("Color 6");
+		yellow();	// Set color yellow
 	printf("----------------------\n");
 	printf("ID: %ld\nName: %s\n", post.PostID,post.Name);	// Print name
 	
@@ -194,7 +194,7 @@ void view_post(Post post) // Helper
 
 	printf("Description:\n%s\n", post.Description);	// Print description
 	printf("----------------------\n");
-	system("Color 7");
+	reset();	// reset color
 }
 
 void view_posts(Manager manager) {

@@ -129,6 +129,8 @@ unsigned int addPost(const unsigned int managerID, int location, int type, int p
 	post.Profession = profession;
 	strcpy(post.Name, name);
 	strcpy(post.Description, description);
+	post.Promoted = 0;
+
 	managerfile = fopen(MANAGERS_FILENAME, "r+b");
 	if (managerfile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
@@ -375,7 +377,8 @@ int getPostsByManagerID(Post* postsArray,const unsigned int ManagerID) {
 				strcpy(postsArray[i].Name, post.Name);
 				postsArray[i].Location = post.Location;
 				postsArray[i].Type = post.Type;
-				postsArray[i].Profession = post.Type;		
+				postsArray[i].Profession = post.Type;
+				postsArray[i].Promoted = post.Promoted;
 			}
 			i++;
 		}
