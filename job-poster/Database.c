@@ -449,11 +449,15 @@ unsigned int deletePost(const unsigned int postID, const unsigned int managerID)
 							i++;
 						}
 						i++;
-						while (manager.Posts[i]) {	// SECOND SECTION
+						while (i<MAX_POSTS) {	// SECOND SECTION
 							tempManager.Posts[i - 1] = manager.Posts[i];
 							i++;
 						}
 						tempManager.Posts[MAX_POSTS - 1] = 0;	// CLEAR LAST ONE
+						fseek(infile, -(int)sizeof(Manager), SEEK_END);
+						fwrite(&tempManager, sizeof(Manager), 1, managerFile);
+						fclose(managerFile);
+						return postID;
 					}
 				}
 				fclose(managerFile);

@@ -155,6 +155,7 @@
     <None Include="Applied.bin" />
     <None Include="Managers.bin" />
     <None Include="Posts.bin" />
+    <None Include="Temp.bin" />
     <None Include="Users.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
