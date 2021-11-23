@@ -140,10 +140,10 @@ label1:
 		{
 			printf("this username does not exist!\nplease try again or 1 to exit:\n");
 			scanf("%s", username);
-			if (strcmp(username, '1') == 0)
+			if (strcmp(username, "1") == 0)
 				break;
 		}
-		if (strcmp(username, '1') == 0)
+		if (strcmp(username, "1") == 0)
 			goto label1;
 		userID = checkUserName(username);
 		printf("enter a password:\n");
@@ -152,10 +152,10 @@ label1:
 		{
 			printf("prees 1 to exit or try again!\nenter a password:\n");
 			gets(password);
-			if (strcmp(password, '1') == 0)
+			if (strcmp(password, "1") == 0)
 				break;
 		}
-		if (strcmp(password, '1') == 0)
+		if (strcmp(password, "1") == 0)
 			goto label1;
 		printf("your login is succsess!\n");
 		employerMenu(userID, username);/*moved to employer menu*/
@@ -168,10 +168,10 @@ label1:
 		{
 			printf("this username does not exist!\nplease try again or 1 to exit:\n");
 			scanf("%s", username);
-			if (strcmp(username, '1') == 0)
+			if (strcmp(username, "1") == 0)
 				break;
 		}
-		if (strcmp(username, '1') == 0)
+		if (strcmp(username, "1") == 0)
 			goto label1;
 		userID = checkUserName(username);
 		printf("enter a password:\n");
@@ -180,10 +180,10 @@ label1:
 		{
 			printf("press 1 to exit or try again!\nenter a password:\n");
 			gets(password);
-			if (strcmp(password, '1') == 0)
+			if (strcmp(password, "1") == 0)
 				break;
 		}
-		if (strcmp(password, '1') == 0)
+		if (strcmp(password, "1") == 0)
 			goto label1;
 		printf("successful login!\n");
 		candidateMenu(userID, username,ID,age,phoneNumber,password);/*transfer to candidate options menu.*/
@@ -196,7 +196,7 @@ label1:
 		{
 			printf("this username is incorrect or already exists\nplease enter new username or 1 to exit:\n");
 			scanf("%s", username);
-			if (strcmp(username, '1') == 0)
+			if (strcmp(username, "1") == 0)
 				break;
 		}
 		/*if (strcmp(username, '1') == 0)
@@ -213,7 +213,7 @@ label1:
 			if (strcmp(password, "1") == 0)
 				break;
 		}
-		if (strcmp(password, '1') == 0)
+		if (strcmp(password, "1") == 0)
 			goto label1;
 		printf("to verify the password\nenter the password again\n");
 		gets(newpassword);
@@ -221,10 +221,10 @@ label1:
 		{
 			printf("the verify failed\nenter the password again\n");
 			gets(newpassword);
-			if (strcmp(newpassword, '1') == 0)
+			if (strcmp(newpassword, "1") == 0)
 				break;
 		}
-		if (strcmp(newpassword, '1') == 0)
+		if (strcmp(newpassword, "1") == 0)
 			goto label1;
 		userID = registerManager(username, name, password);
 		if (userID == 0)
@@ -243,10 +243,10 @@ label1:
 		{
 			printf("this username is incorrect or alreadt exists\nplease enter new username or 1 to exit:\n");
 			scanf("%s", username);
-			if (strcmp(username, '1') == 0)
+			if (strcmp(username, "1") == 0)
 				break;
 		}
-		if (strcmp(username, '1') == 0)
+		if (strcmp(username, "1") == 0)
 			goto label1;
 		printf("enter name:\n");
 		scanf("%s", name);
@@ -274,10 +274,10 @@ label1:
 		{
 			printf("not valid number!\npress 1 to exit or a correct phone number:\n");
 			gets(phoneNumber);
-			if (strcmp(phoneNumber, '1') == 0)
+			if (strcmp(phoneNumber, "1") == 0)
 				break;
 		}
-		if (strcmp(phoneNumber, '1') == 0)
+		if (strcmp(phoneNumber, "1") == 0)
 			goto label1;
 		printf("enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
 		gets(password);
@@ -285,10 +285,10 @@ label1:
 		{
 			printf("this password is incorrect! \nplease enter new password or press 1 to exit:\n");
 			gets(password);
-			if (strcmp(password, '1') == 0)
+			if (strcmp(password, "1") == 0)
 				break;
 		}
-		if (strcmp(password, '1') == 0)
+		if (strcmp(password, "1") == 0)
 			goto label1;
 		printf("to verify the password\nenter the password again\n");
 		gets(newpassword);
@@ -296,10 +296,10 @@ label1:
 		{
 			printf("the verify failed\nenter the password again or press 1 to exit:\n");
 			gets(newpassword);
-			if (strcmp(newpassword, '1') == 0)
+			if (strcmp(newpassword, "1") == 0)
 				break;
 		}
-		if (strcmp(newpassword, '1') == 0)
+		if (strcmp(newpassword, "1") == 0)
 			goto label1;
 		/*send the ditails to the file--gleb*/
 		userID=registerUser(username,name,ID,age,phoneNumber,password,NULL);
