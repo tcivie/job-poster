@@ -14,17 +14,18 @@ int add_new_post(unsigned int managerID)
 		if (strlen(new_post.Name) > MAX_SIZE)
 			printf("Title should be 100 characters or lower\n");
 		printf("Please enter post title (Maximun: 100 characters)\n");
+		getchar();
 		gets(new_post.Name);
 	} while (strlen(new_post.Name) > MAX_SIZE);
 	do
 	{
-		printf("Select location from list:\n1. North\n2. Center\n 3.South\n");
+		printf("Select location from list:\n1. North\n2. Center\n3. South\n");
 		scanf("%d", &new_post.Location);
 	} while (new_post.Location < 1 || new_post.Location > 3);
 	do
 	{
 		printf("Select type of job from list:\n1. Full-time\n2. Part-time\n");
-		scanf("%d", &new_post.Location);
+		scanf("%d", &new_post.Type);
 	} while (new_post.Type < 1 || new_post.Type > 2);
 	do
 	{
@@ -36,6 +37,7 @@ int add_new_post(unsigned int managerID)
 		if (strlen(new_post.Description) > MAX_DESCRIPTION)
 			printf("Description should be 255 characters or lower\n");
 		printf("Please enter post description (Maximun: 255 characters)\n");
+		getchar();
 		gets(new_post.Description);
 	} while (strlen(new_post.Description) > MAX_DESCRIPTION);
 	if (!addPost(manager.ManagerID, new_post.Location, new_post.Type, new_post.Profession, new_post.Name, new_post.Description))
@@ -157,6 +159,7 @@ int update_post(int managerID)
 
 void view_post(Post post) // Helper
 {
+	printf("----------------------");
 	printf("Name: %s\n", post.Name);	// Print name
 
 	printf("Location: ");	// Print location
@@ -194,6 +197,7 @@ void view_post(Post post) // Helper
 		printf("Not relevant\n");
 
 	printf("Description:\n%s", post.Description);	// Print description
+	printf("----------------------");
 }
 
 void view_posts(Manager manager) {
