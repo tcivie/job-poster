@@ -36,6 +36,8 @@ void candidateMenu(unsigned int *ID,char *name)
 		case 3:
 			/*function to view all of submission's history*/
 			size = getAppliedByUser(&retValue, ID);
+			if (size == 0)
+				printf("You didnt apply for any job.\n");
 			for (int i = 0; i < size; i++)
 			{
 				getPostData(&post, retValue[i].PostID);
@@ -47,10 +49,15 @@ void candidateMenu(unsigned int *ID,char *name)
 			editUserProfile(ID);
 			break;
 		case 5:
-			printf("Enter the job application ID you would like to apply to\nID:\t");
+			printf("Enter the job application ID you would like to apply to ( enter 0 to go back to menu )\nID:\t");
 			scanf("%d", &tempID);
 			system("cls");
-			ApplyJob(ID, tempID);
+			if (ApplyJob(ID, tempID))
+			{
+				green();
+				printf("Succesfuly applied\n");
+				reset();
+			}
 			break;
 		case 6:
 			/*function to Log out from system*/
@@ -74,6 +81,7 @@ void employerMenu(unsigned int employerID,char *name)
 	
 	char password[20], newpassword[20];
 	int choice,size;
+
 	do
 	{
 
@@ -106,6 +114,13 @@ void employerMenu(unsigned int employerID,char *name)
 			break;
 		case 3:
 			/*function to Update an existing ad on the board*/
+			size = getPostsByManagerID(&postsArray, employerID);
+			if (size == 0)
+				printf("You have no posts yet.\n");
+			for (int i = 0; i < size; i++)
+			{
+				view_post(postsArray[i]);
+			}
 			update_post(employerID);
 			break;
 		case 4:
@@ -250,6 +265,7 @@ label1:
 		}
 		if (strcmp(password, "1") == 0)
 			goto label1;
+		system("cls");
 		green();
 		printf("Successful login!\n");
 		reset();
