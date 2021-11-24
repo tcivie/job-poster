@@ -410,7 +410,7 @@ unsigned int deletePost(const unsigned int postID, const unsigned int managerID)
 	Post toCopy;
 	Manager manager,tempManager;
 	infile = fopen(POSTS_FILENAME, "rb");
-	outfile = fopen(TEMP_FILENAME, "ab");
+	outfile = fopen(TEMP_FILENAME, "wb");
 	if (infile == NULL || outfile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
