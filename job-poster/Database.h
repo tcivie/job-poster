@@ -71,6 +71,13 @@ int initFiles();
 unsigned int checkUserName(char UserName[MAX_SIZE]);
 
 /// <summary>
+/// Checks if post exists in the database
+/// </summary>
+/// <param name="PostID">ID of the post</param>
+/// <returns>Post ID if exists | 0 - Otherwise</returns>
+unsigned int checkPostID(const unsigned int PostID);
+
+/// <summary>
 /// Checks if the username of the manager exists in the database
 /// </summary>
 /// <param name="UserName">Manager's username</param>

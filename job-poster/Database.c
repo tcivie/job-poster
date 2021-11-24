@@ -226,18 +226,20 @@ unsigned int ApplyJob(const unsigned int UserID, const unsigned int PostID) {
 	if (applicationID = checkUserApplication(PostID, UserID)) {	// Checks if the user already applied
 		return applicationID;
 	}
-	infile = fopen(APPLIED_FILENAME, "ab");
-	if (infile == NULL) {
-		fprintf(stderr, "\nERROR OPENING FILE\n");
-		exit(1);
-	} else {
-		if (getUserData(&user, UserID)) {
-			applicationID = getLastIdApplications() + 1;
-			Apply application = {applicationID,PostID,UserID};
-			strcpy(application.Description, user.Resume);	// copy the application
-			fwrite(&application, sizeof(Apply), 1, infile);
-			fclose(infile);
-			return applicationID;
+	if (checkPostID(PostID)) {
+		infile = fopen(APPLIED_FILENAME, "ab");
+		if (infile == NULL) {
+			fprintf(stderr, "\nERROR OPENING FILE\n");
+			exit(1);
+		} else {
+			if (getUserData(&user, UserID)) {
+				applicationID = getLastIdApplications() + 1;
+				Apply application = {applicationID,PostID,UserID};
+				strcpy(application.Description, user.Resume);	// copy the application
+				fwrite(&application, sizeof(Apply), 1, infile);
+				fclose(infile);
+				return applicationID;
+			}
 		}
 	}
 	return 0;
@@ -513,6 +515,26 @@ int checkUserName(char UserName[MAX_SIZE]) {
 			if (strcmp(input.UserName, UserName) == 0) {	// check if equal
 				fclose(infile);
 				return input.UserID;	// return user ID
+			}
+		}
+		fclose(infile);
+		return 0;
+	}
+	return 0;
+}
+
+unsigned int checkPostID(const unsigned int PostID) {
+	FILE* infile;
+	Post input;
+	infile = fopen(POSTS_FILENAME, "rb");
+	if (infile == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	} else {
+		while (fread(&input, sizeof(Post), 1, infile)) {	// read trough file
+			if (input.PostID == PostID) {	// check if equal
+				fclose(infile);
+				return input.PostID;	// return post ID
 			}
 		}
 		fclose(infile);
