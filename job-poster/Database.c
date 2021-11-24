@@ -223,15 +223,14 @@ unsigned int ApplyJob(const unsigned int UserID, const unsigned int PostID) {
 	int applicationID;
 	FILE* infile;
 	User user;
+	if (applicationID = checkUserApplication(PostID, UserID)) {	// Checks if the user already applied
+		return applicationID;
+	}
 	infile = fopen(APPLIED_FILENAME, "ab");
 	if (infile == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
 	} else {
-		if (applicationID = checkUserApplication(PostID, UserID)) {	// Checks if the user already applied
-			fclose(infile);
-			return applicationID;
-		}
 		if (getUserData(&user, UserID)) {
 			applicationID = getLastIdApplications() + 1;
 			Apply application = {applicationID,PostID,UserID};
