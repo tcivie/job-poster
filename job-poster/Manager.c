@@ -114,7 +114,7 @@ int update_post(int managerID)
 	} while (flag == 0);
 	while (choose > 0 && choose < 6)
 	{
-		printf("What property would you like to change?\n 1. Location\n2. Type of job\n3. Profession\n4. Name of post\n5. Description\n6. None\n");
+		printf("What property would you like to change?\n 1. Location\n 2. Type of job\n 3. Profession\n 4. Name of post\n 5. Description\n 6. None\n");
 		scanf("%d", &choose);
 		switch (choose)
 		{

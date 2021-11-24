@@ -38,6 +38,7 @@ int printPostsByCategory()
 			printByCategories(postsArray, sizeArray, choose, innerChoose);
 			break;
 		case 0:
+			system("cls");
 			return 0;
 		default:
 			printf("Wrong choose,please try again\n");
@@ -85,7 +86,10 @@ int enterCV(char* CV)//gets char* to enter the data that the user entered
 	printf("Enter your CV:\n");
 	getchar();
 	gets(CV);
-	printf("succesful");
+	system("cls");
+	green();
+	printf("Succesful\n");
+	reset();
 	return 0;
 }
 
@@ -263,7 +267,7 @@ int promotionAD(const unsigned int managerID)
 	}
 	do {
 		printf("Enter the id of the post you would like to promote:(to return back - enter 0)\n");
-		scanf("%d", &selection);	
+		scanf("%d", &selection);
 		system("cls");
 		if (selection == 0)
 			return 0;
@@ -279,11 +283,19 @@ int promotionAD(const unsigned int managerID)
 	} while (flag == 0);
 	flag = 0;
 	do{
-		printf("Enter number of days of promotion:(between 1-365)\n");
+		printf("Enter number of days of promotion:(between 1-365 , 0 to go back)\n");
 		scanf("%d", &numberOfdays1);
 		system("cls");
+		if (numberOfdays1 == 0)
+			return 0;
 		if (numberOfDaysPayment(numberOfdays1) == 0)
 			flag = 1;
+		else
+		{
+			red();
+			printf("Number of days should be betweeen 1-365\n");
+			reset();
+		}
 	}while (flag == 0);
 	printf("The total payment will be: %d\$\n", numberOfdays1 * 3);
 	printf("Are you sure you want to continue?(0-yes , else-no)\n");
@@ -291,26 +303,34 @@ int promotionAD(const unsigned int managerID)
 	system("cls");
 	if (endChoose == 0)
 	{
-		flag = 0;
+		flag = 1;
 		do {
-			printf("Enter the name of the credit card holder:\n");
+			printf("Enter the name of the credit card holder:(enter 0 to go back to menu)\n");
 			getchar();
 			gets(name);
 			system("cls");
+			if (strcmp(name, "0") == 0)
+				return 0;
 			if (FullNameCheck(name) == 0)
 			{
-				printf("Enter the credit number:\n");
-				scanf("%s", Cnum);
+				printf("Enter the credit number:(no spaces , enter 0 to go back to menu)\n");
 				system("cls");
+				scanf("%s", Cnum);
+				if (strcmp(Cnum, "0") == 0)
+					return 0;
 				if (creditNumberCheck(Cnum) == 0) {
-					printf("Enter the card validity:(mm/yy)\n");
+					printf("Enter the card validity:(mm/yy , enter 0 to go back to menu)\n");
 					scanf("%s", validity);
 					system("cls");
+					if (strcmp(validity, "0") == 0)
+						return 0;
 					if (creditValidityCheck(validity) == 0) {
-						printf("Enter last 3 digits on the back of the credit card:\n");
+						printf("Enter last 3 digits on the back of the credit card:(enter 0 to go back to menu)\n");
 						getchar();
 						scanf("%s", threedigit);
 						system("cls");
+						if (strcmp(threedigit, "0") == 0)
+							return 0;
 						if (last3DigitsCheck(threedigit) == 0)
 							flag = 0;
 						else {
