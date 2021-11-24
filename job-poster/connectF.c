@@ -259,6 +259,7 @@ int promotionAD(const unsigned int managerID)
 	do {
 		printf("Enter the id of the post you would like to promote:\n");
 		scanf("%d", &selection);
+		system("cls");
 		flag = 0;
 		for (int j = 0; j <size; j++)
 		{
@@ -273,12 +274,14 @@ int promotionAD(const unsigned int managerID)
 	do{
 		printf("Enter number of days of promotion:(between 1-365)\n");
 		scanf("%d", &numberOfdays1);
+		system("cls");
 		if (numberOfDaysPayment(numberOfdays1) == 0)
 			flag = 1;
 	}while (flag == 0);
 	printf("The total payment will be: %d\$\n", numberOfdays1 * 3);
 	printf("Are you sure you want to continue?(0-yes , else-no)\n");
 	scanf("%d", &endChoose);
+	system("cls");
 	if (endChoose == 0)
 	{
 		flag = 0;
@@ -286,42 +289,67 @@ int promotionAD(const unsigned int managerID)
 			printf("Enter the name of the credit card holder:\n");
 			getchar();
 			gets(name);
+			system("cls");
 			if (FullNameCheck(name) == 0)
 			{
 				printf("Enter the credit number:\n");
 				scanf("%s", Cnum);
+				system("cls");
 				if (creditNumberCheck(Cnum) == 0) {
 					printf("Enter the card validity:(mm/yy)\n");
 					scanf("%s", validity);
+					system("cls");
 					if (creditValidityCheck(validity) == 0) {
 						printf("Enter last 3 digits on the back of the credit card:\n");
 						getchar();
 						scanf("%s", threedigit);
+						system("cls");
 						if (last3DigitsCheck(threedigit) == 0)
 							flag = 0;
-						else
+						else {
+							red();
 							printf("3 digits failed - try again\n");
+							reset();
+						}
 					}
 					else
 					{
-						if (creditValidityCheck(validity) == 2)
+						if (creditValidityCheck(validity) == 2) {
+							red();
 							printf("No slash in the middle of the date-try again\n");
+							reset();
+						}
 						else {
-							if (creditValidityCheck(validity) == 4)
+							if (creditValidityCheck(validity) == 4) {
+								red();
 								printf("The card expired\n");
-							else
+								reset();
+							} else {
+								red();
 								printf("Year/month are not correct, try again\n");
+								reset();
+							}
 						}
 						
 					}
 				}
-				else
+				else {
+					red();
 					printf("credit card number error - try again\n");
+					reset();
+				}
 			}
-			else
+			else {
+				red();
 				printf("Full name error - try again\n");
+				reset();
+			}
 		} while (flag);
 		updatePost(selection, 0, 0, 0, NULL, NULL, 1);
+		system("cls");
+		green();
+		printf("Advertisement successfuly promoted!\n");
+		reset();
 		return 0;
 	}
 }

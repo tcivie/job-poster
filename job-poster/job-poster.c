@@ -13,10 +13,14 @@ void candidateMenu(unsigned int *ID,char *name)
 	printf("\n------------------------------------------------------\n");
 	printf("Hello dear %s\n", name);
 	do {
-		printf("what would you like to do?\n");
+		printf("What would you like to do?\n");
 		printf("1-->Job search by parameters  \n2-->Submit a resume  \n3-->View all of submission's history  \n4-->Edit user profile  \n5-->Apply for job  \n6-->Log out from system\n");
 		printf("------------------------------------------------------\n");
+		yellow();
+		printf("Choice:\t");
 		scanf("%d", &choice);
+		reset();
+		system("cls");
 		switch (choice)
 		{
 		case 1:
@@ -43,13 +47,14 @@ void candidateMenu(unsigned int *ID,char *name)
 			editUserProfile(ID);
 			break;
 		case 5:
-			printf("Enter the job application ID you would like to apply to\n");
+			printf("Enter the job application ID you would like to apply to\nID:\t");
 			scanf("%d", &tempID);
+			system("cls");
 			ApplyJob(ID, tempID);
 			break;
 		case 6:
 			/*function to Log out from system*/
-			printf("goodbye %s!\n", name);
+			printf("Goodbye %s!\n", name);
 			return;
 			break;
 
@@ -84,7 +89,11 @@ void employerMenu(unsigned int employerID,char *name)
 		printf(" 9--> Disconnecting from the system\n");
 		printf("10--> chat with a candidate\n");
 		printf("------------------------------------------------------\n");
+		yellow();
+		printf("Choice:\t");
 		scanf("%d", &choice);
+		reset();
+		system("cls");
 		switch (choice)
 		{
 		case 1:
@@ -126,11 +135,11 @@ void employerMenu(unsigned int employerID,char *name)
 			break;
 		case 9:
 			/*function to Disconnecting from the system*/
-			printf("goodbye %s!\n", name);
+			printf("Goodbye %s!\n", name);
 			return;
 			break;
 		case 10:
-			printf("who you want to speak with?");
+			printf("Who you want to speak with?");
 			//not functional
 		default:
 			break;
@@ -150,111 +159,148 @@ int main()
 	User user;
 	initFiles();	// create missing files
 label1:
+	system("cls");
 	printf("Hello! \n------------------------------------------------------");
-	printf("\n Enter what you want to do:\n 1-->connect as an employer\n 2-->connect as an candidate\n 3-->create a new employer\n 4-->create a new candidate\n 5-->to close the program\n");
+	printf("\n Enter what you want to do:\n 1-->Connect as an employer\n 2-->Connect as an candidate\n 3-->Create a new employer\n 4-->Create a new candidate\n 5-->To close the program\n");
 	printf("------------------------------------------------------\n");
+	yellow();
+	printf("Choice:\t");
 	scanf("%d", &option_menu1);
-
+	reset();
+	system("cls");
 	switch (option_menu1)
 	{
 	case 1:// #################################################################################
-		printf("to login as an employer you have to enter the username and a password:\n");
+		printf("To login as an employer you have to enter the username and a password:\n");
+		printf("Username:\t");
 		while (getchar() != '\n');
-		printf("username:\n");
 		strcpy(username, "");
 		scanf("%s", username);
+		system("cls");
 		while (!(checkManagerUserName(username)))
 		{
 			strcpy(username, "");
 			while (getchar() != '\n');
-			printf("this username does not exist!\nplease try again or 1 to exit:\n");
+			red();
+			printf("This username does not exist!\nplease try again or 1 to exit:\n");
+			reset();
+			printf("Choice:\t");
 			scanf("%s", username);
+			system("cls");
 			if (strcmp(username, "1") == 0)
 				break;
 		}
 		if (strcmp(username, "1") == 0)
 			goto label1;
 		userID = checkManagerUserName(username);
-		printf("-enter a password:\n");
+		printf("Password:\t");
 		getchar();
 		gets(password);
+		system("cls");
 		while (!(checkPasswordManager(userID, password)))
 		{
-			printf("prees 1 to exit or try again!\nenter a password:\n");
+			red();
+			printf("Wrong password! prees 1 to exit or try again!\nPassword:\t");
+			reset();
 			gets(password);
+			system("cls");
 			if (strcmp(password, "1") == 0)
 				break;
 		}
 		if (strcmp(password, "1") == 0)
 			goto label1;
-		printf("your login is succsess!\n");
+		green();
+		printf("Your login is successful!\n");
+		reset();
 		getManagerData(&manager, userID);
 		employerMenu(userID, manager.FullName);/*moved to employer menu*/
 		break;
 	case 2://#############################################################
-		printf("-to login as a candidate you need to enter username and password:\n");
-		printf("username:\n");
+		printf("To login as a candidate you need to enter username and password:\n");
+		printf("Username:\t");
 		getchar();
 		gets( username);
+		system("cls");
 		while (!(checkUserName(username)))
 		{
-			printf("this username does not exist!\nplease try again or 1 to exit:\n");
+			red();
+			printf("This username does not exist!\nplease try again or 1 to exit:\n");
+			reset();
+			printf("Username:\t");
 			gets( username);
 			if (strcmp(username, "1") == 0)
-				break;
+				goto label1;
 		}
 		if (strcmp(username, "1") == 0)
 			goto label1;
 		userID = checkUserName(username);
-		printf("-enter a password:\n");
+		printf("Password:\t");
 		gets(password);
 		while (!(checkPasswordUser(userID, password)))
 		{
-			printf("press 1 to exit or try again!\nenter a password:\n");
+			red();
+			printf("Wrong password! press 1 to exit or try again!\nPassword:\t");
+			reset();
 			gets(password);
+			system("cls");
 			if (strcmp(password, "1") == 0)
 				break;
 		}
 		if (strcmp(password, "1") == 0)
 			goto label1;
-		printf("successful login!\n");
+		green();
+		printf("Successful login!\n");
+		reset();
 		getUserData(&user, userID);
 		candidateMenu(userID, user.FullName);/*transfer to candidate options menu.*/
 		break;
 	case 3://############################################
-		printf("to login as an employer you need to enter the following details:\n");
-		printf("-enter username:\n");
+		printf("To register as an employer you need to enter the following details:\n");
+		printf("Username:\t");
 		scanf("%s", username);
+		system("cls");
 		while (FullNameCheck(username) || checkManagerUserName(username))
 		{
-			printf("this username is incorrect or already exists\nplease enter new username or 1 to exit:\n");
+			red();
+			printf("This username is incorrect or already exists\nplease enter new username or 1 to exit:\nUsername:\t");
+			reset();
 			scanf("%s", username);
+			system("cls");
 			if (strcmp(username, "1") == 0)
 				break;
 		}
 		/*if (strcmp(username, '1') == 0)
 			goto label1;*/	// ERROR: EXCEPTION - READ LOCATION VIOLATION
 		while (getchar() != '\n');
-		printf("-enter name or business name:\n");
+		printf("Enter name or business name:\t");
 		
 		gets(name);
-		printf("-enter a password:\n1. At least 6 digits.\n2. English letters and numbers only.\n3. At least one capital letter and one small cap letter.\n");
+		system("cls");
+		printf("Enter a password:\n1. At least 6 digits.\n2. English letters and numbers only.\n3. At least one capital letter and one small cap letter.\nPassword:\t");
 		gets(password);
+		system("cls");
 		while (PasswordCheck(password))	// ERROR: SKIPPING FIRST PASSWORD CHECK
 		{
-			printf("password failed! \nplease enter new password or 1 to exit:\n");
+			red();
+			printf("Password failed! \nplease enter new password or 1 to exit:\nPassword:\t");
+			reset();
 			gets(password);
+			system("cls");
 			if (strcmp(password, "1") == 0)
 				break;
 		}
 		if (strcmp(password, "1") == 0)
 			goto label1;
-		printf("to verify the password\nenter the password again\n");
+		printf("To verify the password\nenter the password again\nPassword:\t");
 		gets(newpassword);
+		system("cls");
 		while (strcmp(password, newpassword)!= 0)
 		{
-			printf("the verify failed\nenter the password again\n");
+			red();
+			printf("The verify failed\nenter the password again\nPassword:\t");
+			reset();
 			gets(newpassword);
+			system("cls");
 			if (strcmp(newpassword, "1") == 0)
 				break;
 		}
@@ -263,75 +309,104 @@ label1:
 		userID = registerManager(username, name, password);
 		if (userID == 0)
 		{
-			printf("register failed!\nproblem with the file!");
+			red();
+			printf("Register failed!\nproblem with the file!");
+			reset();
 			goto label1;
 		}
-		printf("you have successfully registered!\n");
+		green();
+		printf("You have been successfully registered!\n");
+		reset();
 		employerMenu(userID,name);/*transfered to employer options menu.*/
 		break;
 	case 4:
-		printf("to connect as a candidate you need to enter the following details:\n");
-		printf("-enter username:\n");
+		printf("To register as a candidate you need to enter the following details:\n");
+		printf("Username:\t");
 		scanf("%s", username);
+		system("cls");
 		while (FullNameCheck(username)|| checkUserName(username))
 		{
-			printf("this username is incorrect or alreadt exists\nplease enter new username or 1 to exit:\n");
+			red();
+			printf("This username is incorrect or alreadt exists\nplease enter new username or 1 to exit:\nUsername:\t");
+			reset();
 			scanf("%s", username);
+			system("cls");
 			if (strcmp(username, "1") == 0)
 				break;
 		}
 		if (strcmp(username, "1") == 0)
 			goto label1;
-		printf("-enter full name:\n");
+		printf("Full name:\t");
 		getchar();
 		gets(name);
-		printf("-enter ID\n");
+		system("cls");
+		printf("Enter ID:\t");
 		scanf("%ld", &ID);
+		system("cls");
 		while (!(IDcheck(ID)))
 		{
-			printf("not valid ID\nenter ID again or press 1 to exit:\n");
+			red();
+			printf("Not valid ID\nenter ID again or press 1 to exit:\nEnter ID:\t");
+			reset();
 			scanf("%ld", &ID);
+			system("cls");
 			if (ID == 1)
 				break;
 		}
 		if (ID == 1)
 			goto label1;
-		printf("-enter age:\n");
+		printf("Enter age:\t");
 		scanf("%d", &age);
+		system("cls");
 		while (AgeCheck(age))
 		{
-			printf("wrong age!\nplease try again\n");
+			red();
+			printf("Wrong age!\nplease try again\nEnter age:\t");
+			reset();
 			scanf("%d", &age);
+			system("cls");
 		}
-		printf("-enter a phone number:\n");
+		printf("Enter a phone number:\t");
 		getchar();
 		gets(phoneNumber);
+		system("cls");
 		while (phoneNumberCheck(phoneNumber))
 		{
-			printf("not valid number!\npress 1 to exit or a correct phone number:\n");
+			red();
+			printf("not valid number!\npress 1 to exit or a correct phone number:\nEnter a phone number:\t");
+			reset();
 			gets(phoneNumber);
+			system("cls");
 			if (strcmp(phoneNumber, "1") == 0)
 				break;
 		}
 		if (strcmp(phoneNumber, "1") == 0)
 			goto label1;
-		printf("-enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\n");
+		printf("Enter a password:\n1.At least 6 digits.\n2.English letters and numbers only.\n3.At least one capital letter and one small cap letter.\nPassword:\t");
 		gets(password);
+		system("cls");
 		while (PasswordCheck(password))/*check the password and enter her again.*/
 		{
-			printf("this password is incorrect! \nplease enter new password or press 1 to exit:\n");
+			red();
+			printf("This password is incorrect! \nplease enter new password or press 1 to exit:\nPassword:\t");
+			reset();
 			gets(password);
+			system("cls");
 			if (strcmp(password, "1") == 0)
 				break;
 		}
 		if (strcmp(password, "1") == 0)
 			goto label1;
-		printf("to verify the password\nenter the password again\n");
+		printf("To verify the password\nenter the password again\nPassword:\t");
 		gets(newpassword);
+		system("cls");
 		while (strcmp(password, newpassword)!=0)
 		{
-			printf("the verify failed\nenter the password again or press 1 to exit:\n");
+			red();
+			printf("The verify failed\nenter the password again or press 1 to exit:\nPassword:\t");
+			reset();
 			gets(newpassword);
+			system("cls");
 			if (strcmp(newpassword, "1") == 0)
 				break;
 		}
@@ -340,18 +415,24 @@ label1:
 		/*send the ditails to the file--gleb*/
 		userID=registerUser(username,name,ID,age,phoneNumber,password,"");
 		if (userID == 0)
-		{
-			printf("register failed!\nproblem with the file!");
+		{	
+			red();
+			printf("Register failed!\nproblem with the file!");
+			reset();
 			goto label1;
 		}
-		printf("you have successfully registered!\n");
+		green();
+		printf("You have successfully registered!\n");
+		reset();
 		candidateMenu(userID,name,ID,age,phoneNumber,password);/*transfer to candidate options menu.*/
 		break;
 	case 5:
-		printf("thank you!\ngoodbye");
+		printf("Thank you!\ngoodbye");
 		goto label2;
 	default:
+		red();
 		printf("Error input! please try again\n");
+		reset();
 		goto label1;
 		break;
 	}

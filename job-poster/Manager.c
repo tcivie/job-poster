@@ -16,21 +16,25 @@ int add_new_post(unsigned int managerID)
 		printf("Please enter post title (Maximun: 100 characters)\n");
 		getchar();
 		gets(new_post.Name);
+		system("cls");
 	} while (strlen(new_post.Name) > MAX_SIZE);
 	do
 	{
 		printf("Select location from list:\n1. North\n2. Center\n3. South\n");
 		scanf("%d", &new_post.Location);
+		system("cls");
 	} while (new_post.Location < 1 || new_post.Location > 3);
 	do
 	{
 		printf("Select type of job from list:\n1. Full-time\n2. Part-time\n");
 		scanf("%d", &new_post.Type);
+		system("cls");
 	} while (new_post.Type < 1 || new_post.Type > 2);
 	do
 	{
 		printf("Select relevant profession from list:\n1. Security\n2. Engineering\n3. Medicine\n4. Restaurants\n5. Education\n6. Public transportation\n7. Factories\n8. Economics\n0. Not relevant\n");
 		scanf("%d", &new_post.Profession);
+		system("cls");
 	} while (new_post.Profession < 0 || new_post.Profession > 8);
 	do
 	{
@@ -39,12 +43,18 @@ int add_new_post(unsigned int managerID)
 		printf("Please enter post description (Maximun: 255 characters)\n");
 		getchar();
 		gets(new_post.Description);
+		system("cls");
 	} while (strlen(new_post.Description) > MAX_DESCRIPTION);
 	if (!addPost(manager.ManagerID, new_post.Location, new_post.Type, new_post.Profession, new_post.Name, new_post.Description))
 	{
+		red();
 		printf("Error! can't add post\n");
+		reset();
 		return 1;
 	}
+	green();
+	printf("Successfuly added a new post!");
+	reset();
 	return 0;
 }
 
@@ -59,18 +69,23 @@ int delete_post(int managerID)
 
 		printf("Which post would you like to remove?\n");
 		scanf("%d", &del_val); // delete value
+		system("cls");
 		while(manager.Posts[i])
 		{
 			if (manager.Posts[i] == del_val)
 			{
 				deletePost(del_val,managerID);
 				flag = 1;
+				green();
 				printf("Post has been deleted.\n");
+				reset();
 				return 0;
 			}
 			i++;
 		}
+		red();
 		printf("Invalid post ID\n");
+		reset();
 		return 1;
 	}
 }

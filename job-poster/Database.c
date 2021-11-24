@@ -417,19 +417,21 @@ unsigned int deletePost(const unsigned int postID, const unsigned int managerID)
 	}
 	else {
 		while (fread(&toCopy, sizeof(Post), 1, infile)) {	// read trough file
-			if (toCopy.PostID == postID)	// if found the post
-				continue;
-			fwrite(&toCopy, sizeof(Post), 1, outfile);	// write to temp
+			if (toCopy.PostID != postID)	// if found the post
+				fwrite(&toCopy, sizeof(Post), 1, outfile);	// write to temp
 		}
 		fclose(infile);
-		remove(POSTS_FILENAME);
-		infile = fopen(POSTS_FILENAME, "ab");
-		if (infile == NULL) {
+		infile = NULL;
+		fclose(outfile);
+		outfile = NULL;
+		infile = fopen(TEMP_FILENAME, "rb");
+		outfile = fopen(POSTS_FILENAME, "wb");
+		if (infile == NULL || outfile == NULL) {
 			fprintf(stderr, "\nERROR OPENING FILE\n");
 			exit(1);
 		} else {
-			while (fread(&toCopy, sizeof(Post), 1, outfile)) {	// read trough file
-				fwrite(&toCopy, sizeof(Post), 1, infile);	// write to temp
+			while (fread(&toCopy, sizeof(Post), 1, infile)) {	// read trough file
+				fwrite(&toCopy, sizeof(Post), 1, outfile);	// write to temp
 			}
 		}
 		fclose(outfile);
