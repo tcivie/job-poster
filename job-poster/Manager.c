@@ -171,9 +171,9 @@ void view_post(Post post) // Helper
 	if (post.Promoted == 1)
 		yellow();	// Set color yellow
 	printf("----------------------\n");
-	printf("ID: %ld\nName: %s\n", post.PostID,post.Name);	// Print name
+	printf("ID:\t\t %ld\nName:\t\t %s\n", post.PostID,post.Name);	// Print name
 	
-	printf("Location: ");	// Print location
+	printf("Location:\t ");	// Print location
 	if (post.Location == 1)
 		printf("North\n");
 	if (post.Location == 2)
@@ -181,14 +181,14 @@ void view_post(Post post) // Helper
 	if (post.Location == 3)
 		printf("South\n");
 
-	printf("Type of job: ");	// Print type
+	printf("Type of job:\t ");	// Print type
 	if (post.Type == 1)
 		printf("Full-time\n");
 	if (post.Type == 2)
 		printf("Part-time\n");
 
-	printf("Profession: ");		// Print profession
-	if (post.Profession == 1)
+	printf("Profession:\t ");		// Print profession
+	if (post.Profession== 1)
 		printf("Security\n");
 	if (post.Profession == 2)
 		printf("Engineering\n");
@@ -207,7 +207,7 @@ void view_post(Post post) // Helper
 	if (post.Profession == 0)
 		printf("Not relevant\n");
 
-	printf("Description:\n%s\n", post.Description);	// Print description
+	printf("Description:\t %s\n", post.Description);	// Print description
 	printf("----------------------\n");
 	reset();	// reset color
 }
