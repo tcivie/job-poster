@@ -7,7 +7,7 @@
 int printPostsByCategory();
 int printByCategories(Post* postsArray, int size, int category, int innerCategory);
 
-int printPostsByCategory()
+int printPostsByCategory()//opens menu, and prints according to the choises of the user
 {
 	int choose = -1;
 	int innerChoose = 0;
@@ -48,7 +48,7 @@ int printPostsByCategory()
 	return 0;
 }
 
-int printByCategories(Post* postsArray, int size, int category, int innerCategory)//help function for prev function
+int printByCategories(Post* postsArray, int size, int category, int innerCategory)//help function to print by category - prints only for the searching categories
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -93,7 +93,7 @@ int enterCV(char* CV)//gets char* to enter the data that the user entered
 	return 0;
 }
 
-int editUserProfile(const unsigned int userID)
+int editUserProfile(const unsigned int userID)//opens menu to edit the user by categories
 {
 	int choose = -1;
 	char temp[MAX_SIZE] = "";
@@ -180,7 +180,7 @@ int editUserProfile(const unsigned int userID)
 }
 
 
-int editManagerData(const unsigned int userID)
+int editManagerData(const unsigned int userID)//opens menu to edit the manager profile 
 {
 	int choose = -1;
 	char temp[MAX_SIZE] = "";
@@ -237,7 +237,7 @@ int editManagerData(const unsigned int userID)
 	return 0;
 }
 	
-int promotionAD(const unsigned int managerID)
+int promotionAD(const unsigned int managerID)//function to promote ad - menu that gets inputs from the user and checks it
 {
 	int selection = -1;
 	Post posts[MAX_POSTS];
