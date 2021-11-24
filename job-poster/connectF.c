@@ -237,29 +237,36 @@ int promotionAD(const unsigned int managerID)
 {
 	int selection = -1;
 	Post posts[MAX_POSTS];
-	char name[MAX_DESCRIPTION]="";
-	char Cnum[MAX_DESCRIPTION]="";
-	char validity[MAX_DESCRIPTION]="";
-	char threedigit[MAX_DESCRIPTION]="";
-	int numberOfdays1=-1, endChoose = 0;
+	char name[MAX_DESCRIPTION] = "";
+	char Cnum[MAX_DESCRIPTION] = "";
+	char validity[MAX_DESCRIPTION] = "";
+	char threedigit[MAX_DESCRIPTION] = "";
+	int numberOfdays1 = -1, endChoose = 0;
 	int flag = 0;
 	Manager manager;
-	int size = getPostsByManagerID(posts,managerID);
-	if(!(getManagerData(&manager,managerID)))
+	int size = getPostsByManagerID(posts, managerID);
+	if (!(getManagerData(&manager, managerID)))
 		exit(1);
-	printf("Those are all your posts:\n\n");
-	for (int i = 0; i < size; i++)
+	if (size == 0)
+		printf("You have no posts yet.\n");
+	else
 	{
-		for (int j = 0; j < size; j++)
+		printf("Those are all your posts:\n\n");
+		for (int i = 0; i < size; i++)
 		{
-			if (posts[i].PostID == manager.Posts[j])
-				view_post(posts[i]);
+			for (int j = 0; j < size; j++)
+			{
+				if (posts[i].PostID == manager.Posts[j])
+					view_post(posts[i]);
+			}
 		}
 	}
 	do {
-		printf("Enter the id of the post you would like to promote:\n");
-		scanf("%d", &selection);
+		printf("Enter the id of the post you would like to promote:(to return back - enter 0)\n");
+		scanf("%d", &selection);	
 		system("cls");
+		if (selection == 0)
+			return 0;
 		flag = 0;
 		for (int j = 0; j <size; j++)
 		{

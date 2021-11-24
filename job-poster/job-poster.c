@@ -111,6 +111,8 @@ void employerMenu(unsigned int employerID,char *name)
 		case 4:
 			/*function to View ads posted by the employer connected to the system*/
 			size =getPostsByManagerID(&postsArray, employerID);
+			if (size == 0)
+				printf("You have no posts yet.\n");
 			for (int i = 0; i < size; i++)
 			{
 				view_post(postsArray[i]);
