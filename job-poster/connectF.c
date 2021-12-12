@@ -314,8 +314,8 @@ int promotionAD(const unsigned int managerID)
 			if (FullNameCheck(name) == 0)
 			{
 				printf("Enter the credit number:(no spaces , enter 0 to go back to menu)\n");
-				system("cls");
 				scanf("%s", Cnum);
+				system("cls");
 				if (strcmp(Cnum, "0") == 0)
 					return 0;
 				if (creditNumberCheck(Cnum) == 0) {
