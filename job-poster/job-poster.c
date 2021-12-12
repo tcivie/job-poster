@@ -58,6 +58,12 @@ void candidateMenu(unsigned int *ID,char *name)
 				printf("Succesfuly applied\n");
 				reset();
 			}
+			else
+			{
+				red();
+				printf("Application error, please try again.\n");
+				reset();
+			}
 			break;
 		case 6:
 			/*function to Log out from system*/
